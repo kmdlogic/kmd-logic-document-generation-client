@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{B3A856D9-AB49-4DAB-8A53-5B4461B2735C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F6DAFB03-D211-4EEC-A7E6-0CBF99361FC4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kmd.Logic.DocumentGeneration.Client", "src\Kmd.Logic.DocumentGeneration.Client\Kmd.Logic.DocumentGeneration.Client.csproj", "{B7D824BD-27A8-44AB-99B3-104CBBC1B3E0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kmd.Logic.DocumentGeneration.Client.Sample", "sample\Kmd.Logic.DocumentGeneration.Client.Sample\Kmd.Logic.DocumentGeneration.Client.Sample.csproj", "{AD0F7BA5-A090-4025-92BA-645095B75B26}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{B1DE939A-4D71-4150-B411-8BB10AE73A3B}"
+	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+		build.ps1 = build.ps1
+		build.sh = build.sh
+		CHANGES.md = CHANGES.md
+		Directory.Build.props = Directory.Build.props
+		global.json = global.json
+		LICENSE = LICENSE
+		README.md = README.md
+		setup.ps1 = setup.ps1
+		setup.sh = setup.sh
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7D824BD-27A8-44AB-99B3-104CBBC1B3E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7D824BD-27A8-44AB-99B3-104CBBC1B3E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7D824BD-27A8-44AB-99B3-104CBBC1B3E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7D824BD-27A8-44AB-99B3-104CBBC1B3E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD0F7BA5-A090-4025-92BA-645095B75B26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD0F7BA5-A090-4025-92BA-645095B75B26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD0F7BA5-A090-4025-92BA-645095B75B26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD0F7BA5-A090-4025-92BA-645095B75B26}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B7D824BD-27A8-44AB-99B3-104CBBC1B3E0} = {F6DAFB03-D211-4EEC-A7E6-0CBF99361FC4}
+		{AD0F7BA5-A090-4025-92BA-645095B75B26} = {B3A856D9-AB49-4DAB-8A53-5B4461B2735C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9CC79F7D-6B66-467E-B4C9-939A7D88E2BA}
+	EndGlobalSection
+EndGlobal
