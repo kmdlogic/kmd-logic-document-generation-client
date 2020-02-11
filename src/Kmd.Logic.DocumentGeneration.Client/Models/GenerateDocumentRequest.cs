@@ -24,18 +24,25 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// </summary>
         /// <param name="configurationId">Identifier of configuration to be
         /// used.</param>
-        /// <param name="key">Key specifying which entry from configuration to
-        /// be used.</param>
+        /// <param name="hierarchyPath">The hierarchy of possible template
+        /// sources not including the master location.
+        /// For example, if you have a customer "A0001" with a department
+        /// "B0001" then the hierarchy path would be "A0001\\B0001".
+        /// If the department has no template source configured then the
+        /// customers templates will be used.</param>
         /// <param name="templateId">Identifier of template to be used.</param>
         /// <param name="language">Language code in ISO 639-2 format (eg.
         /// en).</param>
+        /// <param name="documentFormat">Format of the generated document.
+        /// Possible values include: 'Txt', 'Rtf', 'Doc', 'Docx', 'Pdf'</param>
         /// <param name="mergeData">Data to be merge into document.</param>
-        public GenerateDocumentRequest(System.Guid? configurationId = default(System.Guid?), System.Guid? key = default(System.Guid?), string templateId = default(string), string language = default(string), object mergeData = default(object))
+        public GenerateDocumentRequest(System.Guid? configurationId = default(System.Guid?), string hierarchyPath = default(string), string templateId = default(string), string language = default(string), string documentFormat = default(string), object mergeData = default(object))
         {
             ConfigurationId = configurationId;
-            Key = key;
+            HierarchyPath = hierarchyPath;
             TemplateId = templateId;
             Language = language;
+            DocumentFormat = documentFormat;
             MergeData = mergeData;
             CustomInit();
         }
@@ -52,11 +59,15 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         public System.Guid? ConfigurationId { get; set; }
 
         /// <summary>
-        /// Gets or sets key specifying which entry from configuration to be
-        /// used.
+        /// Gets or sets the hierarchy of possible template sources not
+        /// including the master location.
+        /// For example, if you have a customer "A0001" with a department
+        /// "B0001" then the hierarchy path would be "A0001\\B0001".
+        /// If the department has no template source configured then the
+        /// customers templates will be used.
         /// </summary>
-        [JsonProperty(PropertyName = "key")]
-        public System.Guid? Key { get; set; }
+        [JsonProperty(PropertyName = "hierarchyPath")]
+        public string HierarchyPath { get; set; }
 
         /// <summary>
         /// Gets or sets identifier of template to be used.
@@ -69,6 +80,13 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// </summary>
         [JsonProperty(PropertyName = "language")]
         public string Language { get; set; }
+
+        /// <summary>
+        /// Gets or sets format of the generated document. Possible values
+        /// include: 'Txt', 'Rtf', 'Doc', 'Docx', 'Pdf'
+        /// </summary>
+        [JsonProperty(PropertyName = "documentFormat")]
+        public string DocumentFormat { get; set; }
 
         /// <summary>
         /// Gets or sets data to be merge into document.

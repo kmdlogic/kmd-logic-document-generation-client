@@ -108,13 +108,17 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/document-generation/documents/{requestId}": {
+    "/subscriptions/{subscriptionId}/document-generation/requests/{requestId}/download": {
       "get": {
         "tags": [
           "DocumentGeneration"
         ],
-        "summary": "Gets document generated for provided request.",
+        "summary": "Gets URI to document generated for provided request.",
         "operationId": "GetDocument",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "name": "subscriptionId",
@@ -135,10 +139,72 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DocumentUri"
+            }
           },
           "404": {
             "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/document-generation/templates/{configurationId}": {
+      "get": {
+        "tags": [
+          "DocumentGeneration"
+        ],
+        "summary": "List all templates.",
+        "operationId": "GetTemplates",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Identifier of Logic subscription.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of configuration to use.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "hierarchyPath",
+            "in": "query",
+            "description": "The hierarchy of possible template sources not including the master location. \r\nFor example, if you have a customer \"A0001\" with a department \"B0001\" then the hierarchy path would be \"A0001\\B0001\". \r\nIf the department has no template source configured then the customers templates will be used.",
+            "type": "string"
+          },
+          {
+            "name": "subject",
+            "in": "query",
+            "description": "Subject of created document.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Template"
+              }
+            }
           }
         },
         "security": [
@@ -158,9 +224,8 @@
           "description": "Identifier of configuration to be used.",
           "type": "string"
         },
-        "key": {
-          "format": "uuid",
-          "description": "Key specifying which entry from configuration to be used.",
+        "hierarchyPath": {
+          "description": "The hierarchy of possible template sources not including the master location. \r\nFor example, if you have a customer \"A0001\" with a department \"B0001\" then the hierarchy path would be \"A0001\\\\B0001\". \r\nIf the department has no template source configured then the customers templates will be used.",
           "type": "string"
         },
         "templateId": {
@@ -170,6 +235,17 @@
         "language": {
           "description": "Language code in ISO 639-2 format (eg. en).",
           "type": "string"
+        },
+        "documentFormat": {
+          "description": "Format of the generated document.",
+          "type": "string",
+          "enum": [
+            "Txt",
+            "Rtf",
+            "Doc",
+            "Docx",
+            "Pdf"
+          ]
         },
         "mergeData": {
           "description": "Data to be merge into document.",
@@ -188,14 +264,27 @@
           "format": "uuid",
           "type": "string"
         },
+        "configurationId": {
+          "format": "uuid",
+          "type": "string"
+        },
         "templateId": {
           "type": "string"
         },
         "language": {
           "type": "string"
         },
-        "key": {
-          "format": "uuid",
+        "documentFormat": {
+          "type": "string",
+          "enum": [
+            "Txt",
+            "Rtf",
+            "Doc",
+            "Docx",
+            "Pdf"
+          ]
+        },
+        "hierarchyPath": {
           "type": "string"
         },
         "state": {
@@ -206,6 +295,33 @@
             "Completed",
             "Failed"
           ]
+        }
+      }
+    },
+    "DocumentUri": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "format": "uri",
+          "type": "string"
+        },
+        "uriExpiryTime": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "Template": {
+      "type": "object",
+      "properties": {
+        "templateId": {
+          "type": "string"
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

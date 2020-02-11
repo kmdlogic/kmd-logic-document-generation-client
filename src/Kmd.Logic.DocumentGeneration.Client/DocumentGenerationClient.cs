@@ -22,11 +22,11 @@ namespace Kmd.Logic.DocumentGeneration.Client
     [SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "HttpClient is not owned by this class.")]
     public sealed class DocumentGenerationClient
     {
-        private readonly HttpClient httpClient;
-        private readonly DocumentGenerationOptions options;
-        private readonly LogicTokenProviderFactory tokenProviderFactory;
+        private readonly HttpClient _httpClient;
+        private readonly DocumentGenerationOptions _options;
+        private readonly LogicTokenProviderFactory _tokenProviderFactory;
 
-        private InternalClient internalClient;
+        private InternalClient _internalClient;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DocumentGenerationClient"/> class.
@@ -36,19 +36,25 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// <param name="options">The required configuration options.</param>
         public DocumentGenerationClient(HttpClient httpClient, LogicTokenProviderFactory tokenProviderFactory, DocumentGenerationOptions options)
         {
-            this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-            this.options = options ?? throw new ArgumentNullException(nameof(options));
-            this.tokenProviderFactory = tokenProviderFactory ?? throw new ArgumentNullException(nameof(tokenProviderFactory));
+            this._httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+            this._options = options ?? throw new ArgumentNullException(nameof(options));
+            this._tokenProviderFactory = tokenProviderFactory ?? throw new ArgumentNullException(nameof(tokenProviderFactory));
 
 #pragma warning disable CS0618 // Type or member is obsolete
-            if (string.IsNullOrEmpty(this.tokenProviderFactory.DefaultAuthorizationScope))
+            if (string.IsNullOrEmpty(this._tokenProviderFactory.DefaultAuthorizationScope))
             {
-                this.tokenProviderFactory.DefaultAuthorizationScope = "https://logicidentityprod.onmicrosoft.com/bb159109-0ccd-4b08-8d0d-80370cedda84/.default";
+                this._tokenProviderFactory.DefaultAuthorizationScope = "https://logicidentityprod.onmicrosoft.com/bb159109-0ccd-4b08-8d0d-80370cedda84/.default";
             }
 #pragma warning restore CS0618 // Type or member is obsolete
         }
 
-        public async Task<DocumentGenerationRequest> RequestDocumentGenerationAsync(System.Guid? subscriptionId, GenerateDocumentRequest request = default(GenerateDocumentRequest))
+        /// <summary>
+        /// Requests document generation.
+        /// </summary>
+        /// <param name="subscriptionId">Identifier of Logic subscription.</param>
+        /// <param name="request">Document generation parameters.</param>
+        /// <returns>DocumentGenerationRequest object.</returns>
+        public async Task<DocumentGenerationRequest> RequestDocumentGenerationAsync(Guid? subscriptionId, GenerateDocumentRequest request = default(GenerateDocumentRequest))
         {
             var resolvedSubscriptionId = this.ResolveSubscriptionId(subscriptionId);
             var client = this.CreateClient();
@@ -69,7 +75,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// <param name="subscriptionId">Identifier of Logic subscription.</param>
         /// <param name="requestId">Identifier of request to return.</param>
         /// <returns>Document generation request.</returns>
-        public async Task<DocumentGenerationRequest> GetDocumentGenerationAsync(System.Guid? subscriptionId = null, System.Guid? requestId = null)
+        public async Task<DocumentGenerationRequest> GetDocumentGenerationAsync(Guid? subscriptionId = null, Guid? requestId = null)
         {
             var resolvedSubscriptionId = this.ResolveSubscriptionId(subscriptionId);
             var client = this.CreateClient();
@@ -83,61 +89,73 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// </summary>
         /// <param name="subscriptionId">Identifier of Logic subscription.</param>
         /// <param name="requestId">Identifier of request which document should be retuned.</param>
-        /// <returns>Generated document.</returns>
-        public async Task<Stream> GetDocumentAsync(System.Guid? subscriptionId, System.Guid requestId)
+        /// <returns>DocumentUri of the generated document.</returns>
+        public async Task<DocumentUri> GetDocumentAsync(Guid? subscriptionId, Guid requestId)
         {
             var resolvedSubscriptionId = this.ResolveSubscriptionId(subscriptionId);
 
             var client = this.CreateClient();
 
-            try
-            {
-                var response = await client.GetDocumentWithHttpMessagesAsync(resolvedSubscriptionId, requestId: requestId).ConfigureAwait(false);
-                switch (response.Response.StatusCode)
-                {
-                    case System.Net.HttpStatusCode.OK:
-                        if (response.Response.Content == null)
-                        {
-                            return null;
-                        }
-                        else
-                        {
-                            return await response.Response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                        }
+            return await client
+                .GetDocumentAsync(resolvedSubscriptionId, requestId: requestId)
+                .ConfigureAwait(false);
+        }
 
-                    case System.Net.HttpStatusCode.NotFound:
-                        return null;
+        /// <summary>
+        /// Writes document generated for provided request to the output stream provided.
+        /// </summary>
+        /// <param name="subscriptionId">Identifier of Logic subscription.</param>
+        /// <param name="requestId">Identifier of request which document should be retuned.</param>
+        /// <param name="outputStream">Output stream to which to write the generated document.</param>
+        /// <returns>void.</returns>
+        public async Task WriteDocumentToStreamAsync(Guid? subscriptionId, Guid requestId, Stream outputStream)
+        {
+            var documentUri = await this.GetDocumentAsync(subscriptionId, requestId).ConfigureAwait(false);
+            var response = await this._httpClient.GetAsync(documentUri.Uri).ConfigureAwait(false);
+            await response.Content.CopyToAsync(outputStream).ConfigureAwait(false);
+        }
 
-                    default:
-                        throw new DocumentGenerationConfigurationException("Invalid configuration provided to access documentGeneration service", response.Response.Content.ToString());
-                }
-            }
-            catch (ValidationException ex)
-            {
-                throw new DocumentGenerationValidationException(ex.Message, ex);
-            }
+        /// <summary>
+        /// List all templates.
+        /// </summary>
+        /// <param name="subscriptionId">Identifier of Logic subscription.</param>
+        /// <param name="configurationId">Identifier of configuration to use.</param>
+        /// <param name="hierarchyPath">
+        /// The hierarchy of possible template sources not including the master location.
+        /// For example, if you have a customer "A0001" with a department "B0001" then the hierarchy path would be "A0001\B0001".
+        /// If the department has no template source configured then the customers templates will be used.
+        /// </param>
+        /// <param name="subject">Subject of created document.</param>
+        /// <returns>List of templates that can be requested.</returns>
+        public async Task<IEnumerable<Template>> GetTemplatesAsync(Guid? subscriptionId, Guid configurationId, string hierarchyPath, string subject)
+        {
+            var resolvedSubscriptionId = this.ResolveSubscriptionId(subscriptionId);
+            var client = this.CreateClient();
+            return await client
+                .GetTemplatesAsync(resolvedSubscriptionId, configurationId, hierarchyPath, subject)
+                .ConfigureAwait(false);
         }
 
         private InternalClient CreateClient()
         {
-            if (this.internalClient != null)
+            if (this._internalClient != null)
             {
-                return this.internalClient;
+                return this._internalClient;
             }
 
-            var tokenProvider = this.tokenProviderFactory.GetProvider(this.httpClient);
+            var tokenProvider = this._tokenProviderFactory.GetProvider(this._httpClient);
 
-            this.internalClient = new InternalClient(new TokenCredentials(tokenProvider))
+            this._internalClient = new InternalClient(new TokenCredentials(tokenProvider))
             {
-                BaseUri = this.options.DocumentGenerationServiceUri,
+                BaseUri = this._options.DocumentGenerationServiceUri,
             };
 
-            return this.internalClient;
+            return this._internalClient;
         }
 
         private Guid ResolveSubscriptionId(Guid? subscriptionId)
         {
-            var resolvedSubscriptionId = subscriptionId ?? this.options.SubscriptionId;
+            var resolvedSubscriptionId = subscriptionId ?? this._options.SubscriptionId;
             if (resolvedSubscriptionId == null)
             {
                 throw new DocumentGenerationValidationException("No subscription id provided", new Dictionary<string, IList<string>>());

@@ -28,10 +28,10 @@ artifacts:
 deploy:
 - provider: NuGet
   api_key:
-    secure: 7pOgIjWPM0drO1v6jIg2xVkvX5IL1M+DL/VGBdAr1KHN8zXBG8oWgCklUH2/aV63
+    secure: V4mxeh2bg7iqp30Q6sESykx0Wo+4lT63mnbPliCqNr1SqBXvWgVukK/JI8QvvcrL
   skip_symbols: true
   on:
-    branch: /^(master|dev)$/
+    branch: /^master$/
     CI_WINDOWS: true
 - provider: GitHub
   auth_token:

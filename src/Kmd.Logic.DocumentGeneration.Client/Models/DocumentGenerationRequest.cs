@@ -22,15 +22,19 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// <summary>
         /// Initializes a new instance of the DocumentGenerationRequest class.
         /// </summary>
+        /// <param name="documentFormat">Possible values include: 'Txt', 'Rtf',
+        /// 'Doc', 'Docx', 'Pdf'</param>
         /// <param name="state">Possible values include: 'Requested',
         /// 'Completed', 'Failed'</param>
-        public DocumentGenerationRequest(System.Guid? id = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), string templateId = default(string), string language = default(string), System.Guid? key = default(System.Guid?), string state = default(string))
+        public DocumentGenerationRequest(System.Guid? id = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), System.Guid? configurationId = default(System.Guid?), string templateId = default(string), string language = default(string), string documentFormat = default(string), string hierarchyPath = default(string), string state = default(string))
         {
             Id = id;
             SubscriptionId = subscriptionId;
+            ConfigurationId = configurationId;
             TemplateId = templateId;
             Language = language;
-            Key = key;
+            DocumentFormat = documentFormat;
+            HierarchyPath = hierarchyPath;
             State = state;
             CustomInit();
         }
@@ -52,6 +56,11 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
 
         /// <summary>
         /// </summary>
+        [JsonProperty(PropertyName = "configurationId")]
+        public System.Guid? ConfigurationId { get; set; }
+
+        /// <summary>
+        /// </summary>
         [JsonProperty(PropertyName = "templateId")]
         public string TemplateId { get; set; }
 
@@ -61,9 +70,16 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         public string Language { get; set; }
 
         /// <summary>
+        /// Gets or sets possible values include: 'Txt', 'Rtf', 'Doc', 'Docx',
+        /// 'Pdf'
         /// </summary>
-        [JsonProperty(PropertyName = "key")]
-        public System.Guid? Key { get; set; }
+        [JsonProperty(PropertyName = "documentFormat")]
+        public string DocumentFormat { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "hierarchyPath")]
+        public string HierarchyPath { get; set; }
 
         /// <summary>
         /// Gets possible values include: 'Requested', 'Completed', 'Failed'

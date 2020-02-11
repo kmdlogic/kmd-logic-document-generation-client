@@ -7,6 +7,8 @@
 namespace Kmd.Logic.DocumentGeneration.Client
 {
     using Models;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -96,7 +98,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
 
             /// <summary>
-            /// Gets document generated for provided request.
+            /// Gets URI to document generated for provided request.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -107,13 +109,13 @@ namespace Kmd.Logic.DocumentGeneration.Client
             /// <param name='requestId'>
             /// Identifier of request which document should be retuned.
             /// </param>
-            public static void GetDocument(this IInternalClient operations, System.Guid subscriptionId, System.Guid requestId)
+            public static DocumentUri GetDocument(this IInternalClient operations, System.Guid subscriptionId, System.Guid requestId)
             {
-                operations.GetDocumentAsync(subscriptionId, requestId).GetAwaiter().GetResult();
+                return operations.GetDocumentAsync(subscriptionId, requestId).GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Gets document generated for provided request.
+            /// Gets URI to document generated for provided request.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -127,9 +129,74 @@ namespace Kmd.Logic.DocumentGeneration.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetDocumentAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid requestId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DocumentUri> GetDocumentAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid requestId, CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.GetDocumentWithHttpMessagesAsync(subscriptionId, requestId, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                using (var _result = await operations.GetDocumentWithHttpMessagesAsync(subscriptionId, requestId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// List all templates.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// Identifier of Logic subscription.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of configuration to use.
+            /// </param>
+            /// <param name='hierarchyPath'>
+            /// The hierarchy of possible template sources not including the master
+            /// location.
+            /// For example, if you have a customer "A0001" with a department "B0001" then
+            /// the hierarchy path would be "A0001\B0001".
+            /// If the department has no template source configured then the customers
+            /// templates will be used.
+            /// </param>
+            /// <param name='subject'>
+            /// Subject of created document.
+            /// </param>
+            public static IList<Template> GetTemplates(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string), string subject = default(string))
+            {
+                return operations.GetTemplatesAsync(subscriptionId, configurationId, hierarchyPath, subject).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// List all templates.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// Identifier of Logic subscription.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of configuration to use.
+            /// </param>
+            /// <param name='hierarchyPath'>
+            /// The hierarchy of possible template sources not including the master
+            /// location.
+            /// For example, if you have a customer "A0001" with a department "B0001" then
+            /// the hierarchy path would be "A0001\B0001".
+            /// If the department has no template source configured then the customers
+            /// templates will be used.
+            /// </param>
+            /// <param name='subject'>
+            /// Subject of created document.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IList<Template>> GetTemplatesAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string), string subject = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetTemplatesWithHttpMessagesAsync(subscriptionId, configurationId, hierarchyPath, subject, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
     }

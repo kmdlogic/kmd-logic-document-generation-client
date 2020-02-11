@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageVersion>0.1.0</PackageVersion>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/kmdlogic/kmd-logic-document-generation-client</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/kmdlogic/kmd-logic-document-generation-client</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup>
