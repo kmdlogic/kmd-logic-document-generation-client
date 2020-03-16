@@ -9,10 +9,10 @@
 
   <PropertyGroup>
     <Description>A client library for KMD Logic Document Generation</Description>
-    <VersionPrefix>0.1.0</VersionPrefix>
+    <VersionPrefix>0.1.1</VersionPrefix>
     <Authors>KMD</Authors>
     <PackageTags>kmd;logic;documentgeneration</PackageTags>
-    <!-- <PackageIconUrl>https://console.kmdlogic.io/favicon-32x32.png</PackageIconUrl> -->
+    <PackageIcon>kmd-logic-icon.png</PackageIcon>
     <PackageProjectUrl>https://github.com/kmdlogic/kmd-logic-documentgeneration-client</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/kmdlogic/kmd-logic-documentgeneration-client</RepositoryUrl>
