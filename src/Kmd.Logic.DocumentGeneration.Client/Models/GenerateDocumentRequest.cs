@@ -36,7 +36,11 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// <param name="documentFormat">Format of the generated document.
         /// Possible values include: 'Txt', 'Rtf', 'Doc', 'Docx', 'Pdf'</param>
         /// <param name="mergeData">Data to be merge into document.</param>
-        public GenerateDocumentRequest(System.Guid? configurationId = default(System.Guid?), string hierarchyPath = default(string), string templateId = default(string), string language = default(string), string documentFormat = default(string), object mergeData = default(object))
+        /// <param name="callbackUrl">URL that is going to be called when
+        /// document generation completes.</param>
+        /// <param name="debug">Flag indicating if document generation should
+        /// be run in diagnostic mode.</param>
+        public GenerateDocumentRequest(System.Guid? configurationId = default(System.Guid?), string hierarchyPath = default(string), string templateId = default(string), string language = default(string), string documentFormat = default(string), object mergeData = default(object), string callbackUrl = default(string), bool? debug = default(bool?))
         {
             ConfigurationId = configurationId;
             HierarchyPath = hierarchyPath;
@@ -44,6 +48,8 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
             Language = language;
             DocumentFormat = documentFormat;
             MergeData = mergeData;
+            CallbackUrl = callbackUrl;
+            Debug = debug;
             CustomInit();
         }
 
@@ -93,6 +99,20 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// </summary>
         [JsonProperty(PropertyName = "mergeData")]
         public object MergeData { get; set; }
+
+        /// <summary>
+        /// Gets or sets URL that is going to be called when document
+        /// generation completes.
+        /// </summary>
+        [JsonProperty(PropertyName = "callbackUrl")]
+        public string CallbackUrl { get; set; }
+
+        /// <summary>
+        /// Gets or sets flag indicating if document generation should be run
+        /// in diagnostic mode.
+        /// </summary>
+        [JsonProperty(PropertyName = "debug")]
+        public bool? Debug { get; set; }
 
     }
 }

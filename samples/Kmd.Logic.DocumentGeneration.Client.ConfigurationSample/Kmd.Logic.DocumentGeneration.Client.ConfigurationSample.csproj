@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <UserSecretsId>edb58c8c-982f-4398-b610-e98cbf7d7df3</UserSecretsId>
+    <RootNamespace>Kmd.Logic.DocumentGeneration.Client.ConfigurationSample</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Graph" Version="3.3.0" />
+    <PackageReference Include="Microsoft.Graph.Auth" Version="1.0.0-preview.4" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="SerilogTimings" Version="2.3.0" />
+    <PackageReference Include="Kmd.Logic.Identity.Authorization" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="values\customer.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Kmd.Logic.DocumentGeneration.Client\Kmd.Logic.DocumentGeneration.Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="AnchorDetails.cs" />
+    <Compile Remove="DocumentDetails.cs" />
+  </ItemGroup>
+
+</Project>

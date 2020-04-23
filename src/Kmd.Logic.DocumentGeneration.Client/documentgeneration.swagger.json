@@ -5,6 +5,1196 @@
     "title": "KMD Logic Document Generation Service API"
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/azureblob": {
+      "get": {
+        "tags": [
+          "ConfigurationEntriesAzureBlob"
+        ],
+        "summary": "Gets a SharePoint Online template storage configuration entry for a given document generation configuration managed by the subscription.",
+        "operationId": "GetAzureBlobEntryAtPath",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "hierarchyPath",
+            "in": "query",
+            "description": "The configuration entry ancestry path to the entry to be returned.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "ConfigurationEntriesAzureBlob"
+        ],
+        "summary": "Updates a SharePoint Online template storage configuration entry for a given document generation configuration managed by the subscription.",
+        "operationId": "UpdateAzureBlobEntryAtPath",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "hierarchyPath",
+            "in": "query",
+            "description": "The configuration entry ancestry path to the entry.",
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "SharePoint Online template storage settings.",
+            "schema": {
+              "$ref": "#/definitions/AzureBlobTemplateModelUpdateEntryAtPathRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "ConfigurationEntriesAzureBlob"
+        ],
+        "summary": "Creates a SharePoint Online template storage configuration entry for a given document generation configuration managed by the subscription.",
+        "operationId": "CreateAzureBlobEntryUnderPath",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "parentHierarchyPath",
+            "in": "query",
+            "description": "The configuration entry ancestry path to the parent entry.",
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "SharePoint Online template storage settings.",
+            "schema": {
+              "$ref": "#/definitions/AzureBlobTemplateModelCreateEntryUnderPathRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "ConfigurationEntriesAzureBlob"
+        ],
+        "summary": "Deletes a storage configuration entry for a given document generation configuration managed by the subscription.",
+        "operationId": "DeleteAzureBlobEntryAtPath",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configuration.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to having the entry to be deleted.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "hierarchyPath",
+            "in": "query",
+            "description": "The configuration entry ancestry path to the entry to be deleted.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DocumentGenerationConfigurationSummary"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/azureblob/{entryId}": {
+      "get": {
+        "tags": [
+          "ConfigurationEntriesAzureBlob"
+        ],
+        "summary": "Gets a SharePoint Online template storage configuration entry for a given document generation configuration managed by the subscription.",
+        "operationId": "GetAzureBlobEntryAtId",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entryId",
+            "in": "path",
+            "description": "The configuration entry identifier of the entry to be returned.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "ConfigurationEntriesAzureBlob"
+        ],
+        "summary": "Updates a SharePoint Online template storage configuration entry for a given document generation configuration managed by the subscription.",
+        "operationId": "UpdateAzureBlobEntryAtId",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entryId",
+            "in": "path",
+            "description": "The configuration entry identifier of the entry to be updated.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "SharePoint Online template storage settings.",
+            "schema": {
+              "$ref": "#/definitions/AzureBlobTemplateModelUpdateEntryAtIdRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "ConfigurationEntriesAzureBlob"
+        ],
+        "summary": "Deletes a storage configuration entry for a given document generation configuration managed by the subscription.",
+        "operationId": "DeleteAzureBlobEntryAtId",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configuration.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to having the entry to be deleted.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entryId",
+            "in": "path",
+            "description": "The configuration entry identifier of the entry to be deleted.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DocumentGenerationConfigurationSummary"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/azureblob/{parentEntryId}": {
+      "post": {
+        "tags": [
+          "ConfigurationEntriesAzureBlob"
+        ],
+        "summary": "Creates a SharePoint Online template storage configuration entry for a given document generation configuration managed by the subscription.",
+        "operationId": "CreateAzureBlobEntryUnderId",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "parentEntryId",
+            "in": "path",
+            "description": "The configuration entry identifier of the parent entry.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "SharePoint Online template storage settings.",
+            "schema": {
+              "$ref": "#/definitions/AzureBlobTemplateModelCreateEntryUnderIdRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/sharepointonline": {
+      "get": {
+        "tags": [
+          "ConfigurationEntriesSharePointOnline"
+        ],
+        "summary": "Gets a SharePoint Online template storage configuration entry for a given document generation configuration managed by the subscription.",
+        "operationId": "GetSharePointOnlineEntryAtPath",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "hierarchyPath",
+            "in": "query",
+            "description": "The configuration entry ancestry path to the entry to be returned.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "ConfigurationEntriesSharePointOnline"
+        ],
+        "summary": "Updates a SharePoint Online template storage configuration entry for a given document generation configuration managed by the subscription.",
+        "operationId": "UpdateSharePointOnlineEntryAtPath",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "hierarchyPath",
+            "in": "query",
+            "description": "The configuration entry ancestry path to the entry.",
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "SharePoint Online template storage settings.",
+            "schema": {
+              "$ref": "#/definitions/SharePointOnlineTemplateModelUpdateEntryAtPathRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "ConfigurationEntriesSharePointOnline"
+        ],
+        "summary": "Creates a SharePoint Online template storage configuration entry for a given document generation configuration managed by the subscription.",
+        "operationId": "CreateSharePointOnlineEntryUnderPath",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "parentHierarchyPath",
+            "in": "query",
+            "description": "The configuration entry ancestry path to the parent entry.",
+            "type": "string"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "SharePoint Online template storage settings.",
+            "schema": {
+              "$ref": "#/definitions/SharePointOnlineTemplateModelCreateEntryUnderPathRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "ConfigurationEntriesSharePointOnline"
+        ],
+        "summary": "Deletes a storage configuration entry for a given document generation configuration managed by the subscription.",
+        "operationId": "DeleteSharePointOnlineEntryAtPath",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configuration.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to having the entry to be deleted.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "hierarchyPath",
+            "in": "query",
+            "description": "The configuration entry ancestry path to the entry to be deleted.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DocumentGenerationConfigurationSummary"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/sharepointonline/{entryId}": {
+      "get": {
+        "tags": [
+          "ConfigurationEntriesSharePointOnline"
+        ],
+        "summary": "Gets a SharePoint Online template storage configuration entry for a given document generation configuration managed by the subscription.",
+        "operationId": "GetSharePointOnlineEntryAtId",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entryId",
+            "in": "path",
+            "description": "The configuration entry identifier of the entry to be returned.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "ConfigurationEntriesSharePointOnline"
+        ],
+        "summary": "Updates a SharePoint Online template storage configuration entry for a given document generation configuration managed by the subscription.",
+        "operationId": "UpdateSharePointOnlineEntryAtId",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entryId",
+            "in": "path",
+            "description": "The configuration entry identifier of the entry to be updated.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "SharePoint Online template storage settings.",
+            "schema": {
+              "$ref": "#/definitions/SharePointOnlineTemplateModelUpdateEntryAtIdRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "ConfigurationEntriesSharePointOnline"
+        ],
+        "summary": "Deletes a storage configuration entry for a given document generation configuration managed by the subscription.",
+        "operationId": "DeleteSharePointOnlineEntryAtId",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configuration.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to having the entry to be deleted.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "entryId",
+            "in": "path",
+            "description": "The configuration entry identifier of the entry to be deleted.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DocumentGenerationConfigurationSummary"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/sharepointonline/{parentEntryId}": {
+      "post": {
+        "tags": [
+          "ConfigurationEntriesSharePointOnline"
+        ],
+        "summary": "Creates a SharePoint Online template storage configuration entry for a given document generation configuration managed by the subscription.",
+        "operationId": "CreateSharePointOnlineEntryUnderId",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "parentEntryId",
+            "in": "path",
+            "description": "The configuration entry identifier of the parent entry.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "SharePoint Online template storage settings.",
+            "schema": {
+              "$ref": "#/definitions/SharePointOnlineTemplateModelCreateEntryUnderIdRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/document-generation/v2/configurations": {
+      "get": {
+        "tags": [
+          "Configurations"
+        ],
+        "summary": "Get all document generation configurations managed by the subscription.",
+        "operationId": "GetAllConfigurations",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ConfigurationListResponse"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Configurations"
+        ],
+        "summary": "Create a new document generation configuration.",
+        "operationId": "CreateDocumentGenerationConfiguration",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The details of the configuration being created.",
+            "schema": {
+              "$ref": "#/definitions/CreateConfigurationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DocumentGenerationConfigurationSummary"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}": {
+      "get": {
+        "tags": [
+          "Configurations"
+        ],
+        "summary": "Get the summary of a document generation configuration managed by the subscription by the id of the configuration.",
+        "operationId": "GetConfigurationSummaryById",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DocumentGenerationConfigurationSummary"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Configurations"
+        ],
+        "summary": "Update an existing document generation configuration.",
+        "operationId": "UpdateDocumentGenerationConfiguration",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to update.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The details of the configuration being updated.",
+            "schema": {
+              "$ref": "#/definitions/UpdateConfigurationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DocumentGenerationConfigurationSummary"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Configurations"
+        ],
+        "summary": "Deletes a document generation configuration managed by the subscription.",
+        "operationId": "DeleteDocumentGenerationConfiguration",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
     "/subscriptions/{subscriptionId}/document-generation/requests": {
       "post": {
         "tags": [
@@ -37,6 +1227,62 @@
             "description": "Document generation parameters.",
             "schema": {
               "$ref": "#/definitions/GenerateDocumentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DocumentGenerationRequest"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/document-generation/conversion": {
+      "post": {
+        "tags": [
+          "DocumentGeneration"
+        ],
+        "summary": "Requests document generation.",
+        "operationId": "RequestDocumentConversion",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Identifier of Logic subscription.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Document generation parameters.",
+            "schema": {
+              "$ref": "#/definitions/GenerateDocumentConversionRequest"
             }
           }
         ],
@@ -205,6 +1451,9 @@
                 "$ref": "#/definitions/Template"
               }
             }
+          },
+          "404": {
+            "description": "Not Found"
           }
         },
         "security": [
@@ -216,6 +1465,335 @@
     }
   },
   "definitions": {
+    "AzureBlobStorageConfiguration": {
+      "type": "object",
+      "properties": {
+        "templateStorageType": {
+          "type": "string",
+          "enum": [
+            "Logic",
+            "SharePointOnline",
+            "AzureBlobStorage"
+          ]
+        },
+        "secretKeyForStorageConnectionString": {
+          "type": "string"
+        },
+        "containerName": {
+          "type": "string"
+        },
+        "blobPrefix": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "templateStorageConfiguration": {
+          "$ref": "#/definitions/AzureBlobStorageConfiguration"
+        }
+      }
+    },
+    "AzureBlobTemplateModel": {
+      "type": "object",
+      "properties": {
+        "secretKeyOrStorageConnectionString": {
+          "type": "string"
+        },
+        "containerName": {
+          "type": "string"
+        },
+        "blobPrefix": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureBlobTemplateModelCreateEntryUnderPathRequest": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/AzureBlobTemplateModel"
+        }
+      }
+    },
+    "AzureBlobTemplateModelUpdateEntryAtPathRequest": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/AzureBlobTemplateModel"
+        }
+      }
+    },
+    "DocumentGenerationConfigurationEntrySummary": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "templateStorageType": {
+          "type": "string",
+          "enum": [
+            "Logic",
+            "SharePointOnline",
+            "AzureBlobStorage"
+          ]
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentGenerationConfigurationEntrySummary"
+          }
+        }
+      }
+    },
+    "DocumentGenerationConfigurationSummary": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "hasLicense": {
+          "type": "boolean"
+        },
+        "levelNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "templateStorageDirectory": {
+          "$ref": "#/definitions/DocumentGenerationConfigurationEntrySummary"
+        }
+      }
+    },
+    "AzureBlobTemplateModelUpdateEntryAtIdRequest": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/AzureBlobTemplateModel"
+        }
+      }
+    },
+    "AzureBlobTemplateModelCreateEntryUnderIdRequest": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/AzureBlobTemplateModel"
+        }
+      }
+    },
+    "SharePointOnlineTemplateStorageConfiguration": {
+      "type": "object",
+      "properties": {
+        "templateStorageType": {
+          "type": "string",
+          "enum": [
+            "Logic",
+            "SharePointOnline",
+            "AzureBlobStorage"
+          ]
+        },
+        "clientId": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "secretKeyForClientSecret": {
+          "type": "string"
+        },
+        "groupName": {
+          "type": "string"
+        }
+      }
+    },
+    "SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "templateStorageConfiguration": {
+          "$ref": "#/definitions/SharePointOnlineTemplateStorageConfiguration"
+        }
+      }
+    },
+    "SharePointOnlineTemplateModel": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "tenantId": {
+          "type": "string"
+        },
+        "secretKeyOrClientSecret": {
+          "type": "string"
+        },
+        "groupName": {
+          "type": "string"
+        }
+      }
+    },
+    "SharePointOnlineTemplateModelCreateEntryUnderPathRequest": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/SharePointOnlineTemplateModel"
+        }
+      }
+    },
+    "SharePointOnlineTemplateModelUpdateEntryAtPathRequest": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/SharePointOnlineTemplateModel"
+        }
+      }
+    },
+    "SharePointOnlineTemplateModelUpdateEntryAtIdRequest": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/SharePointOnlineTemplateModel"
+        }
+      }
+    },
+    "SharePointOnlineTemplateModelCreateEntryUnderIdRequest": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/SharePointOnlineTemplateModel"
+        }
+      }
+    },
+    "ConfigurationListResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "CreateConfigurationRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "hasLicense": {
+          "type": "boolean"
+        },
+        "levelNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpdateConfigurationRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "hasLicense": {
+          "type": "boolean"
+        },
+        "levelNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "GenerateDocumentRequest": {
       "type": "object",
       "properties": {
@@ -250,6 +1828,15 @@
         "mergeData": {
           "description": "Data to be merge into document.",
           "type": "object"
+        },
+        "callbackUrl": {
+          "format": "uri",
+          "description": "URL that is going to be called when document generation completes.",
+          "type": "string"
+        },
+        "debug": {
+          "description": "Flag indicating if document generation should be run in diagnostic mode.",
+          "type": "boolean"
         }
       }
     },
@@ -295,6 +1882,85 @@
             "Completed",
             "Failed"
           ]
+        },
+        "callbackUrl": {
+          "format": "uri",
+          "type": "string"
+        },
+        "debug": {
+          "type": "boolean"
+        },
+        "failReason": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GenerateDocumentConversionRequest": {
+      "type": "object",
+      "properties": {
+        "configurationId": {
+          "format": "uuid",
+          "description": "Identifier of configuration to be used.",
+          "type": "string"
+        },
+        "sourceDocumentUrl": {
+          "format": "uri",
+          "description": "URL that identifies the document to be converted.",
+          "type": "string"
+        },
+        "sourceDocumentFormat": {
+          "description": "Format of the source document.",
+          "type": "string",
+          "enum": [
+            "Txt",
+            "Rtf",
+            "Doc",
+            "Docx",
+            "Pdf"
+          ]
+        },
+        "convertedDocumentFormat": {
+          "description": "Format of the converted document.",
+          "type": "string",
+          "enum": [
+            "Txt",
+            "Rtf",
+            "Doc",
+            "Docx",
+            "Pdf"
+          ]
+        },
+        "convertedDocumentPdfFormat": {
+          "description": "Optional PdfFormat of the converted document.",
+          "type": "string",
+          "enum": [
+            "PdfA1A",
+            "PdfA1B",
+            "PdfA2A",
+            "PdfA3A",
+            "PdfA2B",
+            "PdfA2U",
+            "PdfA3B",
+            "PdfA3U",
+            "V13",
+            "V14",
+            "V15",
+            "V16",
+            "V17",
+            "PdfUa1",
+            "PdfX1A",
+            "PdfX3"
+          ]
+        },
+        "callbackUrl": {
+          "format": "uri",
+          "description": "URL that is going to be called when document generation completes.",
+          "type": "string"
+        },
+        "debug": {
+          "description": "Flag indicating if document generation should be run in diagnostic mode.",
+          "type": "boolean"
         }
       }
     },

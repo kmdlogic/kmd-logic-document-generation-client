@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 
-namespace Kmd.Logic.DocumentGeneration.Client
+namespace Kmd.Logic.DocumentGeneration.Client.Types
 {
     [Serializable]
     public class DocumentGenerationValidationException : Exception

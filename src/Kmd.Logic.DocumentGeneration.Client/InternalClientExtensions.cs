@@ -18,6 +18,1021 @@ namespace Kmd.Logic.DocumentGeneration.Client
     internal static partial class InternalClientExtensions
     {
             /// <summary>
+            /// Gets a SharePoint Online template storage configuration entry for a given
+            /// document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='hierarchyPath'>
+            /// The configuration entry ancestry path to the entry to be returned.
+            /// </param>
+            public static AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails GetAzureBlobEntryAtPath(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string))
+            {
+                return operations.GetAzureBlobEntryAtPathAsync(subscriptionId, configurationId, hierarchyPath).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets a SharePoint Online template storage configuration entry for a given
+            /// document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='hierarchyPath'>
+            /// The configuration entry ancestry path to the entry to be returned.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails> GetAzureBlobEntryAtPathAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetAzureBlobEntryAtPathWithHttpMessagesAsync(subscriptionId, configurationId, hierarchyPath, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Updates a SharePoint Online template storage configuration entry for a
+            /// given document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='hierarchyPath'>
+            /// The configuration entry ancestry path to the entry.
+            /// </param>
+            /// <param name='request'>
+            /// SharePoint Online template storage settings.
+            /// </param>
+            public static AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails UpdateAzureBlobEntryAtPath(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string), AzureBlobTemplateModelUpdateEntryAtPathRequest request = default(AzureBlobTemplateModelUpdateEntryAtPathRequest))
+            {
+                return operations.UpdateAzureBlobEntryAtPathAsync(subscriptionId, configurationId, hierarchyPath, request).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Updates a SharePoint Online template storage configuration entry for a
+            /// given document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='hierarchyPath'>
+            /// The configuration entry ancestry path to the entry.
+            /// </param>
+            /// <param name='request'>
+            /// SharePoint Online template storage settings.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails> UpdateAzureBlobEntryAtPathAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string), AzureBlobTemplateModelUpdateEntryAtPathRequest request = default(AzureBlobTemplateModelUpdateEntryAtPathRequest), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.UpdateAzureBlobEntryAtPathWithHttpMessagesAsync(subscriptionId, configurationId, hierarchyPath, request, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Creates a SharePoint Online template storage configuration entry for a
+            /// given document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='parentHierarchyPath'>
+            /// The configuration entry ancestry path to the parent entry.
+            /// </param>
+            /// <param name='request'>
+            /// SharePoint Online template storage settings.
+            /// </param>
+            public static AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails CreateAzureBlobEntryUnderPath(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string parentHierarchyPath = default(string), AzureBlobTemplateModelCreateEntryUnderPathRequest request = default(AzureBlobTemplateModelCreateEntryUnderPathRequest))
+            {
+                return operations.CreateAzureBlobEntryUnderPathAsync(subscriptionId, configurationId, parentHierarchyPath, request).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Creates a SharePoint Online template storage configuration entry for a
+            /// given document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='parentHierarchyPath'>
+            /// The configuration entry ancestry path to the parent entry.
+            /// </param>
+            /// <param name='request'>
+            /// SharePoint Online template storage settings.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails> CreateAzureBlobEntryUnderPathAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string parentHierarchyPath = default(string), AzureBlobTemplateModelCreateEntryUnderPathRequest request = default(AzureBlobTemplateModelCreateEntryUnderPathRequest), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.CreateAzureBlobEntryUnderPathWithHttpMessagesAsync(subscriptionId, configurationId, parentHierarchyPath, request, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Deletes a storage configuration entry for a given document generation
+            /// configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configuration.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to having the entry to be deleted.
+            /// </param>
+            /// <param name='hierarchyPath'>
+            /// The configuration entry ancestry path to the entry to be deleted.
+            /// </param>
+            public static DocumentGenerationConfigurationSummary DeleteAzureBlobEntryAtPath(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string))
+            {
+                return operations.DeleteAzureBlobEntryAtPathAsync(subscriptionId, configurationId, hierarchyPath).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Deletes a storage configuration entry for a given document generation
+            /// configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configuration.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to having the entry to be deleted.
+            /// </param>
+            /// <param name='hierarchyPath'>
+            /// The configuration entry ancestry path to the entry to be deleted.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<DocumentGenerationConfigurationSummary> DeleteAzureBlobEntryAtPathAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.DeleteAzureBlobEntryAtPathWithHttpMessagesAsync(subscriptionId, configurationId, hierarchyPath, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Gets a SharePoint Online template storage configuration entry for a given
+            /// document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='entryId'>
+            /// The configuration entry identifier of the entry to be returned.
+            /// </param>
+            public static AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails GetAzureBlobEntryAtId(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, System.Guid entryId)
+            {
+                return operations.GetAzureBlobEntryAtIdAsync(subscriptionId, configurationId, entryId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets a SharePoint Online template storage configuration entry for a given
+            /// document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='entryId'>
+            /// The configuration entry identifier of the entry to be returned.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails> GetAzureBlobEntryAtIdAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, System.Guid entryId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetAzureBlobEntryAtIdWithHttpMessagesAsync(subscriptionId, configurationId, entryId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Updates a SharePoint Online template storage configuration entry for a
+            /// given document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='entryId'>
+            /// The configuration entry identifier of the entry to be updated.
+            /// </param>
+            /// <param name='request'>
+            /// SharePoint Online template storage settings.
+            /// </param>
+            public static AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails UpdateAzureBlobEntryAtId(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, System.Guid entryId, AzureBlobTemplateModelUpdateEntryAtIdRequest request = default(AzureBlobTemplateModelUpdateEntryAtIdRequest))
+            {
+                return operations.UpdateAzureBlobEntryAtIdAsync(subscriptionId, configurationId, entryId, request).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Updates a SharePoint Online template storage configuration entry for a
+            /// given document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='entryId'>
+            /// The configuration entry identifier of the entry to be updated.
+            /// </param>
+            /// <param name='request'>
+            /// SharePoint Online template storage settings.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails> UpdateAzureBlobEntryAtIdAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, System.Guid entryId, AzureBlobTemplateModelUpdateEntryAtIdRequest request = default(AzureBlobTemplateModelUpdateEntryAtIdRequest), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.UpdateAzureBlobEntryAtIdWithHttpMessagesAsync(subscriptionId, configurationId, entryId, request, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Deletes a storage configuration entry for a given document generation
+            /// configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configuration.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to having the entry to be deleted.
+            /// </param>
+            /// <param name='entryId'>
+            /// The configuration entry identifier of the entry to be deleted.
+            /// </param>
+            public static DocumentGenerationConfigurationSummary DeleteAzureBlobEntryAtId(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, System.Guid entryId)
+            {
+                return operations.DeleteAzureBlobEntryAtIdAsync(subscriptionId, configurationId, entryId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Deletes a storage configuration entry for a given document generation
+            /// configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configuration.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to having the entry to be deleted.
+            /// </param>
+            /// <param name='entryId'>
+            /// The configuration entry identifier of the entry to be deleted.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<DocumentGenerationConfigurationSummary> DeleteAzureBlobEntryAtIdAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, System.Guid entryId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.DeleteAzureBlobEntryAtIdWithHttpMessagesAsync(subscriptionId, configurationId, entryId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Creates a SharePoint Online template storage configuration entry for a
+            /// given document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='parentEntryId'>
+            /// The configuration entry identifier of the parent entry.
+            /// </param>
+            /// <param name='request'>
+            /// SharePoint Online template storage settings.
+            /// </param>
+            public static AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails CreateAzureBlobEntryUnderId(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, System.Guid parentEntryId, AzureBlobTemplateModelCreateEntryUnderIdRequest request = default(AzureBlobTemplateModelCreateEntryUnderIdRequest))
+            {
+                return operations.CreateAzureBlobEntryUnderIdAsync(subscriptionId, configurationId, parentEntryId, request).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Creates a SharePoint Online template storage configuration entry for a
+            /// given document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='parentEntryId'>
+            /// The configuration entry identifier of the parent entry.
+            /// </param>
+            /// <param name='request'>
+            /// SharePoint Online template storage settings.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails> CreateAzureBlobEntryUnderIdAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, System.Guid parentEntryId, AzureBlobTemplateModelCreateEntryUnderIdRequest request = default(AzureBlobTemplateModelCreateEntryUnderIdRequest), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.CreateAzureBlobEntryUnderIdWithHttpMessagesAsync(subscriptionId, configurationId, parentEntryId, request, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Gets a SharePoint Online template storage configuration entry for a given
+            /// document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='hierarchyPath'>
+            /// The configuration entry ancestry path to the entry to be returned.
+            /// </param>
+            public static SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails GetSharePointOnlineEntryAtPath(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string))
+            {
+                return operations.GetSharePointOnlineEntryAtPathAsync(subscriptionId, configurationId, hierarchyPath).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets a SharePoint Online template storage configuration entry for a given
+            /// document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='hierarchyPath'>
+            /// The configuration entry ancestry path to the entry to be returned.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails> GetSharePointOnlineEntryAtPathAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetSharePointOnlineEntryAtPathWithHttpMessagesAsync(subscriptionId, configurationId, hierarchyPath, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Updates a SharePoint Online template storage configuration entry for a
+            /// given document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='hierarchyPath'>
+            /// The configuration entry ancestry path to the entry.
+            /// </param>
+            /// <param name='request'>
+            /// SharePoint Online template storage settings.
+            /// </param>
+            public static SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails UpdateSharePointOnlineEntryAtPath(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string), SharePointOnlineTemplateModelUpdateEntryAtPathRequest request = default(SharePointOnlineTemplateModelUpdateEntryAtPathRequest))
+            {
+                return operations.UpdateSharePointOnlineEntryAtPathAsync(subscriptionId, configurationId, hierarchyPath, request).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Updates a SharePoint Online template storage configuration entry for a
+            /// given document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='hierarchyPath'>
+            /// The configuration entry ancestry path to the entry.
+            /// </param>
+            /// <param name='request'>
+            /// SharePoint Online template storage settings.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails> UpdateSharePointOnlineEntryAtPathAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string), SharePointOnlineTemplateModelUpdateEntryAtPathRequest request = default(SharePointOnlineTemplateModelUpdateEntryAtPathRequest), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.UpdateSharePointOnlineEntryAtPathWithHttpMessagesAsync(subscriptionId, configurationId, hierarchyPath, request, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Creates a SharePoint Online template storage configuration entry for a
+            /// given document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='parentHierarchyPath'>
+            /// The configuration entry ancestry path to the parent entry.
+            /// </param>
+            /// <param name='request'>
+            /// SharePoint Online template storage settings.
+            /// </param>
+            public static SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails CreateSharePointOnlineEntryUnderPath(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string parentHierarchyPath = default(string), SharePointOnlineTemplateModelCreateEntryUnderPathRequest request = default(SharePointOnlineTemplateModelCreateEntryUnderPathRequest))
+            {
+                return operations.CreateSharePointOnlineEntryUnderPathAsync(subscriptionId, configurationId, parentHierarchyPath, request).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Creates a SharePoint Online template storage configuration entry for a
+            /// given document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='parentHierarchyPath'>
+            /// The configuration entry ancestry path to the parent entry.
+            /// </param>
+            /// <param name='request'>
+            /// SharePoint Online template storage settings.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails> CreateSharePointOnlineEntryUnderPathAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string parentHierarchyPath = default(string), SharePointOnlineTemplateModelCreateEntryUnderPathRequest request = default(SharePointOnlineTemplateModelCreateEntryUnderPathRequest), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.CreateSharePointOnlineEntryUnderPathWithHttpMessagesAsync(subscriptionId, configurationId, parentHierarchyPath, request, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Deletes a storage configuration entry for a given document generation
+            /// configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configuration.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to having the entry to be deleted.
+            /// </param>
+            /// <param name='hierarchyPath'>
+            /// The configuration entry ancestry path to the entry to be deleted.
+            /// </param>
+            public static DocumentGenerationConfigurationSummary DeleteSharePointOnlineEntryAtPath(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string))
+            {
+                return operations.DeleteSharePointOnlineEntryAtPathAsync(subscriptionId, configurationId, hierarchyPath).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Deletes a storage configuration entry for a given document generation
+            /// configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configuration.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to having the entry to be deleted.
+            /// </param>
+            /// <param name='hierarchyPath'>
+            /// The configuration entry ancestry path to the entry to be deleted.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<DocumentGenerationConfigurationSummary> DeleteSharePointOnlineEntryAtPathAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.DeleteSharePointOnlineEntryAtPathWithHttpMessagesAsync(subscriptionId, configurationId, hierarchyPath, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Gets a SharePoint Online template storage configuration entry for a given
+            /// document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='entryId'>
+            /// The configuration entry identifier of the entry to be returned.
+            /// </param>
+            public static SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails GetSharePointOnlineEntryAtId(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, System.Guid entryId)
+            {
+                return operations.GetSharePointOnlineEntryAtIdAsync(subscriptionId, configurationId, entryId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Gets a SharePoint Online template storage configuration entry for a given
+            /// document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='entryId'>
+            /// The configuration entry identifier of the entry to be returned.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails> GetSharePointOnlineEntryAtIdAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, System.Guid entryId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetSharePointOnlineEntryAtIdWithHttpMessagesAsync(subscriptionId, configurationId, entryId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Updates a SharePoint Online template storage configuration entry for a
+            /// given document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='entryId'>
+            /// The configuration entry identifier of the entry to be updated.
+            /// </param>
+            /// <param name='request'>
+            /// SharePoint Online template storage settings.
+            /// </param>
+            public static SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails UpdateSharePointOnlineEntryAtId(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, System.Guid entryId, SharePointOnlineTemplateModelUpdateEntryAtIdRequest request = default(SharePointOnlineTemplateModelUpdateEntryAtIdRequest))
+            {
+                return operations.UpdateSharePointOnlineEntryAtIdAsync(subscriptionId, configurationId, entryId, request).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Updates a SharePoint Online template storage configuration entry for a
+            /// given document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='entryId'>
+            /// The configuration entry identifier of the entry to be updated.
+            /// </param>
+            /// <param name='request'>
+            /// SharePoint Online template storage settings.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails> UpdateSharePointOnlineEntryAtIdAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, System.Guid entryId, SharePointOnlineTemplateModelUpdateEntryAtIdRequest request = default(SharePointOnlineTemplateModelUpdateEntryAtIdRequest), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.UpdateSharePointOnlineEntryAtIdWithHttpMessagesAsync(subscriptionId, configurationId, entryId, request, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Deletes a storage configuration entry for a given document generation
+            /// configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configuration.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to having the entry to be deleted.
+            /// </param>
+            /// <param name='entryId'>
+            /// The configuration entry identifier of the entry to be deleted.
+            /// </param>
+            public static DocumentGenerationConfigurationSummary DeleteSharePointOnlineEntryAtId(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, System.Guid entryId)
+            {
+                return operations.DeleteSharePointOnlineEntryAtIdAsync(subscriptionId, configurationId, entryId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Deletes a storage configuration entry for a given document generation
+            /// configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configuration.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to having the entry to be deleted.
+            /// </param>
+            /// <param name='entryId'>
+            /// The configuration entry identifier of the entry to be deleted.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<DocumentGenerationConfigurationSummary> DeleteSharePointOnlineEntryAtIdAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, System.Guid entryId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.DeleteSharePointOnlineEntryAtIdWithHttpMessagesAsync(subscriptionId, configurationId, entryId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Creates a SharePoint Online template storage configuration entry for a
+            /// given document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='parentEntryId'>
+            /// The configuration entry identifier of the parent entry.
+            /// </param>
+            /// <param name='request'>
+            /// SharePoint Online template storage settings.
+            /// </param>
+            public static SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails CreateSharePointOnlineEntryUnderId(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, System.Guid parentEntryId, SharePointOnlineTemplateModelCreateEntryUnderIdRequest request = default(SharePointOnlineTemplateModelCreateEntryUnderIdRequest))
+            {
+                return operations.CreateSharePointOnlineEntryUnderIdAsync(subscriptionId, configurationId, parentEntryId, request).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Creates a SharePoint Online template storage configuration entry for a
+            /// given document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='parentEntryId'>
+            /// The configuration entry identifier of the parent entry.
+            /// </param>
+            /// <param name='request'>
+            /// SharePoint Online template storage settings.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails> CreateSharePointOnlineEntryUnderIdAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, System.Guid parentEntryId, SharePointOnlineTemplateModelCreateEntryUnderIdRequest request = default(SharePointOnlineTemplateModelCreateEntryUnderIdRequest), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.CreateSharePointOnlineEntryUnderIdWithHttpMessagesAsync(subscriptionId, configurationId, parentEntryId, request, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get all document generation configurations managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            public static IList<ConfigurationListResponse> GetAllConfigurations(this IInternalClient operations, System.Guid subscriptionId)
+            {
+                return operations.GetAllConfigurationsAsync(subscriptionId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get all document generation configurations managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IList<ConfigurationListResponse>> GetAllConfigurationsAsync(this IInternalClient operations, System.Guid subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetAllConfigurationsWithHttpMessagesAsync(subscriptionId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Create a new document generation configuration.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='request'>
+            /// The details of the configuration being created.
+            /// </param>
+            public static DocumentGenerationConfigurationSummary CreateDocumentGenerationConfiguration(this IInternalClient operations, System.Guid subscriptionId, CreateConfigurationRequest request = default(CreateConfigurationRequest))
+            {
+                return operations.CreateDocumentGenerationConfigurationAsync(subscriptionId, request).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Create a new document generation configuration.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='request'>
+            /// The details of the configuration being created.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<DocumentGenerationConfigurationSummary> CreateDocumentGenerationConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, CreateConfigurationRequest request = default(CreateConfigurationRequest), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.CreateDocumentGenerationConfigurationWithHttpMessagesAsync(subscriptionId, request, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get the summary of a document generation configuration managed by the
+            /// subscription by the id of the configuration.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            public static DocumentGenerationConfigurationSummary GetConfigurationSummaryById(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId)
+            {
+                return operations.GetConfigurationSummaryByIdAsync(subscriptionId, configurationId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get the summary of a document generation configuration managed by the
+            /// subscription by the id of the configuration.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<DocumentGenerationConfigurationSummary> GetConfigurationSummaryByIdAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetConfigurationSummaryByIdWithHttpMessagesAsync(subscriptionId, configurationId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Update an existing document generation configuration.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to update.
+            /// </param>
+            /// <param name='request'>
+            /// The details of the configuration being updated.
+            /// </param>
+            public static DocumentGenerationConfigurationSummary UpdateDocumentGenerationConfiguration(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, UpdateConfigurationRequest request = default(UpdateConfigurationRequest))
+            {
+                return operations.UpdateDocumentGenerationConfigurationAsync(subscriptionId, configurationId, request).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Update an existing document generation configuration.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to update.
+            /// </param>
+            /// <param name='request'>
+            /// The details of the configuration being updated.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<DocumentGenerationConfigurationSummary> UpdateDocumentGenerationConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, UpdateConfigurationRequest request = default(UpdateConfigurationRequest), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.UpdateDocumentGenerationConfigurationWithHttpMessagesAsync(subscriptionId, configurationId, request, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Deletes a document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            public static void DeleteDocumentGenerationConfiguration(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId)
+            {
+                operations.DeleteDocumentGenerationConfigurationAsync(subscriptionId, configurationId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Deletes a document generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task DeleteDocumentGenerationConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.DeleteDocumentGenerationConfigurationWithHttpMessagesAsync(subscriptionId, configurationId, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
             /// Requests document generation.
             /// </summary>
             /// <param name='operations'>
@@ -52,6 +1067,46 @@ namespace Kmd.Logic.DocumentGeneration.Client
             public static async Task<DocumentGenerationRequest> RequestDocumentGenerationAsync(this IInternalClient operations, System.Guid subscriptionId, GenerateDocumentRequest request = default(GenerateDocumentRequest), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.RequestDocumentGenerationWithHttpMessagesAsync(subscriptionId, request, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Requests document generation.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// Identifier of Logic subscription.
+            /// </param>
+            /// <param name='request'>
+            /// Document generation parameters.
+            /// </param>
+            public static DocumentGenerationRequest RequestDocumentConversion(this IInternalClient operations, System.Guid subscriptionId, GenerateDocumentConversionRequest request = default(GenerateDocumentConversionRequest))
+            {
+                return operations.RequestDocumentConversionAsync(subscriptionId, request).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Requests document generation.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// Identifier of Logic subscription.
+            /// </param>
+            /// <param name='request'>
+            /// Document generation parameters.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<DocumentGenerationRequest> RequestDocumentConversionAsync(this IInternalClient operations, System.Guid subscriptionId, GenerateDocumentConversionRequest request = default(GenerateDocumentConversionRequest), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.RequestDocumentConversionWithHttpMessagesAsync(subscriptionId, request, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
