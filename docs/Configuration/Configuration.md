@@ -125,7 +125,7 @@ Hovering the pointer over the status badge will provide further details about th
   - Add child entry (plus icon):  
   Adds a child entry to the configuration entry.  
   It will open a pop-up dialog like so:  
-  ![Image of Logic Console Create Document Generation Configuration - Add pop up](./assets/image009.jpg)
+  ![Image of Logic Console Create Document Generation Configuration - Add pop up](./assets/image014.jpg)
 
   - Remove entry (trash icon):  
   Removes (after prompting the user) the configuration entry. 
