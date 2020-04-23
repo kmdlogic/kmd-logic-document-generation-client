@@ -1,6 +1,6 @@
 ﻿# KMD Logic Document Generation Configuration
 
-To configure a Logic Document Generation environment, you need to access [Logic Console](https://console.kmdlogic.io/) to do so.
+To configure a Logic Document Generation environment you need to access [Logic Console](https://console.kmdlogic.io/).
 
 ## Accessing Logic Document Generation Configuration module
 
