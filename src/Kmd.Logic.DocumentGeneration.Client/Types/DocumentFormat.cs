@@ -1,4 +1,4 @@
-﻿namespace Kmd.Logic.DocumentGeneration.Client.Models
+﻿namespace Kmd.Logic.DocumentGeneration.Client.Types
 {
     public enum DocumentFormat
     {

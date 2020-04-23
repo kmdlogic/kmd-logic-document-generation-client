@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Kmd.Logic.DocumentGeneration.Client
+namespace Kmd.Logic.DocumentGeneration.Client.Types
 {
     [Serializable]
     public class DocumentGenerationConfigurationException : Exception

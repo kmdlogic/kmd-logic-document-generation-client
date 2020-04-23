@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Kmd.Logic.DocumentGeneration.Client.Sample
+namespace Kmd.Logic.DocumentGeneration.Client.GenerationSample
 {
     public class AnchorDetails
     {
@@ -8,6 +8,6 @@ namespace Kmd.Logic.DocumentGeneration.Client.Sample
 
         public DateTime Expiry { get; set; }
 
-        public string Href { get; set; }
+        public Uri Href { get; set; }
     }
 }
