@@ -36,8 +36,7 @@ _(Required)_ In order to use `Logic Document Generation` your team needs to have
 - Levels:
 _(Optional)_ `Logic Document Generation` allows you to consume templates stored in multiple storages, it uses a hierarchical organization where each _**level**_ down the hierarchy is able to override a template found on its parent _**level**_.  
 By default this screen is pre-populated with two levels (Customer and Department), feel free to modify this to suit your needs.  
-A configuration environment can have zero, one or multiple levels.  
-We will see later how to configure entries at different levels of the hierarchy.
+
 
 ### Master Storage Settings
 
