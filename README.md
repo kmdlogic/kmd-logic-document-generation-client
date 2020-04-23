@@ -6,6 +6,11 @@ A dotnet client library for submitting document generation requests the KMD Logi
 
 To allow products using the Logic platform to generate documents for well-defined business scenarios using templates that their customers can easily manage.
 
+## Configuring a Document Generation environment in Console
+
+For a guide on how to configure a Document Generation environment in Console please go [here](./docs/Configuration/Configuration.md).
+
+
 ## Getting started in ASP.NET Core
 
 To use this library in an ASP.NET Core application, 
