@@ -31,7 +31,7 @@ The screen is divided in two sections, the `Configuration Settings` and the `Mas
 _(Required)_ The configuration name, any non-empty string is valid.
 
 - ASPOSE license switch:  
-_(Required)_ In order to use `Logic Document Generation` your organization needs to have a valid ASPOSE license. Toggle this switch on to acknowledge that.
+_(Required)_ In order to use `Logic Document Generation` your team needs to have a valid ASPOSE license. Toggle this switch on to acknowledge that.
 
 - Levels:
 _(Optional)_ `Logic Document Generation` allows you to consume templates stored in multiple storages, it uses a hierarchical organization where each _**level**_ down the hierarchy is able to override a template found on its parent _**level**_.  
