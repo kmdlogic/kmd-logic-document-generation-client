@@ -63,13 +63,22 @@ _(Required)_ The SharePoint group name where the templates are stored.
 _(Required)_ The Client Secret from your SharePoint Client Credentials.
 
 #### Azure Blob Storage settings
+
+You'll need an Azure Blob Storage resource to use this provider.  
+
+To create an Azure Blob Storage resource please follow the guide located in [https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-create).
+
+Once you have done that, you'll need to take note of its connection string, you can do that by following guide: [https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage#view-access-keys-and-connection-string](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage#view-access-keys-and-connection-string).  
+
+Finally, fill out the Azure Blob Storage provider settings.  
+
 ![Image of Logic Console Create Document Generation Configuration - Azure Blob Storage Settings](./assets/image006.jpg)
 
 - Container:  
 _(Required)_ Your Azure Blob Storage container name.
 
-- Connection:
-_(Required)_ Your Azure Blob Storage connection string.
+- Connection:  
+_(Required)_ Your Azure Blob Storage connection string.  
 
 - Blob prefix:  
 _(Optional)_ Your Azure Blob Storage blob prefix.
