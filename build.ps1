@@ -49,7 +49,7 @@ foreach ($src in Get-ChildItem src/*) {
     Pop-Location
 }
 
-foreach ($src in Get-ChildItem sample/*) {
+foreach ($src in Get-ChildItem samples/*) {
     Push-Location $src
 
     Write-Host "build: compiling project in $src"
