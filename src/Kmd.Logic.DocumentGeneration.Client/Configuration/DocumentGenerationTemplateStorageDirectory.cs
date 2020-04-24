@@ -235,17 +235,19 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
                 .ToArray();
         }
 
-        public DocumentGenerationProgress RequestDocumentGeneration(string templateId, string twoLetterIsoLanguageName, DocumentFormat documentFormat, JObject mergeData)
+        public DocumentGenerationProgress RequestDocumentGeneration(string templateId, string twoLetterIsoLanguageName, DocumentFormat documentFormat, JObject mergeData, Uri callbackUrl, bool debug)
         {
             return this.InternalClient.RequestDocumentGeneration(
-                this.SubscriptionId,
-                new GenerateDocumentRequest(
-                    this.ConfigurationId,
-                    this.HierarchyPath.ToString(),
-                    templateId,
-                    twoLetterIsoLanguageName,
-                    documentFormat.ToString(),
-                    mergeData))
+                    this.SubscriptionId,
+                    new DocumentGenerationRequestDetails(
+                            this.HierarchyPath.ToString(),
+                            templateId,
+                            twoLetterIsoLanguageName,
+                            documentFormat,
+                            mergeData,
+                            callbackUrl,
+                            debug)
+                        .ToWebRequest(this.ConfigurationId))
                 ?.ToDocumentGenerationProgress();
         }
 

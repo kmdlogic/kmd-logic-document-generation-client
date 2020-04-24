@@ -186,7 +186,9 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                             template.TemplateId,
                             template.Languages.FirstOrDefault() ?? string.Empty,
                             DocumentFormat.Docx,
-                            mergeData)?.Id;
+                            mergeData,
+                            null,
+                            false)?.Id;
 
                     Uri downloadLink = null;
 
@@ -216,10 +218,10 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                     await DownloadToFilesystem(downloadLink, filename, $"Generated {template.TemplateId}").ConfigureAwait(false);
 
                     // Request the new document be converted to Pdf/A
-                    DiagnosticLog($"Requesting the generated document be onverted to Pdf/A");
+                    DiagnosticLog($"Requesting the generated document be converted to Pdf/A");
                     var converstionRequestId =
                         documentGenerationConfiguration.RequestDocumentConversionToPdfA(
-                            new DocumentConversionToPdfARequest(
+                            new DocumentConversionToPdfARequestDetails(
                                 downloadLink,
                                 DocumentFormat.Docx,
                                 null,

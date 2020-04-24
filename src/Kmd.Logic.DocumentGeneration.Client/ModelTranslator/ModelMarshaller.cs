@@ -135,16 +135,30 @@ namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
         }
 
         internal static GenerateDocumentConversionRequest ToWebRequest(
-            this DocumentConversionRequest documentConversionRequest, Guid configurationId)
+            this DocumentConversionRequestDetails documentConversionRequestDetails, Guid configurationId)
         {
             return new GenerateDocumentConversionRequest(
                 configurationId,
-                documentConversionRequest.SourceDocumentUrl.ToString(),
-                documentConversionRequest.SourceDocumentFormat.ToString(),
-                documentConversionRequest.ConvertedDocumentFormat.ToString(),
-                documentConversionRequest.ConvertedDocumentPdfFormat.ToString(),
-                documentConversionRequest.CallbackUrl?.ToString(),
-                documentConversionRequest.Debug);
+                documentConversionRequestDetails.SourceDocumentUrl.ToString(),
+                documentConversionRequestDetails.SourceDocumentFormat.ToString(),
+                documentConversionRequestDetails.ConvertedDocumentFormat.ToString(),
+                documentConversionRequestDetails.ConvertedDocumentPdfFormat.ToString(),
+                documentConversionRequestDetails.CallbackUrl?.ToString(),
+                documentConversionRequestDetails.Debug);
+        }
+
+        internal static GenerateDocumentRequest ToWebRequest(
+            this DocumentGenerationRequestDetails documentGenerationRequestDetails, Guid configurationId)
+        {
+            return new GenerateDocumentRequest(
+                configurationId,
+                documentGenerationRequestDetails.HierarchyPath,
+                documentGenerationRequestDetails.TemplateId,
+                documentGenerationRequestDetails.TwoLetterIsoLanguageName,
+                documentGenerationRequestDetails.DocumentFormat.ToString(),
+                documentGenerationRequestDetails.MergeData,
+                documentGenerationRequestDetails.CallbackUrl?.ToString(),
+                documentGenerationRequestDetails.Debug);
         }
 
         internal static CreateConfigurationRequest ToCreateConfigurationRequest(
