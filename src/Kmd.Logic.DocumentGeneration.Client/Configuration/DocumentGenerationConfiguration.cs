@@ -168,17 +168,17 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
             return documentUri?.ToDocumentGenerationUri();
         }
 
-        public DocumentGenerationProgress RequestDocumentConversionToPdfA(DocumentConversionToPdfARequest documentConversionToPdfARequest)
+        public DocumentGenerationProgress RequestDocumentConversionToPdfA(DocumentConversionToPdfARequestDetails documentConversionToPdfARequestDetails)
         {
             var documentGenerationRequest =
-                this.InternalClient.RequestDocumentConversion(this.SubscriptionId, documentConversionToPdfARequest.ToWebRequest(this.Id));
+                this.InternalClient.RequestDocumentConversion(this.SubscriptionId, documentConversionToPdfARequestDetails.ToWebRequest(this.Id));
             return documentGenerationRequest.ToDocumentGenerationProgress();
         }
 
-        public DocumentGenerationProgress RequestDocumentConversion(DocumentConversionRequest documentConversionRequest)
+        public DocumentGenerationProgress RequestDocumentConversion(DocumentConversionRequestDetails documentConversionRequestDetails)
         {
             var documentGenerationRequest =
-                this.InternalClient.RequestDocumentConversion(this.SubscriptionId, documentConversionRequest.ToWebRequest(this.Id));
+                this.InternalClient.RequestDocumentConversion(this.SubscriptionId, documentConversionRequestDetails.ToWebRequest(this.Id));
             return documentGenerationRequest.ToDocumentGenerationProgress();
         }
 

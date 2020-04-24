@@ -3,7 +3,7 @@ using Kmd.Logic.DocumentGeneration.Client.Types;
 
 namespace Kmd.Logic.DocumentGeneration.Client.ServiceMessages
 {
-    public class DocumentConversionRequest
+    public class DocumentConversionRequestDetails
     {
         /// <summary>
         /// Gets URL that identifies the document to be converted.
@@ -35,7 +35,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.ServiceMessages
         /// </summary>
         public bool Debug { get; }
 
-        public DocumentConversionRequest(
+        public DocumentConversionRequestDetails(
             Uri sourceDocumentUrl,
             DocumentFormat sourceDocumentFormat,
             DocumentFormat convertedDocumentFormat,

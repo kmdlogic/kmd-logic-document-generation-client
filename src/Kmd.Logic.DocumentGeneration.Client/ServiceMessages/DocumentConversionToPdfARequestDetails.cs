@@ -3,9 +3,9 @@ using Kmd.Logic.DocumentGeneration.Client.Types;
 
 namespace Kmd.Logic.DocumentGeneration.Client.ServiceMessages
 {
-    public class DocumentConversionToPdfARequest : DocumentConversionRequest
+    public class DocumentConversionToPdfARequestDetails : DocumentConversionRequestDetails
     {
-        public DocumentConversionToPdfARequest(
+        public DocumentConversionToPdfARequestDetails(
             Uri sourceDocumentUrl,
             DocumentFormat sourceDocumentFormat,
             Uri callbackUrl = null,
