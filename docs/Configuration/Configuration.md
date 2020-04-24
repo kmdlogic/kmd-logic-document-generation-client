@@ -46,7 +46,7 @@ _(Required)_ The template storage provider where the master templates are stored
 
 #### SharePoint settings
 
-For `SharePoint Online`, `Logic Document Generation` requires Client Credentials from an Azure App Registration with the following API permissions:
+For `SharePoint Online`, `Logic Document Generation` requires an Azure App Registration with the following API permissions:
 
 - Microsoft Graph
   - Files.ReadAll
@@ -60,7 +60,7 @@ Once you have set the minimum permissions required by `Logic Document Generation
 
 ![Image of App Registration API Permissions](./assets/image015.jpg)
 
-Next, create a new client secret and copy its client secret which you will need later:
+Next, create a new client secret and copy its value which you will need later:
 
 ![Image of App Registration API Client Secret](./assets/image016.jpg)
 
