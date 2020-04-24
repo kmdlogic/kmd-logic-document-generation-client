@@ -149,13 +149,14 @@ namespace Kmd.Logic.DocumentGeneration.Client.GenerationSample
                     documentGenerationClient.RequestDocumentGeneration(
                         null,
                         documentDetails.ConfigurationId,
-                        documentDetails.HierarchyPath,
-                        documentDetails.Template.TemplateId,
-                        documentDetails.Template.Languages.FirstOrDefault() ?? string.Empty,
-                        documentDetails.DocumentFormat,
-                        documentDetails.MergeData,
-                        null,
-                        false);
+                        new DocumentGenerationRequestDetails(
+                            documentDetails.HierarchyPath,
+                            documentDetails.Template.TemplateId,
+                            documentDetails.Template.Languages.FirstOrDefault() ?? string.Empty,
+                            documentDetails.DocumentFormat,
+                            documentDetails.MergeData,
+                            null,
+                            false));
 
                 const int secondsToTimesUp = 30;
                 var stopWatch = Stopwatch.StartNew();
@@ -223,13 +224,12 @@ namespace Kmd.Logic.DocumentGeneration.Client.GenerationSample
             {
                 DiagnosticLog($"Requesting document conversion from url {convertedDocumentDetails.Description}");
                 var documentGenerationProgress =
-                    await documentGenerationClient.RequestDocumentConversionToPdfA(
+                    documentGenerationClient.RequestDocumentConversionToPdfA(
                         null,
                         convertedDocumentDetails.ConfigurationId,
-                        new DocumentConversionToPdfARequest(
-                                convertedDocumentDetails.SourceDocumentUrl,
-                                convertedDocumentDetails.SourceDocumentFormat))
-                        .ConfigureAwait(false);
+                        new DocumentConversionToPdfARequestDetails(
+                            convertedDocumentDetails.SourceDocumentUrl,
+                            convertedDocumentDetails.SourceDocumentFormat));
 
                 const int secondsToTimesUp = 30;
                 var stopWatch = Stopwatch.StartNew();

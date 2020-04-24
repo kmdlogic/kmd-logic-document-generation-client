@@ -12,7 +12,6 @@ using Kmd.Logic.DocumentGeneration.Client.ServiceMessages;
 using Kmd.Logic.DocumentGeneration.Client.Types;
 using Kmd.Logic.Identity.Authorization;
 using Microsoft.Rest;
-using Newtonsoft.Json.Linq;
 
 namespace Kmd.Logic.DocumentGeneration.Client
 {
@@ -44,38 +43,18 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// </summary>
         /// <param name="subscriptionId">Identifier of Logic subscription.</param>
         /// <param name="configurationId">Identifier of document generation configuration to be used.</param>
-        /// <param name="hierarchyPath">The hierarchy of possible template sources not including the master location.
-        /// For example, if you have a customer "A0001" with a department "B0001" then the hierarchy path would be @"\A0001\B0001".
-        /// If the department has no template source configured then the customers templates will be used.</param>
-        /// <param name="templateId">Identifier of template to be used.</param>
-        /// <param name="twoLetterIsoLanguageName">Language code in ISO 639-2 format (eg. en).</param>
-        /// <param name="documentFormat">Format of the generated document. Possible values include: 'Txt', 'Rtf', 'Doc', 'Docx', 'Pdf'.</param>
-        /// <param name="mergeData">Data to be merged into document.</param>
-        /// <param name="callbackUrl">URL that is going to be called when document generation completes.</param>
-        /// <param name="debug">Flag indicating if document generation should be run in diagnostic mode.</param>
+        /// <param name="documentGenerationRequestDetails">Document generation parameters.</param>
         /// <returns>DocumentGenerationProgress object.</returns>
         public DocumentGenerationProgress RequestDocumentGeneration(
             Guid? subscriptionId,
             Guid configurationId,
-            string hierarchyPath,
-            string templateId,
-            string twoLetterIsoLanguageName,
-            DocumentFormat documentFormat,
-            JObject mergeData,
-            Uri callbackUrl,
-            bool? debug)
+            DocumentGenerationRequestDetails documentGenerationRequestDetails)
         {
             var resolvedSubscriptionId = this.ResolveSubscriptionId(subscriptionId);
             return this.Client.RequestDocumentGeneration(
                     resolvedSubscriptionId,
-                    new GenerateDocumentRequest(
-                        configurationId,
-                        hierarchyPath,
-                        templateId,
-                        twoLetterIsoLanguageName,
-                        documentFormat.ToString(),
-                        mergeData))
-                ?.ToDocumentGenerationProgress();
+                    documentGenerationRequestDetails.ToWebRequest(configurationId))
+                .ToDocumentGenerationProgress();
         }
 
         /// <summary>
@@ -174,16 +153,16 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// </summary>
         /// <param name="subscriptionId">Identifier of Logic subscription.</param>
         /// <param name="configurationId">Identifier of the Document Generation Configuration.</param>
-        /// <param name="documentConversionToPdfARequest">Document conversion parameters.</param>
+        /// <param name="documentConversionToPdfARequestDetails">Document conversion parameters.</param>
         /// <returns>DocumentGenerationProgress.</returns>
-        public async Task<DocumentGenerationProgress> RequestDocumentConversionToPdfA(
+        public DocumentGenerationProgress RequestDocumentConversionToPdfA(
             Guid? subscriptionId,
             Guid configurationId,
-            DocumentConversionToPdfARequest documentConversionToPdfARequest)
+            DocumentConversionToPdfARequestDetails documentConversionToPdfARequestDetails)
         {
             var resolvedSubscriptionId = this.ResolveSubscriptionId(subscriptionId);
             var documentGenerationRequest =
-                await this.Client.RequestDocumentConversionAsync(resolvedSubscriptionId, documentConversionToPdfARequest.ToWebRequest(configurationId));
+                this.Client.RequestDocumentConversion(resolvedSubscriptionId, documentConversionToPdfARequestDetails.ToWebRequest(configurationId));
             return documentGenerationRequest.ToDocumentGenerationProgress();
         }
 
