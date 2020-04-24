@@ -45,22 +45,46 @@ _(Required)_ The template storage provider where the master templates are stored
 `Logic Document Generation` currently supports two storage providers: `SharePoint 365 Online` and `Azure Blob Storage`.
 
 #### SharePoint settings
+
+For `SharePoint Online`, `Logic Document Generation` requires Client Credentials from an Azure App Registration with the following API permissions:
+
+- Microsoft Graph
+  - Files.ReadAll
+  - Group.Read.All
+
+Go to your organization Azure Portal and create one at [https://docs.microsoft.com/en-us/graph/auth-register-app-v2](https://docs.microsoft.com/en-us/graph/auth-register-app-v2).
+
+You can read about how to set up an Azure App Registration that uses the Microsoft Graph API at [https://docs.microsoft.com/en-us/graph/auth-v2-service?view=graph-rest-1.0](https://docs.microsoft.com/en-us/graph/auth-v2-service?view=graph-rest-1.0).  
+
+Once you have set the minimum permissions required by `Logic Document Generation`, you'll end up with something like this:  
+
+![Image of App Registration API Permissions](./assets/image015.jpg)
+
+Next, create a new client secret and copy its client secret which you will need later:
+
+![Image of App Registration API Client Secret](./assets/image016.jpg)
+
+Finally, head over to the App Registration `Overview` module to copy its Client Id and Tenant Id:  
+
+
+![Image of App Registration Client Id and Tenant Id](./assets/image017.jpg)
+
+
+Once you have done all that, proceed to configure the SharePoint storage provider settings:  
+
 ![Image of Logic Console Create Document Generation Configuration - SharePoint Settings](./assets/image005.jpg)
 
-`Logic Document Generation` requires a valid SharePoint Client Credential and a Group name to retrieve templates from it.  
-**The Client Credential needs to be granted permissions to read documents and the SharePoint instance Group collection.**
-
 - Client Id:  
-_(Required)_ The Client Id from your SharePoint Client Credentials.
+_(Required)_ The Client Id from your App Registration.
 
 - Tenant Id:  
-_(Required)_ The Tenant Id from your SharePoint Client Credentials.
+_(Required)_ The Tenant Id from your App Registration.
 
 - Group Name:  
 _(Required)_ The SharePoint group name where the templates are stored.
 
 - Client Secret:  
-_(Required)_ The Client Secret from your SharePoint Client Credentials.
+_(Required)_ The Client Secret from your App Registration.
 
 #### Azure Blob Storage settings
 
