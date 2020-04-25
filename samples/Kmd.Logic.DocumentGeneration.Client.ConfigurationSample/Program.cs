@@ -190,7 +190,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                             null,
                             false)?.Id;
 
-                    Uri downloadLink = null;
+                    Uri downloadLink;
 
                     if (documentGenerationRequestId == null)
                     {
@@ -227,7 +227,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                                 null,
                                 false))?.Id;
 
-                    Uri convertedDocumentDownloadLink = null;
+                    Uri convertedDocumentDownloadLink;
 
                     if (converstionRequestId == null)
                     {
