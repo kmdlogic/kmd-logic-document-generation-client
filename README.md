@@ -1,6 +1,6 @@
 ﻿# KMD Logic Document Generation Api Client
 
-A dotnet client library for submitting document generation requests the KMD Logic platform and retrieving the corresponding generated documents.
+A dotnet client library for submitting document generation requests to the KMD Logic platform and retrieving the corresponding generated documents.
 
 ## The purpose of the Document Generation API
 
@@ -29,82 +29,73 @@ To submit a document generation request:
 
 ```c#
 var documentGenerationRequest =
-    await documentGenerationClient.RequestDocumentGenerationAsync(subscriptionId, new GenerateDocumentRequest
-        {
-            ConfigurationId = configurationId,
-            HierarchyPath = hierarchyPath,
-            TemplateId = templateId,
-            Language = language,
-            DocumentFormat = documentFormat,
-            MergeData = mergeData,
-        })
+    await documentGenerationClient.RequestDocumentGeneration(
+        subscriptionId,
+        configurationId,
+        new DocumentGenerationRequestDetails(
+            hierarchyPath,
+            templateId,
+            twoLetterIsoLanguageName,
+            documentFormat,
+            mergeData,
+            callbackUrl
+        )
         .ConfigureAwait(false);
 ```
 
-where subscriptionId identifies a KMD Logic subscription,
-and where configurationId, hierarchyPath, templateId, language identify the target template, 
-and where documentFormat declares the format of the generated document,
-and where mergeData provides merge data compatible with [Aspose Words Reporting](https://apireference.aspose.com/net/words/aspose.words.reporting/) data sources.
+where:
 
-The returned DocumentGenerationRequest includes an Id property that can be passed to later client methods.
+* `subscriptionId` identifies a KMD Logic subscription;
+* `configurationId` identifies a KMD Logic Document Generation configuration belonging to that subscription;
+* `hierarchyPath` encodes the hierarchy of possible template sources not including the master location ([Hierarchy Path](./docs/HierarchyPath.md));
+* `templateId` identifies the name of the document generation template;
+* `twoLetterIsoLanguageName` specifies a language code in ISO 639-1 format (eg. en, da);
+* `documentFormat` declares the format of the generated document (see [DocumentFormat](./src/Kmd.Logic.DocumentGeneration.Client/Types/DocumentFormat.cs) );
+* `mergeData` provides merge data compatible with [Aspose Words Reporting](https://apireference.aspose.com/net/words/aspose.words.reporting/) data sources;
+* `callbackUrl` declares a URL that is to be called when document generation completes.
 
-### GetDocumentGeneration
+The returned DocumentGenerationProgress response object [DocumentGenerationProgress.cs](./src/Kmd.Logic.DocumentGeneration.Client/ServiceMessages/DocumentGenerationProgress.cs) includes an Id property that can be passed to later client methods.
 
-#### Gets document generation request.
+### GetDocumentGenerationProgress
+
+#### Gets document generation progress.
 
 To retrieve an already submitted document generation request in order to read its status:
 
 ```c#
-var documentGenerationRequest =
-    await documentGenerationClient.GetDocumentGenerationAsync(subscriptionId, id)
+var documentGenerationProgress =
+    await documentGenerationClient.GetDocumentGenerationProgress(subscriptionId, id)
         .ConfigureAwait(false);
 ```
 
-where subscriptionId identifies a KMD Logic subscription,
-and where id is the Id property of an earlier response to RequestDocumentGeneration. 
+where `subscriptionId` identifies a KMD Logic subscription,
+and where `id` is the Id property of an earlier response to `RequestDocumentGeneration`. 
 
-The documentGenerationRequest object includes a State property which can take one of the following string values:
+The `DocumentGenerationProgress` response object [DocumentGenerationProgress.cs](./src/Kmd.Logic.DocumentGeneration.Client/ServiceMessages/DocumentGenerationProgress.cs) includes a State property ( see [DocumentGenerationState.cs](./src/Kmd.Logic.DocumentGeneration.Client/Types/DocumentGenerationState.cs) ) which can take one of the following values:
 
-* Requested
+* `Requested`
 
-* Completed
+* `Completed`
 
-* Failed
+* `Failed`
 
 
 ### GetDocument
 
-#### Gets document generated for the nominated request
+#### Gets the document generated for the nominated request
 
-To retrieve a generated document (once the document State is Completed):
+To retrieve a generated document (once the document `State` is `Completed`):
 
 ```c#
 var documentUri =
-    await documentGenerationClient.GetDocumentAsync(subscriptionId, id)
+    await documentGenerationClient.GetDocumentGenerationUri(subscriptionId, id)
         .ConfigureAwait(false);
 ```
 
-where subscriptionId identifies a KMD Logic subscription,
-and where id is the Id property of an earlier response to RequestDocumentGeneration. 
+where `subscriptionId` identifies a KMD Logic subscription,
+and where `id` is the Id property of an earlier response to `RequestDocumentGeneration`. 
 
-The response is a DocumentUri object which includes a Uri string property from which the document can be downloaded, and a UriExpiryTime DateTime property up until which time the Uri link should continue to function.
-
-### WriteDocumentToStream
-
-#### Writes the document generated for provided request to the output stream provided
-
-To write the contents of a generated document to a nominated stream (once the document State is Completed):
-
-```c#
-    await documentGenerationClient.WriteDocumentToStreamAsync(subscriptionId, id, outputStream)
-        .ConfigureAwait(false);
-```
-
-where subscriptionId identifies a KMD Logic subscription,
-and where id is the Id property of an earlier response to RequestDocumentGeneration,
-and where outputStream provides an open Stream to which the contents of the document can be copied.
-
-The output stream remains open.
+The response is a `DocumentGenerationUri` object that includes a `Uri` property using which the document can be downloaded, and a `UriExpiryTime` DateTime property up until which time the Uri link should continue to function.
 
 ### GetTemplates
 
@@ -114,21 +105,26 @@ To list all templates for a nominated configuration:
 
 ```c#
 var templates =
-    await documentGenerationClient.GetTemplatesAsync(subscriptionId, configurationId, hierarchyPath, subject)
+    await documentGenerationClient.GetTemplates(subscriptionId, configurationId, hierarchyPath, subject)
         .ConfigureAwait(false);
 ```
 
-where subscriptionId identifies a KMD Logic subscription,
-and where configurationId nominates the configuration to use,
-and where hierarchyPath specifies the hierarchy of possible template sources,
-and where subject is the subject of the created document. 
+where:
 
-The response is a list of Template objects.  Each template includes a TemplateId string property and a Languages property which lists the relevent document languages as ISO 2 Letter Language code values.  E.g. EN,DA.
+* `subscriptionId` identifies a KMD Logic subscription;
+
+* `configurationId` identifies a KMD Logic Document Generation configuration;
+
+* `hierarchyPath` encodes the hierarchy of possible template sources not including the master location ([Hierarchy Path](./docs/HierarchyPath.md));
+
+* `subject` is the subject of the created document.
+
+The response is a list of `DocumentGenerationTemplate` objects.  Each template includes a TemplateId string property and a Languages property which lists the relevent document languages as ISO 2 Letter Language code values.  E.g. en, da.
 
 
 ## How to configure the Document Generation client
 
-Perhaps the easiest way to configure the Document Generation client is from Application Settings.
+Perhaps the easiest way to configure the Document Generation client is though Application Settings.
 
 ```json
 {
@@ -138,7 +134,6 @@ Perhaps the easiest way to configure the Document Generation client is from Appl
     "AuthorizationScope": ""
   },
   "DocumentGeneration": {
-    "DocumentGenerationServiceUri": "",
     "SubscriptionId": ""
   }
 }
@@ -151,7 +146,7 @@ To get started:
 
 ## Sample application
 
-A simple console application is included to demonstrate how to call Logic Document Generation API. You will need to provide the settings described above in `appsettings.json`.
+A simple console application is included to demonstrate how to call the Logic Document Generation API. You will need to provide the settings described above in `appsettings.json`.
 
 Before running the sample application, upload the template documents provided in the folder:
 

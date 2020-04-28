@@ -13,7 +13,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// <remarks>
         /// This option should not be overridden except for testing purposes.
         /// </remarks>
-        public Uri DocumentGenerationServiceUri { get; set; } = new Uri("https://gateway.kmdlogic.io/document-generation/v1");
+        public Uri DocumentGenerationServiceUri { get; set; } = new Uri("https://gateway.kmdlogic.io/document-generation/v2");
 
         /// <summary>
         /// Gets or sets the Logic Subscription.
