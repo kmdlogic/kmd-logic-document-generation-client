@@ -92,7 +92,8 @@ namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
             return new SharePointOnlineTemplateModel(
                 templateStorageConfiguration.ClientId,
                 templateStorageConfiguration.TenantId,
-                templateStorageConfiguration.SecretKeyOrClientSecret);
+                templateStorageConfiguration.SecretKeyOrClientSecret,
+                templateStorageConfiguration.GroupName);
         }
 
         internal static TemplateStorageType ToTemplateStorageType(this string templateStorageTypeString)
