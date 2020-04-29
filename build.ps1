@@ -40,7 +40,7 @@ foreach ($src in Get-ChildItem src/*) {
     & dotnet build -c Release --version-suffix=$buildSuffix
 
     if($suffix) {
-        & dotnet pack -c Release --no-build -o ..\..\artifacts --version-suffix=$suffix
+        & dotnet pack -c Release --no-build -o ..\..\artifacts --version-suffix $suffix
     } else {
         & dotnet pack -c Release --no-build -o ..\..\artifacts
     }
