@@ -5,7 +5,7 @@
     "title": "KMD Logic Document Generation Service API"
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/azureblob": {
+    "/subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/azureblob": {
       "get": {
         "tags": [
           "ConfigurationEntriesAzureBlob"
@@ -239,7 +239,7 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/azureblob/{entryId}": {
+    "/subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/azureblob/{entryId}": {
       "get": {
         "tags": [
           "ConfigurationEntriesAzureBlob"
@@ -414,7 +414,7 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/azureblob/{parentEntryId}": {
+    "/subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/azureblob/{parentEntryId}": {
       "post": {
         "tags": [
           "ConfigurationEntriesAzureBlob"
@@ -483,7 +483,7 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/sharepointonline": {
+    "/subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/sharepointonline": {
       "get": {
         "tags": [
           "ConfigurationEntriesSharePointOnline"
@@ -717,7 +717,7 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/sharepointonline/{entryId}": {
+    "/subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/sharepointonline/{entryId}": {
       "get": {
         "tags": [
           "ConfigurationEntriesSharePointOnline"
@@ -892,7 +892,7 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/sharepointonline/{parentEntryId}": {
+    "/subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/sharepointonline/{parentEntryId}": {
       "post": {
         "tags": [
           "ConfigurationEntriesSharePointOnline"
@@ -961,7 +961,7 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/document-generation/v2/configurations": {
+    "/subscriptions/{subscriptionId}/document-generation/configurations": {
       "get": {
         "tags": [
           "Configurations"
@@ -1051,7 +1051,7 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}": {
+    "/subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}": {
       "get": {
         "tags": [
           "Configurations"
