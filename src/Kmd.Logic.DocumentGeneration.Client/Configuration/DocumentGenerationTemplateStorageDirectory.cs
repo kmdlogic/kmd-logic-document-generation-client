@@ -230,25 +230,29 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
 
         public IEnumerable<DocumentGenerationTemplate> GetTemplates(string subject)
         {
-            return this.InternalClient.GetTemplates(this.SubscriptionId, this.ConfigurationId, this.HierarchyPath.ToString(), subject)
-                ?.Select(t => t.ToDocumentGenerationTemplate())
-                .ToArray();
+            return
+                this.InternalClient.GetTemplatesWithHttpMessagesAsync(this.SubscriptionId, this.ConfigurationId, this.HierarchyPath.ToString(), subject)
+                    .ValidateBody()
+                    ?.Select(t => t.ToDocumentGenerationTemplate())
+                    .ToArray();
         }
 
         public DocumentGenerationProgress RequestDocumentGeneration(string templateId, string twoLetterIsoLanguageName, DocumentFormat documentFormat, JObject mergeData, Uri callbackUrl, bool debug)
         {
-            return this.InternalClient.RequestDocumentGeneration(
-                    this.SubscriptionId,
-                    new DocumentGenerationRequestDetails(
-                            this.HierarchyPath.ToString(),
-                            templateId,
-                            twoLetterIsoLanguageName,
-                            documentFormat,
-                            mergeData,
-                            callbackUrl,
-                            debug)
-                        .ToWebRequest(this.ConfigurationId))
-                ?.ToDocumentGenerationProgress();
+            return
+                this.InternalClient.RequestDocumentGenerationWithHttpMessagesAsync(
+                        this.SubscriptionId,
+                        new DocumentGenerationRequestDetails(
+                                this.HierarchyPath.ToString(),
+                                templateId,
+                                twoLetterIsoLanguageName,
+                                documentFormat,
+                                mergeData,
+                                callbackUrl,
+                                debug)
+                            .ToWebRequest(this.ConfigurationId))
+                    .ValidateBody()
+                    ?.ToDocumentGenerationProgress();
         }
 
         public Guid SubscriptionId => this._documentGenerationConfiguration.SubscriptionId;
