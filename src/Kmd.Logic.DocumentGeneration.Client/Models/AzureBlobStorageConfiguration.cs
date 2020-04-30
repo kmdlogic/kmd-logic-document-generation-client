@@ -24,7 +24,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// Initializes a new instance of the AzureBlobStorageConfiguration
         /// class.
         /// </summary>
-        /// <param name="templateStorageType">Possible values include: 'Logic',
+        /// <param name="templateStorageType">Possible values include:
         /// 'SharePointOnline', 'AzureBlobStorage'</param>
         public AzureBlobStorageConfiguration(string templateStorageType = default(string), string secretKeyForStorageConnectionString = default(string), string containerName = default(string), string blobPrefix = default(string))
         {
@@ -41,7 +41,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets possible values include: 'Logic', 'SharePointOnline',
+        /// Gets or sets possible values include: 'SharePointOnline',
         /// 'AzureBlobStorage'
         /// </summary>
         [JsonProperty(PropertyName = "templateStorageType")]
