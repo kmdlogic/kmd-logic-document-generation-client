@@ -26,7 +26,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// Initializes a new instance of the
         /// DocumentGenerationConfigurationEntrySummary class.
         /// </summary>
-        /// <param name="templateStorageType">Possible values include: 'Logic',
+        /// <param name="templateStorageType">Possible values include:
         /// 'SharePointOnline', 'AzureBlobStorage'</param>
         public DocumentGenerationConfigurationEntrySummary(System.Guid? id = default(System.Guid?), string key = default(string), string name = default(string), string templateStorageType = default(string), IList<DocumentGenerationConfigurationEntrySummary> children = default(IList<DocumentGenerationConfigurationEntrySummary>))
         {
@@ -59,7 +59,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets possible values include: 'Logic', 'SharePointOnline',
+        /// Gets or sets possible values include: 'SharePointOnline',
         /// 'AzureBlobStorage'
         /// </summary>
         [JsonProperty(PropertyName = "templateStorageType")]
