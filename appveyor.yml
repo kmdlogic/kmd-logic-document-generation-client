@@ -31,7 +31,7 @@ deploy:
     secure: V4mxeh2bg7iqp30Q6sESykx0Wo+4lT63mnbPliCqNr1SqBXvWgVukK/JI8QvvcrL
   skip_symbols: true
   on:
-    branch: /^master$/
+    branch: /^(master|dev)$/
     CI_WINDOWS: true
 - provider: GitHub
   auth_token:

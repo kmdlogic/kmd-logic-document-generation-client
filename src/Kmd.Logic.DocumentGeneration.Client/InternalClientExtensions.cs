@@ -18,7 +18,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
     internal static partial class InternalClientExtensions
     {
             /// <summary>
-            /// Gets a SharePoint Online template storage configuration entry for a given
+            /// Gets an Azure Blob template storage configuration entry for a given
             /// document generation configuration managed by the subscription.
             /// </summary>
             /// <param name='operations'>
@@ -39,7 +39,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
 
             /// <summary>
-            /// Gets a SharePoint Online template storage configuration entry for a given
+            /// Gets an Azure Blob template storage configuration entry for a given
             /// document generation configuration managed by the subscription.
             /// </summary>
             /// <param name='operations'>
@@ -66,8 +66,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
 
             /// <summary>
-            /// Updates a SharePoint Online template storage configuration entry for a
-            /// given document generation configuration managed by the subscription.
+            /// Updates an Azure Blob template storage configuration entry for a given
+            /// document generation configuration managed by the subscription.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -82,7 +82,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             /// The configuration entry ancestry path to the entry.
             /// </param>
             /// <param name='request'>
-            /// SharePoint Online template storage settings.
+            /// Azure Blob template storage settings.
             /// </param>
             public static AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails UpdateAzureBlobEntryAtPath(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string), AzureBlobTemplateModelUpdateEntryAtPathRequest request = default(AzureBlobTemplateModelUpdateEntryAtPathRequest))
             {
@@ -90,8 +90,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
 
             /// <summary>
-            /// Updates a SharePoint Online template storage configuration entry for a
-            /// given document generation configuration managed by the subscription.
+            /// Updates an Azure Blob template storage configuration entry for a given
+            /// document generation configuration managed by the subscription.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -106,7 +106,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             /// The configuration entry ancestry path to the entry.
             /// </param>
             /// <param name='request'>
-            /// SharePoint Online template storage settings.
+            /// Azure Blob template storage settings.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -120,8 +120,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
 
             /// <summary>
-            /// Creates a SharePoint Online template storage configuration entry for a
-            /// given document generation configuration managed by the subscription.
+            /// Creates an Azure Blob template storage configuration entry for a given
+            /// document generation configuration managed by the subscription.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -136,7 +136,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             /// The configuration entry ancestry path to the parent entry.
             /// </param>
             /// <param name='request'>
-            /// SharePoint Online template storage settings.
+            /// Azure Blob template storage settings.
             /// </param>
             public static AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails CreateAzureBlobEntryUnderPath(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, string parentHierarchyPath = default(string), AzureBlobTemplateModelCreateEntryUnderPathRequest request = default(AzureBlobTemplateModelCreateEntryUnderPathRequest))
             {
@@ -144,8 +144,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
 
             /// <summary>
-            /// Creates a SharePoint Online template storage configuration entry for a
-            /// given document generation configuration managed by the subscription.
+            /// Creates an Azure Blob template storage configuration entry for a given
+            /// document generation configuration managed by the subscription.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -160,7 +160,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             /// The configuration entry ancestry path to the parent entry.
             /// </param>
             /// <param name='request'>
-            /// SharePoint Online template storage settings.
+            /// Azure Blob template storage settings.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -222,7 +222,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
 
             /// <summary>
-            /// Gets a SharePoint Online template storage configuration entry for a given
+            /// Gets an Azure Blob template storage configuration entry for a given
             /// document generation configuration managed by the subscription.
             /// </summary>
             /// <param name='operations'>
@@ -243,7 +243,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
 
             /// <summary>
-            /// Gets a SharePoint Online template storage configuration entry for a given
+            /// Gets an Azure Blob template storage configuration entry for a given
             /// document generation configuration managed by the subscription.
             /// </summary>
             /// <param name='operations'>
@@ -270,8 +270,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
 
             /// <summary>
-            /// Updates a SharePoint Online template storage configuration entry for a
-            /// given document generation configuration managed by the subscription.
+            /// Updates an Azure Blob template storage configuration entry for a given
+            /// document generation configuration managed by the subscription.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -286,7 +286,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             /// The configuration entry identifier of the entry to be updated.
             /// </param>
             /// <param name='request'>
-            /// SharePoint Online template storage settings.
+            /// Azure Blob template storage settings.
             /// </param>
             public static AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails UpdateAzureBlobEntryAtId(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, System.Guid entryId, AzureBlobTemplateModelUpdateEntryAtIdRequest request = default(AzureBlobTemplateModelUpdateEntryAtIdRequest))
             {
@@ -294,8 +294,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
 
             /// <summary>
-            /// Updates a SharePoint Online template storage configuration entry for a
-            /// given document generation configuration managed by the subscription.
+            /// Updates an Azure Blob template storage configuration entry for a given
+            /// document generation configuration managed by the subscription.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -310,7 +310,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             /// The configuration entry identifier of the entry to be updated.
             /// </param>
             /// <param name='request'>
-            /// SharePoint Online template storage settings.
+            /// Azure Blob template storage settings.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -372,8 +372,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
 
             /// <summary>
-            /// Creates a SharePoint Online template storage configuration entry for a
-            /// given document generation configuration managed by the subscription.
+            /// Creates an Azure Blob template storage configuration entry for a given
+            /// document generation configuration managed by the subscription.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -388,7 +388,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             /// The configuration entry identifier of the parent entry.
             /// </param>
             /// <param name='request'>
-            /// SharePoint Online template storage settings.
+            /// Azure Blob template storage settings.
             /// </param>
             public static AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails CreateAzureBlobEntryUnderId(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, System.Guid parentEntryId, AzureBlobTemplateModelCreateEntryUnderIdRequest request = default(AzureBlobTemplateModelCreateEntryUnderIdRequest))
             {
@@ -396,8 +396,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
 
             /// <summary>
-            /// Creates a SharePoint Online template storage configuration entry for a
-            /// given document generation configuration managed by the subscription.
+            /// Creates an Azure Blob template storage configuration entry for a given
+            /// document generation configuration managed by the subscription.
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -412,7 +412,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             /// The configuration entry identifier of the parent entry.
             /// </param>
             /// <param name='request'>
-            /// SharePoint Online template storage settings.
+            /// Azure Blob template storage settings.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.

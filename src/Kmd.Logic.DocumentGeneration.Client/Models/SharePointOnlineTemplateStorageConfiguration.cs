@@ -24,7 +24,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// Initializes a new instance of the
         /// SharePointOnlineTemplateStorageConfiguration class.
         /// </summary>
-        /// <param name="templateStorageType">Possible values include: 'Logic',
+        /// <param name="templateStorageType">Possible values include:
         /// 'SharePointOnline', 'AzureBlobStorage'</param>
         public SharePointOnlineTemplateStorageConfiguration(string templateStorageType = default(string), string clientId = default(string), string tenantId = default(string), string secretKeyForClientSecret = default(string), string groupName = default(string))
         {
@@ -42,7 +42,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         partial void CustomInit();
 
         /// <summary>
-        /// Gets or sets possible values include: 'Logic', 'SharePointOnline',
+        /// Gets or sets possible values include: 'SharePointOnline',
         /// 'AzureBlobStorage'
         /// </summary>
         [JsonProperty(PropertyName = "templateStorageType")]

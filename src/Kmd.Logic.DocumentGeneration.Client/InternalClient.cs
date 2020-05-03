@@ -309,7 +309,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             CustomInitialize();
         }
         /// <summary>
-        /// Gets a SharePoint Online template storage configuration entry for a given
+        /// Gets an Azure Blob template storage configuration entry for a given
         /// document generation configuration managed by the subscription.
         /// </summary>
         /// <param name='subscriptionId'>
@@ -353,7 +353,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/azureblob").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/azureblob").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             List<string> _queryParameters = new List<string>();
@@ -459,8 +459,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
         }
 
         /// <summary>
-        /// Updates a SharePoint Online template storage configuration entry for a
-        /// given document generation configuration managed by the subscription.
+        /// Updates an Azure Blob template storage configuration entry for a given
+        /// document generation configuration managed by the subscription.
         /// </summary>
         /// <param name='subscriptionId'>
         /// The subscription that owns the configurations.
@@ -472,7 +472,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// The configuration entry ancestry path to the entry.
         /// </param>
         /// <param name='request'>
-        /// SharePoint Online template storage settings.
+        /// Azure Blob template storage settings.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -507,7 +507,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/azureblob").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/azureblob").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             List<string> _queryParameters = new List<string>();
@@ -619,8 +619,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
         }
 
         /// <summary>
-        /// Creates a SharePoint Online template storage configuration entry for a
-        /// given document generation configuration managed by the subscription.
+        /// Creates an Azure Blob template storage configuration entry for a given
+        /// document generation configuration managed by the subscription.
         /// </summary>
         /// <param name='subscriptionId'>
         /// The subscription that owns the configurations.
@@ -632,7 +632,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// The configuration entry ancestry path to the parent entry.
         /// </param>
         /// <param name='request'>
-        /// SharePoint Online template storage settings.
+        /// Azure Blob template storage settings.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -667,7 +667,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/azureblob").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/azureblob").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             List<string> _queryParameters = new List<string>();
@@ -823,7 +823,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/azureblob").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/azureblob").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             List<string> _queryParameters = new List<string>();
@@ -929,7 +929,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
         }
 
         /// <summary>
-        /// Gets a SharePoint Online template storage configuration entry for a given
+        /// Gets an Azure Blob template storage configuration entry for a given
         /// document generation configuration managed by the subscription.
         /// </summary>
         /// <param name='subscriptionId'>
@@ -973,7 +973,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/azureblob/{entryId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/azureblob/{entryId}").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{entryId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(entryId, SerializationSettings).Trim('"')));
@@ -1071,8 +1071,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
         }
 
         /// <summary>
-        /// Updates a SharePoint Online template storage configuration entry for a
-        /// given document generation configuration managed by the subscription.
+        /// Updates an Azure Blob template storage configuration entry for a given
+        /// document generation configuration managed by the subscription.
         /// </summary>
         /// <param name='subscriptionId'>
         /// The subscription that owns the configurations.
@@ -1084,7 +1084,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// The configuration entry identifier of the entry to be updated.
         /// </param>
         /// <param name='request'>
-        /// SharePoint Online template storage settings.
+        /// Azure Blob template storage settings.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -1119,7 +1119,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/azureblob/{entryId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/azureblob/{entryId}").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{entryId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(entryId, SerializationSettings).Trim('"')));
@@ -1267,7 +1267,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/azureblob/{entryId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/azureblob/{entryId}").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{entryId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(entryId, SerializationSettings).Trim('"')));
@@ -1365,8 +1365,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
         }
 
         /// <summary>
-        /// Creates a SharePoint Online template storage configuration entry for a
-        /// given document generation configuration managed by the subscription.
+        /// Creates an Azure Blob template storage configuration entry for a given
+        /// document generation configuration managed by the subscription.
         /// </summary>
         /// <param name='subscriptionId'>
         /// The subscription that owns the configurations.
@@ -1378,7 +1378,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// The configuration entry identifier of the parent entry.
         /// </param>
         /// <param name='request'>
-        /// SharePoint Online template storage settings.
+        /// Azure Blob template storage settings.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -1413,7 +1413,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/azureblob/{parentEntryId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/azureblob/{parentEntryId}").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{parentEntryId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(parentEntryId, SerializationSettings).Trim('"')));
@@ -1561,7 +1561,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/sharepointonline").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/sharepointonline").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             List<string> _queryParameters = new List<string>();
@@ -1715,7 +1715,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/sharepointonline").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/sharepointonline").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             List<string> _queryParameters = new List<string>();
@@ -1875,7 +1875,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/sharepointonline").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/sharepointonline").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             List<string> _queryParameters = new List<string>();
@@ -2031,7 +2031,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/sharepointonline").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/sharepointonline").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             List<string> _queryParameters = new List<string>();
@@ -2181,7 +2181,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/sharepointonline/{entryId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/sharepointonline/{entryId}").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{entryId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(entryId, SerializationSettings).Trim('"')));
@@ -2327,7 +2327,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/sharepointonline/{entryId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/sharepointonline/{entryId}").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{entryId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(entryId, SerializationSettings).Trim('"')));
@@ -2475,7 +2475,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/sharepointonline/{entryId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/sharepointonline/{entryId}").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{entryId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(entryId, SerializationSettings).Trim('"')));
@@ -2621,7 +2621,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}/entries/sharepointonline/{parentEntryId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/entries/sharepointonline/{parentEntryId}").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{parentEntryId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(parentEntryId, SerializationSettings).Trim('"')));
@@ -2760,7 +2760,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -2895,7 +2895,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
@@ -3037,7 +3037,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             // Create HTTP transport objects
@@ -3177,7 +3177,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             // Create HTTP transport objects
@@ -3316,7 +3316,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/v2/configurations/{configurationId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{configurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(configurationId, SerializationSettings).Trim('"')));
             // Create HTTP transport objects

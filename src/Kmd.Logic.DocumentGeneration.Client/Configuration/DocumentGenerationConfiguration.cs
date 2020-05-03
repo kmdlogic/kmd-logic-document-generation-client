@@ -78,7 +78,9 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
             if (this.Id != Guid.Empty)
             {
                 serverDocumentGenerationConfigurationSummary =
-                    this.InternalClient.GetConfigurationSummaryById(this.SubscriptionId, this.Id);
+                    this.InternalClient
+                        .GetConfigurationSummaryByIdWithHttpMessagesAsync(this.SubscriptionId, this.Id)
+                        .ValidateBody();
             }
 
             if (serverDocumentGenerationConfigurationSummary == null)
@@ -88,24 +90,23 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
 
             var serverDocumentGenerationConfigurationSkeleton = new DocumentGenerationConfigurationSkeleton(this.InternalClient, serverDocumentGenerationConfigurationSummary, true);
             this.Id = serverDocumentGenerationConfigurationSkeleton.Id;
-            this.InternalClient.UpdateDocumentGenerationConfiguration(
-                this.SubscriptionId,
-                this.Id,
-                new UpdateConfigurationRequest(
-                    this.Name,
-                    this.HasLicense,
-                    this.LevelNames));
+            this.InternalClient.UpdateDocumentGenerationConfigurationWithHttpMessagesAsync(
+                    this.SubscriptionId,
+                    this.Id,
+                    new UpdateConfigurationRequest(
+                        this.Name,
+                        this.HasLicense,
+                        this.LevelNames))
+                .ValidateBody();
             this.TemplateStorageDirectory.Save(serverDocumentGenerationConfigurationSkeleton.TemplateStorageDirectory);
         }
 
         public void Load()
         {
             var serverDocumentGenerationConfigurationSummary =
-                this.InternalClient.GetConfigurationSummaryById(this.SubscriptionId, this.Id);
-            if (serverDocumentGenerationConfigurationSummary == null)
-            {
-                throw new DocumentGenerationConfigurationException($"Document Generation Configuration {this.Id} not found.");
-            }
+                this.InternalClient
+                    .GetConfigurationSummaryByIdWithHttpMessagesAsync(this.SubscriptionId, this.Id)
+                    .ValidateBody();
 
             var documentGenerationConfigurationSkeleton = new DocumentGenerationConfigurationSkeleton(this.InternalClient, serverDocumentGenerationConfigurationSummary, false);
             this.UpdateProperties(documentGenerationConfigurationSkeleton);
@@ -156,7 +157,9 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
         public DocumentGenerationProgress GetDocumentGenerationProgress(Guid documentGenerationRequestId)
         {
             var documentGenerationRequest =
-                this.InternalClient.GetDocumentGeneration(this.SubscriptionId, documentGenerationRequestId);
+                this.InternalClient
+                    .GetDocumentGenerationWithHttpMessagesAsync(this.SubscriptionId, documentGenerationRequestId)
+                    .ValidateBody();
             return documentGenerationRequest.ToDocumentGenerationProgress();
         }
 
@@ -164,21 +167,24 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
         {
             var documentUri =
                 this.InternalClient
-                    .GetDocument(this.SubscriptionId, documentGenerationRequestId);
+                    .GetDocumentWithHttpMessagesAsync(this.SubscriptionId, documentGenerationRequestId)
+                    .ValidateBody();
             return documentUri?.ToDocumentGenerationUri();
         }
 
         public DocumentGenerationProgress RequestDocumentConversionToPdfA(DocumentConversionToPdfARequestDetails documentConversionToPdfARequestDetails)
         {
             var documentGenerationRequest =
-                this.InternalClient.RequestDocumentConversion(this.SubscriptionId, documentConversionToPdfARequestDetails.ToWebRequest(this.Id));
+                this.InternalClient.RequestDocumentConversionWithHttpMessagesAsync(this.SubscriptionId, documentConversionToPdfARequestDetails.ToWebRequest(this.Id))
+                    .ValidateBody();
             return documentGenerationRequest.ToDocumentGenerationProgress();
         }
 
         public DocumentGenerationProgress RequestDocumentConversion(DocumentConversionRequestDetails documentConversionRequestDetails)
         {
             var documentGenerationRequest =
-                this.InternalClient.RequestDocumentConversion(this.SubscriptionId, documentConversionRequestDetails.ToWebRequest(this.Id));
+                this.InternalClient.RequestDocumentConversionWithHttpMessagesAsync(this.SubscriptionId, documentConversionRequestDetails.ToWebRequest(this.Id))
+                    .ValidateBody();
             return documentGenerationRequest.ToDocumentGenerationProgress();
         }
 

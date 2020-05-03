@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Kmd.Logic.DocumentGeneration.Client.Configuration;
 using Kmd.Logic.DocumentGeneration.Client.Configuration.TemplateStorageConfigurations;
 using Kmd.Logic.DocumentGeneration.Client.Models;
 using Kmd.Logic.DocumentGeneration.Client.ServiceMessages;
 using Kmd.Logic.DocumentGeneration.Client.Types;
+using Microsoft.Rest;
 
 namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
 {
@@ -92,7 +94,8 @@ namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
             return new SharePointOnlineTemplateModel(
                 templateStorageConfiguration.ClientId,
                 templateStorageConfiguration.TenantId,
-                templateStorageConfiguration.SecretKeyOrClientSecret);
+                templateStorageConfiguration.SecretKeyOrClientSecret,
+                templateStorageConfiguration.GroupName);
         }
 
         internal static TemplateStorageType ToTemplateStorageType(this string templateStorageTypeString)
@@ -180,15 +183,23 @@ namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
             var documentGenerationEntryDetails = templateStorageType switch
             {
                 TemplateStorageType.AzureBlobStorage =>
-                entrySkeleton.InternalClient.GetAzureBlobEntryAtId(
-                    entrySkeleton.SubscriptionId,
-                    entrySkeleton.ConfigurationId,
-                    entrySkeleton.Id).ToEntryDetails(),
+                entrySkeleton
+                    .InternalClient
+                    .GetAzureBlobEntryAtIdWithHttpMessagesAsync(
+                        entrySkeleton.SubscriptionId,
+                        entrySkeleton.ConfigurationId,
+                        entrySkeleton.Id)
+                    .ValidateBody()
+                    .ToEntryDetails(),
                 TemplateStorageType.SharePointOnline =>
-                entrySkeleton.InternalClient.GetSharePointOnlineEntryAtId(
-                    entrySkeleton.SubscriptionId,
-                    entrySkeleton.ConfigurationId,
-                    entrySkeleton.Id).ToEntryDetails(),
+                entrySkeleton
+                    .InternalClient
+                    .GetSharePointOnlineEntryAtIdWithHttpMessagesAsync(
+                        entrySkeleton.SubscriptionId,
+                        entrySkeleton.ConfigurationId,
+                        entrySkeleton.Id)
+                    .ValidateBody()
+                    .ToEntryDetails(),
                 _ => throw new DocumentGenerationConfigurationException(
                     $"Unsupported Template Storage Type: {templateStorageType}")
             };
@@ -220,25 +231,31 @@ namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
             switch (entry.TemplateStorageConfiguration.TemplateStorageType)
             {
                 case TemplateStorageType.AzureBlobStorage:
-                    return entry.InternalClient.UpdateAzureBlobEntryAtPath(
-                        entry.SubscriptionId,
-                        entry.ConfigurationId,
-                        hierarchyPathString,
-                        new AzureBlobTemplateModelUpdateEntryAtPathRequest(
-                            entry.Key,
-                            entry.Name,
-                            (entry.TemplateStorageConfiguration as AzureBlobTemplateStorage).ToModel()))
-                        .ToEntryDetails();
+                    return
+                        entry.InternalClient
+                            .UpdateAzureBlobEntryAtPathWithHttpMessagesAsync(
+                                entry.SubscriptionId,
+                                entry.ConfigurationId,
+                                hierarchyPathString,
+                                new AzureBlobTemplateModelUpdateEntryAtPathRequest(
+                                    entry.Key,
+                                    entry.Name,
+                                    (entry.TemplateStorageConfiguration as AzureBlobTemplateStorage).ToModel()))
+                            .ValidateBody()
+                            .ToEntryDetails();
                 case TemplateStorageType.SharePointOnline:
-                    return entry.InternalClient.UpdateSharePointOnlineEntryAtPath(
-                        entry.SubscriptionId,
-                        entry.ConfigurationId,
-                        hierarchyPathString,
-                        new SharePointOnlineTemplateModelUpdateEntryAtPathRequest(
-                            entry.Key,
-                            entry.Name,
-                            (entry.TemplateStorageConfiguration as SharePointOnlineTemplateStorage).ToModel()))
-                        .ToEntryDetails();
+                    return
+                        entry.InternalClient
+                            .UpdateSharePointOnlineEntryAtPathWithHttpMessagesAsync(
+                                entry.SubscriptionId,
+                                entry.ConfigurationId,
+                                hierarchyPathString,
+                                new SharePointOnlineTemplateModelUpdateEntryAtPathRequest(
+                                    entry.Key,
+                                    entry.Name,
+                                    (entry.TemplateStorageConfiguration as SharePointOnlineTemplateStorage).ToModel()))
+                            .ValidateBody()
+                            .ToEntryDetails();
                 default:
                     throw new DocumentGenerationConfigurationException($"Unknown template storage type {entry.TemplateStorageConfiguration.TemplateStorageType}");
             }
@@ -250,28 +267,87 @@ namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
             switch (entry.TemplateStorageConfiguration.TemplateStorageType)
             {
                 case TemplateStorageType.AzureBlobStorage:
-                    return entry.InternalClient.CreateAzureBlobEntryUnderPath(
-                            entry.SubscriptionId,
-                            entry.ConfigurationId,
-                            parentHierarchyPathString,
-                            new AzureBlobTemplateModelCreateEntryUnderPathRequest(
-                                entry.Key,
-                                entry.Name,
-                                (entry.TemplateStorageConfiguration as AzureBlobTemplateStorage).ToModel()))
-                        .ToEntryDetails();
+                    return
+                        entry.InternalClient
+                            .CreateAzureBlobEntryUnderPathWithHttpMessagesAsync(
+                                entry.SubscriptionId,
+                                entry.ConfigurationId,
+                                parentHierarchyPathString,
+                                new AzureBlobTemplateModelCreateEntryUnderPathRequest(
+                                    entry.Key,
+                                    entry.Name,
+                                    (entry.TemplateStorageConfiguration as AzureBlobTemplateStorage).ToModel()))
+                            .ValidateBody()
+                            .ToEntryDetails();
                 case TemplateStorageType.SharePointOnline:
-                    return entry.InternalClient.CreateSharePointOnlineEntryUnderPath(
-                            entry.SubscriptionId,
-                            entry.ConfigurationId,
-                            parentHierarchyPathString,
-                            new SharePointOnlineTemplateModelCreateEntryUnderPathRequest(
-                                entry.Key,
-                                entry.Name,
-                                (entry.TemplateStorageConfiguration as SharePointOnlineTemplateStorage).ToModel()))
-                        .ToEntryDetails();
+                    return
+                        entry.InternalClient
+                            .CreateSharePointOnlineEntryUnderPathWithHttpMessagesAsync(
+                                entry.SubscriptionId,
+                                entry.ConfigurationId,
+                                parentHierarchyPathString,
+                                new SharePointOnlineTemplateModelCreateEntryUnderPathRequest(
+                                    entry.Key,
+                                    entry.Name,
+                                    (entry.TemplateStorageConfiguration as SharePointOnlineTemplateStorage).ToModel()))
+                            .ValidateBody()
+                            .ToEntryDetails();
                 default:
                     throw new DocumentGenerationConfigurationException($"Unknown template storage type {entry.TemplateStorageConfiguration.TemplateStorageType}");
             }
+        }
+
+        internal static T ValidateBody<T>(
+            this IHttpOperationResponse<T> httpOperationResponse,
+            [System.Runtime.CompilerServices.CallerMemberName] string operation = "Unknown method")
+        {
+            if (httpOperationResponse != null && httpOperationResponse.Body != null)
+            {
+                return httpOperationResponse.Body;
+            }
+
+            if (httpOperationResponse?.Response == null)
+            {
+                throw new DocumentGenerationException($"{operation}: Failed.");
+            }
+
+            if (httpOperationResponse.Response.Content == null)
+            {
+                throw new DocumentGenerationException(
+                    $"{operation}: {httpOperationResponse.Response.ReasonPhrase}");
+            }
+
+            var content = httpOperationResponse.Response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            throw new DocumentGenerationException(
+                $"{operation}: {httpOperationResponse.Response.ReasonPhrase}: {content}");
+        }
+
+        internal static T ValidateBody<T>(
+            this Task<HttpOperationResponse<T>> httpOperationResponseTask,
+            [System.Runtime.CompilerServices.CallerMemberName] string operation = "Unknown method")
+        {
+            var httpOperationResponse = httpOperationResponseTask.GetAwaiter().GetResult();
+            return httpOperationResponse.ValidateBody(operation);
+        }
+
+        internal static DocumentGenerationException DocumentGenerationThrow(
+            this HttpOperationException httpOperationException,
+            [System.Runtime.CompilerServices.CallerMemberName] string operation = "Unknown method")
+        {
+            var reason = httpOperationException.Response?.ReasonPhrase;
+            var content = httpOperationException.Response?.Content;
+            var message = $"{operation} Failed";
+            if (!string.IsNullOrWhiteSpace(reason))
+            {
+                message += $": {reason}";
+            }
+
+            if (!string.IsNullOrWhiteSpace(content))
+            {
+                message += $": {content}";
+            }
+
+            return new DocumentGenerationException(message, httpOperationException);
         }
     }
 }

@@ -105,7 +105,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                 documentGenerationConfiguration.LevelNames = new[] { "one", "two" };
 
                 // Create a root directory for this configuration
-                var rootTemplateStaorageDirectory =
+                var rootTemplateStorageDirectory =
                     documentGenerationConfiguration.SetRootTemplateStorageDirectory(
                         "Root directory",
                         sampleTemplateStorageConfiguration);
@@ -115,20 +115,16 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                 // so they'll all resolve to the same place server side.
                 foreach (var childKey in new[] { "schoolone", "schooltwo" })
                 {
-                    var childEntry =
-                        documentGenerationConfiguration.CreateDocumentGenerationTemplateStorageDirectory(
-                            childKey,
-                            $"school {childKey}",
-                            sampleTemplateStorageConfiguration);
-                    rootTemplateStaorageDirectory.AddChild(childEntry);
+                    var childEntry = rootTemplateStorageDirectory.AddChild(documentGenerationConfiguration.CreateDocumentGenerationTemplateStorageDirectory(
+                        childKey,
+                        $"school {childKey}",
+                        sampleTemplateStorageConfiguration));
                     foreach (var grandChildKey in new[] { "A", "B", "C" })
                     {
-                        var grandChild =
-                            documentGenerationConfiguration.CreateDocumentGenerationTemplateStorageDirectory(
-                                grandChildKey,
-                                $"dept {grandChildKey}",
-                                sampleTemplateStorageConfiguration);
-                        childEntry.AddChild(grandChild);
+                        var grandChild = childEntry.AddChild(
+                            grandChildKey,
+                            $"dept {grandChildKey}",
+                            sampleTemplateStorageConfiguration);
                     }
                 }
 
