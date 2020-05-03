@@ -41,9 +41,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
 
 
         /// <summary>
-        /// Gets a SharePoint Online template storage configuration entry for a
-        /// given document generation configuration managed by the
-        /// subscription.
+        /// Gets an Azure Blob template storage configuration entry for a given
+        /// document generation configuration managed by the subscription.
         /// </summary>
         /// <param name='subscriptionId'>
         /// The subscription that owns the configurations.
@@ -63,8 +62,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
         Task<HttpOperationResponse<AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails>> GetAzureBlobEntryAtPathWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
-        /// Updates a SharePoint Online template storage configuration entry
-        /// for a given document generation configuration managed by the
+        /// Updates an Azure Blob template storage configuration entry for a
+        /// given document generation configuration managed by the
         /// subscription.
         /// </summary>
         /// <param name='subscriptionId'>
@@ -77,7 +76,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// The configuration entry ancestry path to the entry.
         /// </param>
         /// <param name='request'>
-        /// SharePoint Online template storage settings.
+        /// Azure Blob template storage settings.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -88,8 +87,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
         Task<HttpOperationResponse<AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails>> UpdateAzureBlobEntryAtPathWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string), AzureBlobTemplateModelUpdateEntryAtPathRequest request = default(AzureBlobTemplateModelUpdateEntryAtPathRequest), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
-        /// Creates a SharePoint Online template storage configuration entry
-        /// for a given document generation configuration managed by the
+        /// Creates an Azure Blob template storage configuration entry for a
+        /// given document generation configuration managed by the
         /// subscription.
         /// </summary>
         /// <param name='subscriptionId'>
@@ -102,7 +101,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// The configuration entry ancestry path to the parent entry.
         /// </param>
         /// <param name='request'>
-        /// SharePoint Online template storage settings.
+        /// Azure Blob template storage settings.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -134,9 +133,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
         Task<HttpOperationResponse<DocumentGenerationConfigurationSummary>> DeleteAzureBlobEntryAtPathWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
-        /// Gets a SharePoint Online template storage configuration entry for a
-        /// given document generation configuration managed by the
-        /// subscription.
+        /// Gets an Azure Blob template storage configuration entry for a given
+        /// document generation configuration managed by the subscription.
         /// </summary>
         /// <param name='subscriptionId'>
         /// The subscription that owns the configurations.
@@ -156,8 +154,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
         Task<HttpOperationResponse<AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails>> GetAzureBlobEntryAtIdWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, System.Guid entryId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
-        /// Updates a SharePoint Online template storage configuration entry
-        /// for a given document generation configuration managed by the
+        /// Updates an Azure Blob template storage configuration entry for a
+        /// given document generation configuration managed by the
         /// subscription.
         /// </summary>
         /// <param name='subscriptionId'>
@@ -170,7 +168,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// The configuration entry identifier of the entry to be updated.
         /// </param>
         /// <param name='request'>
-        /// SharePoint Online template storage settings.
+        /// Azure Blob template storage settings.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -202,8 +200,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
         Task<HttpOperationResponse<DocumentGenerationConfigurationSummary>> DeleteAzureBlobEntryAtIdWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, System.Guid entryId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
-        /// Creates a SharePoint Online template storage configuration entry
-        /// for a given document generation configuration managed by the
+        /// Creates an Azure Blob template storage configuration entry for a
+        /// given document generation configuration managed by the
         /// subscription.
         /// </summary>
         /// <param name='subscriptionId'>
@@ -216,7 +214,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// The configuration entry identifier of the parent entry.
         /// </param>
         /// <param name='request'>
-        /// SharePoint Online template storage settings.
+        /// Azure Blob template storage settings.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
