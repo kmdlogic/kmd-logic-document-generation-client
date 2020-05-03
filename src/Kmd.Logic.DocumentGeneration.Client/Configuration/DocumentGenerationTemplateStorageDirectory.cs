@@ -94,7 +94,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
             }
 
             this._children.Add(child);
-            return this;
+            return child;
         }
 
         public DocumentGenerationTemplateStorageDirectory AddChild(

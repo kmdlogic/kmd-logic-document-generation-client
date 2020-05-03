@@ -10,7 +10,7 @@
         "tags": [
           "ConfigurationEntriesAzureBlob"
         ],
-        "summary": "Gets a SharePoint Online template storage configuration entry for a given document generation configuration managed by the subscription.",
+        "summary": "Gets an Azure Blob template storage configuration entry for a given document generation configuration managed by the subscription.",
         "operationId": "GetAzureBlobEntryAtPath",
         "produces": [
           "application/json",
@@ -61,7 +61,7 @@
         "tags": [
           "ConfigurationEntriesAzureBlob"
         ],
-        "summary": "Updates a SharePoint Online template storage configuration entry for a given document generation configuration managed by the subscription.",
+        "summary": "Updates an Azure Blob template storage configuration entry for a given document generation configuration managed by the subscription.",
         "operationId": "UpdateAzureBlobEntryAtPath",
         "consumes": [
           "application/json-patch+json",
@@ -99,7 +99,7 @@
           {
             "name": "request",
             "in": "body",
-            "description": "SharePoint Online template storage settings.",
+            "description": "Azure Blob template storage settings.",
             "schema": {
               "$ref": "#/definitions/AzureBlobTemplateModelUpdateEntryAtPathRequest"
             }
@@ -126,7 +126,7 @@
         "tags": [
           "ConfigurationEntriesAzureBlob"
         ],
-        "summary": "Creates a SharePoint Online template storage configuration entry for a given document generation configuration managed by the subscription.",
+        "summary": "Creates an Azure Blob template storage configuration entry for a given document generation configuration managed by the subscription.",
         "operationId": "CreateAzureBlobEntryUnderPath",
         "consumes": [
           "application/json-patch+json",
@@ -164,7 +164,7 @@
           {
             "name": "request",
             "in": "body",
-            "description": "SharePoint Online template storage settings.",
+            "description": "Azure Blob template storage settings.",
             "schema": {
               "$ref": "#/definitions/AzureBlobTemplateModelCreateEntryUnderPathRequest"
             }
@@ -244,7 +244,7 @@
         "tags": [
           "ConfigurationEntriesAzureBlob"
         ],
-        "summary": "Gets a SharePoint Online template storage configuration entry for a given document generation configuration managed by the subscription.",
+        "summary": "Gets an Azure Blob template storage configuration entry for a given document generation configuration managed by the subscription.",
         "operationId": "GetAzureBlobEntryAtId",
         "produces": [
           "application/json",
@@ -297,7 +297,7 @@
         "tags": [
           "ConfigurationEntriesAzureBlob"
         ],
-        "summary": "Updates a SharePoint Online template storage configuration entry for a given document generation configuration managed by the subscription.",
+        "summary": "Updates an Azure Blob template storage configuration entry for a given document generation configuration managed by the subscription.",
         "operationId": "UpdateAzureBlobEntryAtId",
         "consumes": [
           "application/json-patch+json",
@@ -337,7 +337,7 @@
           {
             "name": "request",
             "in": "body",
-            "description": "SharePoint Online template storage settings.",
+            "description": "Azure Blob template storage settings.",
             "schema": {
               "$ref": "#/definitions/AzureBlobTemplateModelUpdateEntryAtIdRequest"
             }
@@ -419,7 +419,7 @@
         "tags": [
           "ConfigurationEntriesAzureBlob"
         ],
-        "summary": "Creates a SharePoint Online template storage configuration entry for a given document generation configuration managed by the subscription.",
+        "summary": "Creates an Azure Blob template storage configuration entry for a given document generation configuration managed by the subscription.",
         "operationId": "CreateAzureBlobEntryUnderId",
         "consumes": [
           "application/json-patch+json",
@@ -459,7 +459,7 @@
           {
             "name": "request",
             "in": "body",
-            "description": "SharePoint Online template storage settings.",
+            "description": "Azure Blob template storage settings.",
             "schema": {
               "$ref": "#/definitions/AzureBlobTemplateModelCreateEntryUnderIdRequest"
             }

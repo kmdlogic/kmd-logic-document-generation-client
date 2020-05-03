@@ -309,7 +309,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
             CustomInitialize();
         }
         /// <summary>
-        /// Gets a SharePoint Online template storage configuration entry for a given
+        /// Gets an Azure Blob template storage configuration entry for a given
         /// document generation configuration managed by the subscription.
         /// </summary>
         /// <param name='subscriptionId'>
@@ -459,8 +459,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
         }
 
         /// <summary>
-        /// Updates a SharePoint Online template storage configuration entry for a
-        /// given document generation configuration managed by the subscription.
+        /// Updates an Azure Blob template storage configuration entry for a given
+        /// document generation configuration managed by the subscription.
         /// </summary>
         /// <param name='subscriptionId'>
         /// The subscription that owns the configurations.
@@ -472,7 +472,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// The configuration entry ancestry path to the entry.
         /// </param>
         /// <param name='request'>
-        /// SharePoint Online template storage settings.
+        /// Azure Blob template storage settings.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -619,8 +619,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
         }
 
         /// <summary>
-        /// Creates a SharePoint Online template storage configuration entry for a
-        /// given document generation configuration managed by the subscription.
+        /// Creates an Azure Blob template storage configuration entry for a given
+        /// document generation configuration managed by the subscription.
         /// </summary>
         /// <param name='subscriptionId'>
         /// The subscription that owns the configurations.
@@ -632,7 +632,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// The configuration entry ancestry path to the parent entry.
         /// </param>
         /// <param name='request'>
-        /// SharePoint Online template storage settings.
+        /// Azure Blob template storage settings.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -929,7 +929,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
         }
 
         /// <summary>
-        /// Gets a SharePoint Online template storage configuration entry for a given
+        /// Gets an Azure Blob template storage configuration entry for a given
         /// document generation configuration managed by the subscription.
         /// </summary>
         /// <param name='subscriptionId'>
@@ -1071,8 +1071,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
         }
 
         /// <summary>
-        /// Updates a SharePoint Online template storage configuration entry for a
-        /// given document generation configuration managed by the subscription.
+        /// Updates an Azure Blob template storage configuration entry for a given
+        /// document generation configuration managed by the subscription.
         /// </summary>
         /// <param name='subscriptionId'>
         /// The subscription that owns the configurations.
@@ -1084,7 +1084,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// The configuration entry identifier of the entry to be updated.
         /// </param>
         /// <param name='request'>
-        /// SharePoint Online template storage settings.
+        /// Azure Blob template storage settings.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -1365,8 +1365,8 @@ namespace Kmd.Logic.DocumentGeneration.Client
         }
 
         /// <summary>
-        /// Creates a SharePoint Online template storage configuration entry for a
-        /// given document generation configuration managed by the subscription.
+        /// Creates an Azure Blob template storage configuration entry for a given
+        /// document generation configuration managed by the subscription.
         /// </summary>
         /// <param name='subscriptionId'>
         /// The subscription that owns the configurations.
@@ -1378,7 +1378,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// The configuration entry identifier of the parent entry.
         /// </param>
         /// <param name='request'>
-        /// SharePoint Online template storage settings.
+        /// Azure Blob template storage settings.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
