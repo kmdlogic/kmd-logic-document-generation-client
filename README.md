@@ -38,8 +38,14 @@ The only way to create a new Configuration is via Console (see [here](./docs/Con
 
 But the Document Generation Client does provide an API for editing an existing Configuration, and for running the document generation methods relative to that configuration and its descendent template storages.
 
+The response is a list of `DocumentGenerationTemplate` objects.  Each template includes a TemplateId string property and a Languages property which lists the relevant document languages as ISO 2 Letter Language code values.  E.g. en, da.
+
 More details about the DocumentGenerationConfiguration API can be found [here](./docs/Configuration/DocumentGenerationConfigurationApi.md)
 
+
+## Template authoring
+
+Follow our [Templates](./docs/Templates/Templates.md) guide.
 
 ## How to configure the Document Generation client
 
