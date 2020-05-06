@@ -220,7 +220,8 @@ This design allows a master storage to define a set of generic templates for the
 - Upload a `.docx` file to your Azure Blob Storage account.
 - Name it as the document you want to hide.  
 - Make sure you upload the file to the declared container and directory (`Blob prefix`) in Console for your configuration entry.  
-- Attach a new metadata record to the document with key `Hidden`.
+- Attach a new metadata record to the document with key `Hidden`.  
+- The actual value of the `Hidden` metadata entry doesn't matter as long as the key is equal to `Hidden`.  
 
 You can set metadata for blobs using one of the following methods:
 
@@ -259,6 +260,8 @@ Locate the `.docx` template file in your SharePoint instance and tag them accord
 #### Configuration template subjects in Azure Blob Storage  
 
 The Azure Blob Storage provider from Logic Document Generation relies on the document metadata to filter out templates by `subject`.  
+
+When filtering by `subject`, only the metadata key will be used as matching criteria, the actual value is not considered.  
 
 You can set metadata for blobs using one of the following methods:
 
