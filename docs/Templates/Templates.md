@@ -211,8 +211,8 @@ This design allows a master storage to define a set of generic templates for the
 #### Using SharePoint
 
 - Create an empty `.docx` file in your SharePoint Group.
-- Name it as the document you want to hide. 
-- For instance, if you want to hide `Template.docx`, the name of the document in your local SharePoint Group should be `Template.hidden.docx`
+- Name it as the document you want to hide and add a `.hidden` suffix to it. 
+- For instance, if you want to hide `Template.docx`, the name of the document in your local SharePoint Group should be `Template.docx.hidden`
 
 
 #### Using Azure Blob Storage
