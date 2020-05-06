@@ -252,9 +252,9 @@ var templates = await documentGenerationClient.GetTemplates(subscriptionId, conf
 
 #### Configuring template subjects in SharePoint
 
-The SharePoint storage provider for Logic Document Generation relies on the document tags to filter out templates by `subject`.   
+The SharePoint storage provider for Logic Document Generation relies on the directory name to filter out templates by `subject`.   
 
-Locate the `.docx` template file in your SharePoint instance and tag them accordingly (e.g. add the tag `invoice` as per our example above).  
+Locate the `.docx` template file in your SharePoint instance and put them in a directory matching your `subject` filter (e.g. add the template to an `invoice` directory as per the example above).  
 
 
 #### Configuration template subjects in Azure Blob Storage  
