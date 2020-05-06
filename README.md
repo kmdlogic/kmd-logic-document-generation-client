@@ -41,6 +41,10 @@ But the Document Generation Client does provide an API for editing an existing C
 More details about the DocumentGenerationConfiguration API can be found [here](./docs/Configuration/DocumentGenerationConfigurationApi.md)
 
 
+## Template authoring
+
+Follow our [Templates](./docs/Templates/Templates.md) guide.
+
 ## How to configure the Document Generation client
 
 Perhaps the easiest way to configure the Document Generation client is though Application Settings.
