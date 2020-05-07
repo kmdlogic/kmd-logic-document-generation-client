@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <Description>A client library for KMD Logic Document Generation</Description>
-    <VersionPrefix>0.3.2</VersionPrefix>
+    <VersionPrefix>0.3.3</VersionPrefix>
     <Authors>KMD</Authors>
     <PackageTags>kmd;logic;documentgeneration</PackageTags>
     <PackageIcon>kmd-logic-icon.png</PackageIcon>

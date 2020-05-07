@@ -40,16 +40,14 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// <summary>
         /// Requests document generation.
         /// </summary>
-        /// <param name="subscriptionId">Identifier of Logic subscription.</param>
         /// <param name="configurationId">Identifier of document generation configuration to be used.</param>
         /// <param name="documentGenerationRequestDetails">Document generation parameters.</param>
         /// <returns>DocumentGenerationProgress object.</returns>
         public async Task<DocumentGenerationProgress> RequestDocumentGeneration(
-            Guid? subscriptionId,
             Guid configurationId,
             DocumentGenerationRequestDetails documentGenerationRequestDetails)
         {
-            var resolvedSubscriptionId = this.ResolveSubscriptionId(subscriptionId);
+            var resolvedSubscriptionId = this.ResolveSubscriptionId();
             try
             {
                 var documentGenerationRequest =
@@ -68,12 +66,11 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// <summary>
         /// Gets document generation progress information.
         /// </summary>
-        /// <param name="subscriptionId">Identifier of Logic subscription.</param>
         /// <param name="documentGenerationRequestId">Identifier of request about which to return progress information.</param>
         /// <returns>Document generation request.</returns>
-        public async Task<DocumentGenerationProgress> GetDocumentGenerationProgress(Guid? subscriptionId, Guid documentGenerationRequestId)
+        public async Task<DocumentGenerationProgress> GetDocumentGenerationProgress(Guid documentGenerationRequestId)
         {
-            var resolvedSubscriptionId = this.ResolveSubscriptionId(subscriptionId);
+            var resolvedSubscriptionId = this.ResolveSubscriptionId();
             try
             {
                 var documentGenerationRequest =
@@ -89,12 +86,11 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// <summary>
         /// Gets a Uri to a generated document associated with the provide request id.
         /// </summary>
-        /// <param name="subscriptionId">Identifier of Logic subscription.</param>
         /// <param name="documentGenerationRequestId">Identifier of request which document should be retuned.</param>
         /// <returns>DocumentUri of the generated document.</returns>
-        public async Task<DocumentGenerationUri> GetDocumentGenerationUri(Guid? subscriptionId, Guid documentGenerationRequestId)
+        public async Task<DocumentGenerationUri> GetDocumentGenerationUri(Guid documentGenerationRequestId)
         {
-            var resolvedSubscriptionId = this.ResolveSubscriptionId(subscriptionId);
+            var resolvedSubscriptionId = this.ResolveSubscriptionId();
             try
             {
                 var documentUri =
@@ -111,13 +107,12 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// <summary>
         /// Writes document generated for provided request to the output stream provided.
         /// </summary>
-        /// <param name="subscriptionId">Identifier of Logic subscription.</param>
         /// <param name="requestId">Identifier of request which document should be retuned.</param>
         /// <param name="outputStream">Output stream to which to write the generated document.</param>
         /// <returns>void.</returns>
-        public async Task WriteDocumentToStreamAsync(Guid? subscriptionId, Guid requestId, Stream outputStream)
+        public async Task WriteDocumentToStreamAsync(Guid requestId, Stream outputStream)
         {
-            var documentUri = await this.GetDocumentGenerationUri(subscriptionId, requestId).ConfigureAwait(false);
+            var documentUri = await this.GetDocumentGenerationUri(requestId).ConfigureAwait(false);
             if (documentUri == null)
             {
                 throw new DocumentGenerationException($"Unable to find generated document for request {requestId}.");
@@ -130,16 +125,15 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// <summary>
         /// List all templates.
         /// </summary>
-        /// <param name="subscriptionId">Identifier of Logic subscription.</param>
         /// <param name="configurationId">Identifier of configuration to use.</param>
         /// <param name="hierarchyPath">The hierarchy of possible template sources not including the master location.
         /// For example, if you have a customer "A0001" with a department "B0001" then the hierarchy path would be @"\A0001\B0001".
         /// If the department has no template source configured then the customers templates will be used.</param>
         /// <param name="subject">Subject of created document.</param>
         /// <returns>List of templates that can be requested.</returns>
-        public async Task<IEnumerable<DocumentGenerationTemplate>> GetTemplates(Guid? subscriptionId, Guid configurationId, string hierarchyPath, string subject)
+        public async Task<IEnumerable<DocumentGenerationTemplate>> GetTemplates(Guid configurationId, string hierarchyPath, string subject)
         {
-            var resolvedSubscriptionId = this.ResolveSubscriptionId(subscriptionId);
+            var resolvedSubscriptionId = this.ResolveSubscriptionId();
             try
             {
                 var templates =
@@ -160,11 +154,10 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// <summary>
         /// Get all document generation configurations managed by the subscription.
         /// </summary>
-        /// <param name="subscriptionId">The subscription that owns the configurations.</param>
         /// <returns>The list of existing configurations.</returns>
-        public async Task<IEnumerable<DocumentGenerationConfigurationListItem>> GetConfigurationsForSubscription(Guid? subscriptionId)
+        public async Task<IEnumerable<DocumentGenerationConfigurationListItem>> GetConfigurationsForSubscription()
         {
-            var resolvedSubscriptionId = this.ResolveSubscriptionId(subscriptionId);
+            var resolvedSubscriptionId = this.ResolveSubscriptionId();
             try
             {
                 var configurations = await this.Client
@@ -180,12 +173,11 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// <summary>
         /// Get a document generation configuration managed by the subscription by the id of the configuration.
         /// </summary>
-        /// <param name="subscriptionId">The subscription that owns the configurations.</param>
         /// <param name="configurationId">Identifier of the configuration to return.</param>
         /// <returns>The requested document generation configuration object.</returns>
-        public DocumentGenerationConfiguration GetDocumentGenerationConfiguration(Guid? subscriptionId, Guid configurationId)
+        public DocumentGenerationConfiguration GetDocumentGenerationConfiguration(Guid configurationId)
         {
-            var resolvedSubscriptionId = this.ResolveSubscriptionId(subscriptionId);
+            var resolvedSubscriptionId = this.ResolveSubscriptionId();
             try
             {
                 return new DocumentGenerationConfiguration(this.Client, resolvedSubscriptionId, configurationId);
@@ -199,16 +191,14 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// <summary>
         /// Requests document conversion to Pdf/A.
         /// </summary>
-        /// <param name="subscriptionId">Identifier of Logic subscription.</param>
         /// <param name="configurationId">Identifier of the Document Generation Configuration.</param>
         /// <param name="documentConversionToPdfARequestDetails">Document conversion parameters.</param>
         /// <returns>DocumentGenerationProgress.</returns>
         public async Task<DocumentGenerationProgress> RequestDocumentConversionToPdfA(
-            Guid? subscriptionId,
             Guid configurationId,
             DocumentConversionToPdfARequestDetails documentConversionToPdfARequestDetails)
         {
-            var resolvedSubscriptionId = this.ResolveSubscriptionId(subscriptionId);
+            var resolvedSubscriptionId = this.ResolveSubscriptionId();
             try
             {
                 var documentGenerationRequest =

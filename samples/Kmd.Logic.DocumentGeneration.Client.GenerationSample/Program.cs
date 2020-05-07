@@ -80,7 +80,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.GenerationSample
                 try
                 {
                     var templates =
-                        (await documentGenerationClient.GetTemplates(null, configurationId, hierarchyPath, subject)
+                        (await documentGenerationClient.GetTemplates(configurationId, hierarchyPath, subject)
                             .ConfigureAwait(false))
                         .ToDictionary(t => t.TemplateId, t => t);
                     var allFormats = Enum.GetValues(typeof(DocumentFormat)).Cast<DocumentFormat>().ToArray();
@@ -148,7 +148,6 @@ namespace Kmd.Logic.DocumentGeneration.Client.GenerationSample
                 DiagnosticLog($"Requesting document generation from template {documentDetails.Template.TemplateId}");
                 var documentGenerationProgress =
                     await documentGenerationClient.RequestDocumentGeneration(
-                            null,
                             documentDetails.ConfigurationId,
                             new DocumentGenerationRequestDetails(
                                 documentDetails.HierarchyPath,
@@ -165,7 +164,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.GenerationSample
                 while (stopWatch.Elapsed.TotalSeconds < secondsToTimesUp)
                 {
                     var generationProgress =
-                        await documentGenerationClient.GetDocumentGenerationProgress(null, documentGenerationProgress.Id)
+                        await documentGenerationClient.GetDocumentGenerationProgress(documentGenerationProgress.Id)
                             .ConfigureAwait(false);
 
                     switch (generationProgress.State)
@@ -183,7 +182,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.GenerationSample
                     }
 
                     var documentUri =
-                        await documentGenerationClient.GetDocumentGenerationUri(null, documentGenerationProgress.Id)
+                        await documentGenerationClient.GetDocumentGenerationUri(documentGenerationProgress.Id)
                             .ConfigureAwait(false);
 
                     if (documentUri?.Uri != null)
@@ -229,7 +228,6 @@ namespace Kmd.Logic.DocumentGeneration.Client.GenerationSample
                 DiagnosticLog($"Requesting document conversion from url {convertedDocumentDetails.Description}");
                 var documentGenerationProgress =
                     await documentGenerationClient.RequestDocumentConversionToPdfA(
-                            null,
                             convertedDocumentDetails.ConfigurationId,
                             new DocumentConversionToPdfARequestDetails(
                                 convertedDocumentDetails.SourceDocumentUrl,
@@ -241,7 +239,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.GenerationSample
                 while (stopWatch.Elapsed.TotalSeconds < secondsToTimesUp)
                 {
                     var documentGenerationRequestStatusCheck =
-                        await documentGenerationClient.GetDocumentGenerationProgress(null, documentGenerationProgress.Id)
+                        await documentGenerationClient.GetDocumentGenerationProgress(documentGenerationProgress.Id)
                             .ConfigureAwait(false);
 
                     switch (documentGenerationRequestStatusCheck.State)
@@ -259,7 +257,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.GenerationSample
                     }
 
                     var documentUri =
-                        await documentGenerationClient.GetDocumentGenerationUri(null, documentGenerationProgress.Id)
+                        await documentGenerationClient.GetDocumentGenerationUri(documentGenerationProgress.Id)
                             .ConfigureAwait(false);
 
                     if (documentUri?.Uri != null)
