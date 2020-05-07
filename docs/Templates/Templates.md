@@ -190,27 +190,6 @@ Logic Document Generation uses a hierarchical configuration model where each nod
 
 This design allows a master storage to define a set of generic templates for their customers to use, while allowing their customers to customize/extend all or some of them.   
 
-When retrieving the list of templates for a given entry in the hierarchy, Logic Document Generation will return the templates of such entry and the ones from its parent nodes.  
-
-- Master entry
-    - Template1.docx
-    - Template2.docx
-
-- Master entry > Customer A entry
-    - Template2.docx
-    - Template3.docx
-    - Template4.docx
-
-- Master entry > Customer A entry > Department A entry
-    - Template5.docx
-    - Template6.docx
-
-- Master entry > Customer B entry
-    - Template2.docx
-    - Template3.docx
-    - Template4.docx
-
-
 ### How to override a Master template  
 
 #### Using SharePoint
