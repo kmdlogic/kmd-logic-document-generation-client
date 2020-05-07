@@ -190,7 +190,6 @@ Logic Document Generation uses a hierarchical configuration model where each nod
 
 This design allows a master storage to define a set of generic templates for their customers to use, while allowing their customers to customize/extend all or some of them.   
 
-
 ### How to override a Master template  
 
 #### Using SharePoint
@@ -272,3 +271,78 @@ You can set metadata for blobs using one of the following methods:
 - Programmatically using the Azure Storage client library for .NET ([link](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-properties-metadata)).  
 
 - Using the Azure Blob REST API ([link](https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-metadata)).  
+
+
+### Multi-language support
+
+Logic Document Generation supports multi-language support for templates.  
+
+This allows Logic Document Generation API consumers, to generate documents targeting a specific language.  
+
+Logic Document Generation infers the language of a template if adheres to the following file name pattern: 
+
+`<file_name>.<lang>.docx`
+
+In the following snippet, we request a document to be generated out of the `template.docx` template, but we also specify `en` as the target language.  
+Because of that setting, Logic Document Generation will look `template.en.docx` up and use that template to generate the requested PDF document.  
+
+```csharp
+await documentGenerationClient.RequestDocumentGeneration(subscriptionId, configurationId, new DocumentGenerationRequestDetails(hierarchyPath,
+                "template.docx",
+                // use the English version of the template: template.en.docx
+                "en",
+                DocumentFormat.Pdf,
+                mergeData));
+```
+
+
+#### Overriding rules for multi-language templates
+
+You must override every version of the template for every language you wish to make available for your entry.   
+
+### Template overriding and resolution examples
+
+Given the following configuration entry hierarchy and template files:
+
+    - [\] Master entry 
+        - Template1.docx
+        - Template2.docx
+        - Template3.en.docx
+        - Template3.es.docx
+        - Template3.da.docx            
+    - [\CustomerA\] Customer A entry
+        - Template1.docx.hidden
+        - Template2.docx
+        - Template3.en.docx
+        - Template3.es.docx
+        - Template3.da.docx
+        - Template4.docx
+    - [\CustomerA\DepartmentA] Department A entry
+        - Template3.en.docx
+    - [\CustomerB\] Customer B entry
+        - Template3.da.docx 
+        - Template5.docx
+
+
+----
+
+- List all templates for Master entry:  
+    - Template1.docx
+    - Template2.docx
+    - Template3.docx [en, es, da]
+
+- List all templates for Customer A entry
+    - Template2.docx
+    - Template3.docx [en, es, da]
+    - Template4.docx
+
+- List all templates for Department A entry
+    - Template2.docx
+    - Template3.docx [en]  
+    - Template4.docx
+
+- List all templates for Customer B entry
+    - Template1.docx
+    - Template2.docx
+    - Template3.docx [da] 
+    - Template5.docx
