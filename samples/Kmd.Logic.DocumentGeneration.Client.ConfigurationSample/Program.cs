@@ -72,7 +72,6 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
 
                 var subject = string.Empty;
                 var mergeData = JObject.Parse(File.ReadAllText($"values/{CustomerDataFileName}"));
-                var logicSubscriptionId = configuration.DocumentGeneration.SubscriptionId ?? throw new Exception("Subscription Id not configured");
 
                 ITemplateStorageConfiguration sampleTemplateStorageConfiguration;
                 if (configuration.ConfigurationSample.UseAzureBlob)
@@ -96,9 +95,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                 // Get an existing document generation configuration of template storage directories
                 DiagnosticLog("Getting a document generation template storage configuration.");
                 var documentGenerationConfiguration =
-                    documentGenerationClient.GetDocumentGenerationConfiguration(
-                        logicSubscriptionId,
-                        configurationId);
+                    documentGenerationClient.GetDocumentGenerationConfiguration(configurationId);
 
                 // Update the existing configuration
                 documentGenerationConfiguration.Name = "ConfigurationSample Name";
@@ -140,9 +137,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                 {
                     DiagnosticLog("Downloading the saved document generation template storage configuration.");
                     documentGenerationConfiguration =
-                        documentGenerationClient.GetDocumentGenerationConfiguration(
-                            logicSubscriptionId,
-                            documentGenerationConfiguration.Id);
+                        documentGenerationClient.GetDocumentGenerationConfiguration(documentGenerationConfiguration.Id);
                     DiagnosticLog($"Document generation template storage configuration \"{documentGenerationConfiguration.Name}\" downloaded.");
                 }
 

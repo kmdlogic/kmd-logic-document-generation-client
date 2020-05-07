@@ -62,9 +62,9 @@ namespace Kmd.Logic.DocumentGeneration.Client
             }
         }
 
-        protected Guid ResolveSubscriptionId(Guid? subscriptionId)
+        protected Guid ResolveSubscriptionId()
         {
-            var resolvedSubscriptionId = subscriptionId ?? this._options.SubscriptionId;
+            var resolvedSubscriptionId = this._options.SubscriptionId;
             if (resolvedSubscriptionId == null)
             {
                 throw new DocumentGenerationValidationException("No subscription id provided", new Dictionary<string, IList<string>>());
