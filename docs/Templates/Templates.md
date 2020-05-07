@@ -329,24 +329,20 @@ Given the following configuration entry hierarchy and template files:
 - List all templates for Master entry:  
     - Template1.docx
     - Template2.docx
-    - Template3.en.docx
-    - Template3.es.docx
-    - Template3.da.docx 
+    - Template3.docx [en, es, da]
 
 - List all templates for Customer A entry
     - Template2.docx
-    - Template3.en.docx
-    - Template3.es.docx
-    - Template3.da.docx     
+    - Template3.docx [en, es, da]
     - Template4.docx
 
 - List all templates for Department A entry
     - Template2.docx
-    - Template3.en.docx  
+    - Template3.docx [en]  
     - Template4.docx
 
 - List all templates for Customer B entry
     - Template1.docx
     - Template2.docx
-    - Template3.da.docx  
+    - Template3.docx [da] 
     - Template5.docx
