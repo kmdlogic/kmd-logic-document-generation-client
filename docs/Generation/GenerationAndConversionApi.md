@@ -12,16 +12,15 @@ The Logic DocumentGenerationClient provides APIs for:
 
 ```c#
 DocumentGenerationClient client;
-Guid subscriptionId;
 string aTemplateId;
 JObject mergeData;
 
 // ...
 
-// Get all configurations for this subscription Id
+// Get all configurations for this client's subscription Id
 // and select the Id of the first one with the name MyConfigurationName
 var configurationId = 
-    (await client.GetConfigurationsForSubscription(subscriptionId)
+    (await client.GetConfigurationsForSubscription()
         .ConfigureAwait(false))
     .FirstOrDefault(c => c.Name == "MyConfigurationName")
     .ConfigurationId;
@@ -29,7 +28,6 @@ var configurationId =
 // Request a document be generated using the known template id and provided merge data
 var documentGenerationProgress =
     await documentGenerationClient.RequestDocumentGeneration(
-            subscriptionId,
             configurationId,
             new DocumentGenerationRequestDetails(
                 @"MySchool\MyDepartment",
@@ -44,7 +42,6 @@ var documentGenerationProgress =
 // Download the generated document
 var documentGenerationUri =
     await documentGenerationClient.GetDocumentGenerationUri(
-            subscriptionId,
             documentGenerationProgress.Id)
         .ConfigureAwait(false);
 
@@ -78,8 +75,6 @@ The samples provide example ways to call the constructor:
 
 ## DocumentGenerationClient document generation methods
 
-The DocumentGenerationClient methods each accept a subscriptionId, which identifies a KMD Logic subscription.  If this is null, the SubscriptionId property of the [DocumentGenerationOptions](../../src/Kmd.Logic.DocumentGeneration.Client/DocumentGenerationOptions.cs) is used.
-
 ### `GetTemplates`
 
 #### Lists all templates.
@@ -88,13 +83,12 @@ To list all templates for a nominated configuration at or above the nominated ([
 
 ```c#
 var templates =
-    await documentGenerationClient.GetTemplates(subscriptionId, configurationId, hierarchyPath, subject)
+    await documentGenerationClient.GetTemplates(configurationId, hierarchyPath, subject)
         .ConfigureAwait(false);
 ```
 
 where:
 
-* `subscriptionId` identifies a KMD Logic subscription;
 * `configurationId` identifies a KMD Logic Document Generation configuration;
 * `hierarchyPath` encodes the hierarchy of possible template sources not including the master location ([Hierarchy Path](../HierarchyPath.md));
 * `subject` is the subject of the created document.
@@ -111,7 +105,6 @@ To submit a document generation request:
 ```c#
 var documentGenerationProgress =
     await documentGenerationClient.RequestDocumentGeneration(
-        subscriptionId,
         configurationId,
         new DocumentGenerationRequestDetails(
             hierarchyPath,
@@ -126,8 +119,7 @@ var documentGenerationProgress =
 
 where:
 
-* `subscriptionId` identifies a KMD Logic subscription;
-* `configurationId` identifies a KMD Logic Document Generation configuration belonging to that subscription;
+* `configurationId` identifies a KMD Logic Document Generation configuration belonging to the client's subscription;
 * `hierarchyPath` encodes the hierarchy of possible template sources not including the master location ([Hierarchy Path](../HierarchyPath.md));
 * `templateId` identifies the name of the document generation template;
 * `twoLetterIsoLanguageName` specifies a language code in ISO 639-1 format (eg. en, da);
@@ -145,12 +137,11 @@ To retrieve an already submitted document generation request in order to read it
 
 ```c#
 var documentGenerationProgress =
-    await documentGenerationClient.GetDocumentGenerationProgress(subscriptionId, id)
+    await documentGenerationClient.GetDocumentGenerationProgress(id)
         .ConfigureAwait(false);
 ```
 
-where `subscriptionId` identifies a KMD Logic subscription,
-and where `id` is the Id property of an earlier response to `RequestDocumentGeneration`. 
+where `id` is the Id property of an earlier response to `RequestDocumentGeneration`. 
 
 The `DocumentGenerationProgress` response object ([source](../../src/Kmd.Logic.DocumentGeneration.Client/ServiceMessages/DocumentGenerationProgress.cs)) includes a State property ( see [DocumentGenerationState.cs](../../src/Kmd.Logic.DocumentGeneration.Client/Types/DocumentGenerationState.cs) ) which can take one of the following values:
 
@@ -167,12 +158,11 @@ To retrieve a generated document (once the document `State` is `Completed`):
 
 ```c#
 var documentUri =
-    await documentGenerationClient.GetDocumentGenerationUri(subscriptionId, id)
+    await documentGenerationClient.GetDocumentGenerationUri(id)
         .ConfigureAwait(false);
 ```
 
-where `subscriptionId` identifies a KMD Logic subscription,
-and where `id` is the Id property of an earlier response to `RequestDocumentGeneration`. 
+where `id` is the Id property of an earlier response to `RequestDocumentGeneration`. 
 
 The response is a `DocumentGenerationUri` object that includes a `Uri` property using which the document can be downloaded, and a `UriExpiryTime` DateTime property up until which time the Uri link should continue to function.
 
@@ -186,7 +176,6 @@ To submit a document rendering request:
 ```c#
 var documentGenerationProgress =
     await documentGenerationClient.RequestDocumentConversionToPdfA(
-        subscriptionId,
         configurationId,
         new DocumentConversionToPdfARequestDetails(
             sourceDocumentUrl,
@@ -198,8 +187,7 @@ var documentGenerationProgress =
 
 where:
 
-* `subscriptionId` identifies a KMD Logic subscription;
-* `configurationId` identifies a KMD Logic Document Generation configuration belonging to that subscription;
+* `configurationId` identifies a KMD Logic Document Generation configuration belonging to the client's subscription;
 * `sourceDocumentUrl` URL that identifies the document to be converted;
 * `sourceDocumentFormat` declares the format of the original document (see [DocumentFormat](../../src/Kmd.Logic.DocumentGeneration.Client/Types/DocumentFormat.cs) );
 * `callbackUrl` declares a URL that is to be called when document rendering completes.

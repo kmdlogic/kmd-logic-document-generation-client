@@ -10,22 +10,21 @@ Away from Logic Console, the Document Generation Client provides an API for edit
 
 ```c#
 DocumentGenerationClient client;
-Guid subscriptionId;
 string aTemplateId;
 JObject mergeData;
 
 // ...
 
-// Get all configurations for this subscription Id and select the Id of the first one with the name MyConfigurationName
+// Get all configurations for the client's subscription Id and select the Id of the first one with the name MyConfigurationName
 var configurationId = 
-    (await client.GetConfigurationsForSubscription(subscriptionId)
+    (await client.GetConfigurationsForSubscription()
         .ConfigureAwait(false))
     .FirstOrDefault(c => c.Name == "MyConfigurationName")
     .ConfigurationId;
 
 // Get the configuration with that Id
 var documentGenerationConfiguration =
-    documentGenerationClient.GetDocumentGenerationConfiguration(subscriptionId, configurationId);
+    documentGenerationClient.GetDocumentGenerationConfiguration(configurationId);
 
 // update its root template storage area to a SharePoint Online group folder
 var rootTemplateStorageDirectory =
@@ -67,19 +66,16 @@ The following DocumentGenerationClient methods are used to discover a DocumentGe
 
 #### GetConfigurationsForSubscription
 
-##### Lists all Document Generation Configurations for a nominated Kmd Logic Subscription Id.
+##### Lists all Document Generation Configurations for the client's Kmd Logic Subscription Id.
 
-To list all configurations for a nominated subscription id:
+To list all configurations for the client's subscription id:
 
 ```c#
 var configurations =
-    await documentGenerationClient.GetConfigurationsForSubscription(subscriptionId)
+    await documentGenerationClient.GetConfigurationsForSubscription()
         .ConfigureAwait(false);
 ```
 
-where:
-
-* `subscriptionId` identifies a KMD Logic subscription.
 
 The response is a list of `DocumentGenerationConfigurationListItem` objects [source](../../src/Kmd.Logic.DocumentGeneration.Client/ServiceMessages/DocumentGenerationConfigurationListItem.cs).  Each configuration item includes a ConfigurationId Guid that can be used to identify the configuration in other methods of document generation and configuration.
 
@@ -92,14 +88,13 @@ To retrieve a DocumentGenerationConfiguration:
 
 ```c#
 var documentGenerationConfiguration =
-    await documentGenerationClient.GetDocumentGenerationConfiguration(subscriptionId, configurationId)
+    await documentGenerationClient.GetDocumentGenerationConfiguration(configurationId)
         .ConfigureAwait(false);
 ```
 
 where 
 
-* `subscriptionId` identifies a KMD Logic subscription;
-* `configurationId` identifies a KMD Logic Document Generation configuration belonging to that subscription.
+* `configurationId` identifies a KMD Logic Document Generation configuration belonging to the client's subscription.
 
 The response is a `DocumentGenerationConfiguration` object ([source](../../src/Kmd.Logic.DocumentGeneration.Client/Configuration/DocumentGenerationConfiguration.cs)), detailed below.
 
@@ -133,7 +128,7 @@ The `IList<string>` names of the hierarchy levels.
 
 The `bool` declaration that the customer has a valid Aspose license.
 
-### Instance Methods
+### Configuration Instance Methods
 
 The following instance methods are available on a DocumentGenerationConfiguration object.
 
@@ -215,7 +210,7 @@ where the `HierarchyPath` parameter is a [HierarchyPath](../../src/Kmd.Logic.Doc
 The response is the documentGenerationConfiguration's descendant `DocumentGenerationTemplateStorageDirectory` object at the nomiated hierarchy path.
 
 
-### DocumentGenerationConfiguration Instance Methods
+### Generation Instance Methods
 
 The same document generation methods available via a DocumentGenerationClient object are also available on one of its DocumentGenerationConfiguration objects.
 
@@ -402,7 +397,7 @@ where `subject` is the subject of the created document.
 
 The response is a list of `DocumentGenerationTemplate` objects.  Each template includes a TemplateId string property and a Languages property which lists the relevent document languages as ISO 2 Letter Language code values.  E.g. en, da.
 
-This method is equivalent to the method on DocumentGenerationClient, but since this object is already aware of its configurationId, subscriptionId and hierarchyPath, there is no need to pass these.
+This method is equivalent to the method on DocumentGenerationClient, but since this object is already aware of its configurationId and hierarchyPath, there is no need to pass these.
 
 #### `RequestDocumentGeneration`
 
@@ -432,4 +427,4 @@ where:
 
 The returned DocumentGenerationProgress response object [source](../../src/Kmd.Logic.DocumentGeneration.Client/ServiceMessages/DocumentGenerationProgress.cs) includes an Id property that can be passed to later client methods.
 
-This method is equivalent to the method on DocumentGenerationClient, but since this object is already aware of its configurationId, subscriptionId and hierarchyPath, there is no need to pass these.
+This method is equivalent to the method on DocumentGenerationClient, but since this object is already aware of its configurationId and hierarchyPath, there is no need to pass these.
