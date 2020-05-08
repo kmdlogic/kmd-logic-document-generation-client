@@ -2,23 +2,23 @@
 
 ## Introduction
 
-KMD Logic Document Generation uses MS Word files (`.docx` files) as templates to generate documents from.  
+KMD Logic Document Generation uses MS Word files (Microsoft Open XML `.docx` files) as templates from which to generate documents.  
 
 
 ## Template Syntax
 
-KMD Logic Document Generation utilizes ASPOSE as the underlying library to generate documents.  
-Because of this, it supports out of the box all the syntax constructs available in ASPOSE Reporting Engine.  
-A comprehensive guide about this can be found in the following link:  [Template Syntax - Aspose.Words for .NET - Documentation](https://docs.aspose.com/display/wordsnet/Template+Syntax).  
+KMD Logic Document Generation utilizes [Aspose](https://www.aspose.com) as the underlying library to generate documents.  
+Because of this, it supports out of the box all the syntax constructs available in the Aspose Reporting Engine.  
+A comprehensive guide about this can be found at:  [Template Syntax - Aspose.Words for .NET - Documentation](https://docs.aspose.com/display/wordsnet/Template+Syntax).  
 
 
 ## KMD Logic Document Generation Template Helpers
 
-Additionally to the built-in functionality provided by ASPOSE, KMD Logic Document Generation provides functionality to help template authors to create documents with ease, specially focussing on retrieving resources that are located in storage providers from a KMD Logic Document Generation Configuration entries hierarchy.  
+In addition to the built-in functionality provided by Aspose, KMD Logic Document Generation provides functionality to help template authors to create documents by retrieving resources that are located in storage areas from a KMD Logic Document Generation Configuration hierarchy.  
 
-To learn more about KMD Logic Document Generation Configuration, please refer to the following [guide](../Configuration/Configuration.md).
+To learn more about KMD Logic Document Generation Configuration, please refer to [this guide](../Configuration/Configuration.md).
 
-Find below a list of helpers that KMD Logic Document Generation Template supports:
+KMD Logic Document Generation Template supports the following list of helpers:
 
 ### Template helper
 
@@ -32,20 +32,21 @@ Use the `template` helper to load external `.docx` files (e.g. signatures, discl
 
 #### Note
 
-For the ASPOSE documentation about inserting documents dynamically please follow [this](https://docs.aspose.com/display/wordsnet/Template+Syntax#TemplateSyntax-InsertingDocumentsDynamically) guide.
+For the Aspose documentation about inserting documents dynamically please follow [this guide](https://docs.aspose.com/display/wordsnet/Template+Syntax#TemplateSyntax-InsertingDocumentsDynamically).
 
 
 ### Image helper
 
-Use the `image` helper to load external graphic files or images stored in your storage provider or higher up the hierarchy. 
+Use the `image` helper to load external graphic files or images stored in your storage provider or higher up the hierarchy.  
 
 
 #### Example - Loading image from external url
 
+No need to use the `image` helper, e.g.:
+
 ```
 <<image ["http://www.example.com/image.jpg"] >>
 ```
-
 
 #### Example - Loading images from your storage provider or higher up the hierarchy
 
@@ -55,7 +56,7 @@ Use `image.Load`, e.g.:
 <<image [image.Load("image.jpg")] >>
 ```
 
-#### Example - Loading image from bas64 image data encoded in model property  
+#### Example - Loading image from image data encoded as base64 in the mergeData property  
 
 Use `image.Decode`, e.g.:
 
@@ -65,7 +66,7 @@ Use `image.Decode`, e.g.:
 
 #### Note  
 
-For the ASPOSE documentation about inserting images dynamically please follow [this](https://docs.aspose.com/display/wordsnet/Template+Syntax#TemplateSyntax-InsertingImagesDynamically) guide.
+For the Aspose documentation about inserting images dynamically please follow [this guide](https://docs.aspose.com/display/wordsnet/Template+Syntax#TemplateSyntax-InsertingImagesDynamically).
 
 
 ### Number and Date/Time helper
@@ -74,38 +75,38 @@ Use the `number.format` helper to format `numeric`, `currency` or `percentage` v
 
 Use the `date.format` to format date/time values in your templates.  
 
-`number.format` and `date.format` provide additional functionality from the regular formatting helpers in ASPOSE, mostly focused on customizing the localization culture used to format its values.    
+`number.format` and `date.format` provide additional functionality from the regular formatting helpers in Aspose, mostly focused on customizing the localization culture used to format its values.    
 
 
 #### Examples
 
-- Numeric
+- Numeric (The following examples use a merge data field named Amount)  
 
-    - No (no format):  
-    `<<[No]>>`  
+    - Amount (no format):  
+    `<<[Amount]>>`  
 
-    - No (as Percent (`P`) Format Specifier):  
-    `<<[No]:”P”>>`  
+    - Amount (as Percent (`P`) Format Specifier):  
+    `<<[Amount]:”P”>>`  
 
-    - No (as Numeric (`N`) Format Specifier): 
-    `<<[No]:”N”>>`  
+    - Amount (as Numeric (`N`) Format Specifier): 
+    `<<[Amount]:”N”>>`  
 
-    - No (as Numeric (`N`) Format Specifier `FR` culture):  
-    `<<[number.Format(No, “N”, “fr”)]>>`  
+    - Amount (as Numeric (`N`) Format Specifier `FR` culture):  
+    `<<[number.Format(Amount, “N”, “fr”)]>>`  
 
-    - No (as Numeric (`N`) Format Specifier `EN-GB` culture):  
-    `<<[number.Format(No, “N”, “en-GB”)]>>`  
+    - Amount (as Numeric (`N`) Format Specifier `EN-GB` culture):  
+    `<<[number.Format(Amount, “N”, “en-GB”)]>>`  
 
-    - No (as Fixed-Point (`F`) Format Specifier):  
-    `<<[No]:”F”>>`  
+    - Amount (as Fixed-Point (`F`) Format Specifier):  
+    `<<[Amount]:”F”>>`  
 
-    - No (as Fixed-Point (`F`) `FR` culture):  
-    `<<[number.Format(No, “F”, “fr”)]>>`  
+    - Amount (as Fixed-Point (`F`) `FR` culture):  
+    `<<[number.Format(Amount, “F”, “fr”)]>>`  
 
-    - No (as Fixed-Point (`F`) `EN-GB` culture):  
-    `<<[number.Format(No, “F”, “en-GB”)]>>`  
+    - Amount (as Fixed-Point (`F`) `EN-GB` culture):  
+    `<<[number.Format(Amount, “F”, “en-GB”)]>>`  
 
-- Currency  
+- Currency (The following examples use a merge data field named Price)  
 
     - Price (no format):  
     `<<[Price]>>`  
@@ -134,7 +135,7 @@ Use the `date.format` to format date/time values in your templates.
     - Price (as Digit placeholder):  
     `<<[Price]:”#.##”>>`  
 
-- Percentage
+- Percentage (The following examples use a merge data field named Percentage)  
 
     - Percent (as Percent (`P`) Format Specifier):  
     `<<[Percent]:”P”>>`  
@@ -149,7 +150,7 @@ Use the `date.format` to format date/time values in your templates.
     `<<[Percent]:”%#0.00”>>` 
 
 
-- Date/time
+- Date/time (The following examples use a merge data fields named DateOfBirth and Appointment)  
 
     - DateOfBirth (format `”dd.MM.yyyy”`):  
     `<<[DateOfBirth]:”dd.MM.yyyy”>>`  
@@ -177,12 +178,12 @@ Use the `date.format` to format date/time values in your templates.
 
 #### Notes
 
-For the ASPOSE documentation about outputting expression results and their formatting please follow [this](https://docs.aspose.com/display/wordsnet/Template+Syntax#TemplateSyntax-OutputtingExpressionResults) guide.
+For the Aspose documentation about outputting expression results and related formatting please follow [this guide](https://docs.aspose.com/display/wordsnet/Template+Syntax#TemplateSyntax-OutputtingExpressionResults).
 
 
 ## Templates and document generation
 
-Logic Document Generation uses `.docx` templates and create documents out of them.  
+Logic Document Generation uses `.docx` templates and creates documents out of them.  
 
 There are a few conventions that are followed when resolving a template from a configuration entry point of view (to know more about the configuration model visit the [Configuration](../Configuration/Configuration.md) documentation).  
 
@@ -195,14 +196,14 @@ This design allows a master storage to define a set of generic templates for the
 #### Using SharePoint
 
 - Create a `.docx` file in your SharePoint Group.
-- Name it as the document you want to override and update its content as needed.  
+- Name it using the same name as the document you want to override and update its content as needed.  
 
 
 #### Using Azure Blob Storage
 
 - Upload a `.docx` file to your Azure Blob Storage.
-- Name it as the document you want to override and update its content as needed.  
-- Make sure you upload the file to the declared container and directory (`Blob prefix`) in Console for your configuration entry.  
+- Name it using the same name as the document you want to override and update its content as needed.  
+    > Make sure you upload the file to the declared container and directory (`Blob prefix`) in Console for your configuration entry.  
 
 
 ### How to hide a template from the list of available templates for a given entry
@@ -210,34 +211,34 @@ This design allows a master storage to define a set of generic templates for the
 #### Using SharePoint
 
 - Create an empty `.docx` file in your SharePoint Group.
-- Name it as the document you want to hide and add a `.hidden` suffix to it. 
-- For instance, if you want to hide `Template.docx`, the name of the document in your local SharePoint Group should be `Template.docx.hidden`
+- Name it using the same name as the document you want to hide but adding a `.hidden` suffix to it.  
+    > For instance, if you want to hide `Template.docx`, the name of the document in your local SharePoint Group should be `Template.docx.hidden`
 
 
 #### Using Azure Blob Storage
 
 - Upload a `.docx` file to your Azure Blob Storage account.
-- Name it as the document you want to hide.  
-- Make sure you upload the file to the declared container and directory (`Blob prefix`) in Console for your configuration entry.  
+- Name it using the same name as the document you want to hide.  
+    > Make sure you upload the file to the declared container and directory (`Blob prefix`) in Console for your configuration entry.  
 - Attach a new metadata record to the document with key `Hidden`.  
-- The actual value of the `Hidden` metadata entry doesn't matter as long as the key is equal to `Hidden`.  
+    > The actual value of the `Hidden` metadata entry doesn't matter as long as the key is equal to `Hidden`.  
 
-You can set metadata for blobs using one of the following methods:
+You can set metadata for blobs using one of the following:
 
 - The Storage Explorer in the Azure Portal ([link](https://azure.microsoft.com/en-au/updates/storage-explorer-preview-now-available-in-azure-portal/)).
 
 - The Storage Explorer client ([link](https://azure.microsoft.com/en-us/features/storage-explorer/)).
 
-- Programmatically using the Azure Storage client library for .NET ([link](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-properties-metadata)).  
+- The Azure Storage client library for .NET ([link](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-properties-metadata)).  
 
-- Using the Azure Blob REST API ([link](https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-metadata)).  
+- The Azure Blob REST API ([link](https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-metadata)).  
 
 ### How to tag document templates for searching using Logic Document Generation API
 
 The Logic Document Generation API allows you to list all templates available for a given configuration entry.  
 
 ```csharp
-var templates = await documentGenerationClient.GetTemplates(subscriptionId, configurationId, hierarchyPath, null).ConfigureAwait(false);
+var templates = await documentGenerationClient.GetTemplates(configurationId, hierarchyPath, null).ConfigureAwait(false);
 ```
 
 
@@ -246,7 +247,7 @@ It also allows you to pass in a `subject` parameter to retrieve only those docum
 Below we retrieve all the templates that have a subject equal to `invoice`:  
 
 ```csharp
-var templates = await documentGenerationClient.GetTemplates(subscriptionId, configurationId, hierarchyPath, "invoice").ConfigureAwait(false);
+var templates = await documentGenerationClient.GetTemplates(configurationId, hierarchyPath, "invoice").ConfigureAwait(false);
 ```
 
 #### Configuring template subjects in SharePoint
@@ -262,15 +263,15 @@ The Azure Blob Storage provider from Logic Document Generation relies on the doc
 
 When filtering by `subject`, only the metadata key will be used as matching criteria, the actual value is not considered.  
 
-You can set metadata for blobs using one of the following methods:
+You can set metadata for blobs using one of the following:
 
 - The Storage Explorer in the Azure Portal ([link](https://azure.microsoft.com/en-au/updates/storage-explorer-preview-now-available-in-azure-portal/)).
 
 - The Storage Explorer client ([link](https://azure.microsoft.com/en-us/features/storage-explorer/)).
 
-- Programmatically using the Azure Storage client library for .NET ([link](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-properties-metadata)).  
+- The Azure Storage client library for .NET ([link](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-properties-metadata)).  
 
-- Using the Azure Blob REST API ([link](https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-metadata)).  
+- The Azure Blob REST API ([link](https://docs.microsoft.com/en-us/rest/api/storageservices/set-blob-metadata)).  
 
 
 ### Multi-language support
@@ -279,15 +280,17 @@ Logic Document Generation supports multi-language support for templates.
 
 This allows Logic Document Generation API consumers, to generate documents targeting a specific language.  
 
-Logic Document Generation infers the language of a template if adheres to the following file name pattern: 
+Logic Document Generation infers the language of a template if its file name adheres to the following pattern: 
 
 `<file_name>.<lang>.docx`
 
-In the following snippet, we request a document to be generated out of the `template.docx` template, but we also specify `en` as the target language.  
-Because of that setting, Logic Document Generation will look `template.en.docx` up and use that template to generate the requested PDF document.  
+where `<lang>` is one of the [ISO 639-1 two letter language codes](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
+
+In the following snippet, we request a document be generated using the `template.docx` template, but we also specify `en` as the target language.  
+Because of that setting, Logic Document Generation will ascend the storage configuration hierarchy choosing the first file named `template.en.docx`, and use that template to generate the requested PDF document.  
 
 ```csharp
-await documentGenerationClient.RequestDocumentGeneration(subscriptionId, configurationId, new DocumentGenerationRequestDetails(hierarchyPath,
+await documentGenerationClient.RequestDocumentGeneration(configurationId, new DocumentGenerationRequestDetails(hierarchyPath,
                 "template.docx",
                 // use the English version of the template: template.en.docx
                 "en",
