@@ -349,3 +349,11 @@ Given the following configuration entry hierarchy and template files:
     - Template2.docx
     - Template3.docx [da] 
     - Template5.docx
+
+## Template Metadata
+
+Additional information about a template can be provided in template metadata files.  
+For example, the schema definition of the merge data for a template might be provided in that template's metadata file so that an application can better determine what merge data to provide to the document generation process for a particular template.
+
+For more information about template metadata files see [Template Metadata Files](./TemplateMetadata.md).
+
