@@ -124,6 +124,10 @@ The `DocumentGenerationTemplateStorageDirectory` ([source](../../src/Kmd.Logic.D
 
 The `IList<string>` names of the hierarchy levels.
 
+#### `MetadataFilenameExtension`
+
+The `string` declaration of the filename extension of the [template metadata files](../Templates/TemplateMetadata.md) that can reside along side their corresponding templates.
+
 #### `HasLicense`
 
 The `bool` declaration that the customer has a valid Aspose license.
@@ -398,6 +402,40 @@ where `subject` is the subject of the created document.
 The response is a list of `DocumentGenerationTemplate` objects.  Each template includes a TemplateId string property and a Languages property which lists the relevent document languages as ISO 2 Letter Language code values.  E.g. en, da.
 
 This method is equivalent to the method on DocumentGenerationClient, but since this object is already aware of its configurationId and hierarchyPath, there is no need to pass these.
+
+#### `GetMetadata`
+
+##### Returns the metadata for a template as an output stream.
+
+To get the metadata for a template within a nominated configuration at or above the nominated ([hierarchyPath](../HierarchyPath.md)):
+
+```c#
+var metadataStream =
+    await templateStorageDirectory.GetMetadata(templateId, twoLetterIsoLanguageName)
+        .ConfigureAwait(false);
+```
+
+where:
+
+* `templateId` identifies the name of the document generation template;
+* `twoLetterIsoLanguageName` specifies a language code in ISO 639-1 format (eg. en, da);
+
+The response is an output stream from the metadata file for the nominated template.
+
+The metadata file must have been uploaded to the same storage as the nominated template.
+It will share the same name as its associated template file, but with an extension matching the ```MetadataFilenameExtension``` of the configuration.
+
+For example, if the template is named ```StudentReport.docx``` and the configuration's ```MetadataFilenameExtension``` property is set to ```yaml```, then calling:
+
+```c#
+    templateStorageDirectory.GetMetadata("StudentReport.docx", twoLetterIsoLanguageName)
+```
+
+will return data found in the metadata file ```StudentReport.yaml``` in the same storage area as the ```StudentReport.docx``` file, if that metadata file exists.
+If no such file can be found, an exception will be thrown.
+
+For more information about template metadata files see [Template Metadata Files](../Templates/TemplateMetadata.md).
+
 
 #### `RequestDocumentGeneration`
 

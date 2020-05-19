@@ -79,7 +79,7 @@ The samples provide example ways to call the constructor:
 
 #### Lists all templates.
 
-To list all templates for a nominated configuration at or above the nominated ([hierarchyPath](../HierarchyPath.md)):
+To list all templates for a nominated configuration at or above the nominated [hierarchyPath](../HierarchyPath.md):
 
 ```c#
 var templates =
@@ -100,7 +100,7 @@ The response is a list of `DocumentGenerationTemplate` objects.  Each template i
 
 #### Returns the metadata for a template as an output stream.
 
-To get the metadata for a template within a nominated configuration at or above the nominated ([hierarchyPath](../HierarchyPath.md)):
+To get the metadata for a template within a nominated configuration at or above the nominated [hierarchyPath](../HierarchyPath.md):
 
 ```c#
 var metadataStream =
@@ -118,7 +118,22 @@ where:
 The response is an output stream from the metadata file for the nominated template.
 
 The metadata file must have been uploaded to the same storage as the nominated template.
-It will share the same name as its associated template file, but with an extension matching the MetadataFilenameExtension of the configuration.
+It will share the same name as its associated template file, but with an extension matching the ```MetadataFilenameExtension``` of the configuration.
+
+For example, if the template is named ```StudentReport.docx``` and the configuration's ```MetadataFilenameExtension``` property is set to ```yaml```, then calling:
+
+```c#
+    documentGenerationClient.GetMetadata(
+        configurationId,
+        "StudentReport.docx",
+        twoLetterIsoLanguageName,
+        hierarchyPath)
+```
+
+will return data found in the metadata file ```StudentReport.yaml``` in the same storage area as the ```StudentReport.docx``` file, if that metadata file exists.
+If no such file can be found, an exception will be thrown.
+
+For more information about template metadata files see [Template Metadata Files](../Templates/TemplateMetadata.md).
 
 ### `RequestDocumentGeneration`
 
