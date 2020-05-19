@@ -211,5 +211,38 @@ namespace Kmd.Logic.DocumentGeneration.Client
                 throw httpOperationException.DocumentGenerationThrow();
             }
         }
+
+        /// <summary>
+        /// Gets metadata for a nominated template.
+        /// </summary>
+        /// <param name="configurationId">Identifier of configuration to use.</param>
+        /// <param name="templateId">Identifier of the associated template.</param>
+        /// <param name="language">Language code in ISO 639-2 format (e.g. en).</param>
+        /// <param name="hierarchyPath">
+        /// The hierarchy of possible template sources not including the master location.
+        /// For example, if you have a customer "A0001" with a department "B0001" then the hierarchy path would be "A0001\B0001".
+        /// If the department has no template source configured then the customers templates will be used.
+        /// </param>
+        /// <returns>The template metadata as an output stream.</returns>
+        public async Task<Stream> GetMetadata(Guid configurationId, string templateId, string language, string hierarchyPath)
+        {
+            var resolvedSubscriptionId = this.ResolveSubscriptionId();
+            try
+            {
+                var response =
+                    await this.Client.GetMetadataWithHttpMessagesAsync(
+                            resolvedSubscriptionId,
+                            configurationId,
+                            templateId,
+                            language,
+                            hierarchyPath)
+                        .ConfigureAwait(false);
+                return await response.ValidateContentStream().ConfigureAwait(false);
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                throw httpOperationException.DocumentGenerationThrow();
+            }
+        }
     }
 }

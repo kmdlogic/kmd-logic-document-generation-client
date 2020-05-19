@@ -96,6 +96,30 @@ where:
 The response is a list of `DocumentGenerationTemplate` objects.  Each template includes a TemplateId string property and a Languages property which lists the relevent document languages as ISO 2 Letter Language code values.  E.g. en, da.
 
 
+### `GetMetadata`
+
+#### Returns the metadata for a template as an output stream.
+
+To get the metadata for a template within a nominated configuration at or above the nominated ([hierarchyPath](../HierarchyPath.md)):
+
+```c#
+var metadataStream =
+    await documentGenerationClient.GetMetadata(configurationId, templateId, twoLetterIsoLanguageName, hierarchyPath)
+        .ConfigureAwait(false);
+```
+
+where:
+
+* `configurationId` identifies a KMD Logic Document Generation configuration belonging to the client's subscription;
+* `templateId` identifies the name of the document generation template;
+* `twoLetterIsoLanguageName` specifies a language code in ISO 639-1 format (eg. en, da);
+* `hierarchyPath` encodes the hierarchy of possible template sources not including the master location ([Hierarchy Path](../HierarchyPath.md)).
+
+The response is an output stream from the metadata file for the nominated template.
+
+The metadata file must have been uploaded to the same storage as the nominated template.
+It will share the same name as its associated template file, but with an extension matching the MetadataFilenameExtension of the configuration.
+
 ### `RequestDocumentGeneration`
 
 #### Requests a document generation.

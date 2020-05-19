@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Kmd.Logic.DocumentGeneration.Client.Configuration;
 using Kmd.Logic.DocumentGeneration.Client.Configuration.TemplateStorageConfigurations;
@@ -167,13 +169,13 @@ namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
         internal static CreateConfigurationRequest ToCreateConfigurationRequest(
             this DocumentGenerationConfiguration documentGenerationConfiguration)
         {
-            return new CreateConfigurationRequest(documentGenerationConfiguration.Name, documentGenerationConfiguration.HasLicense, documentGenerationConfiguration.LevelNames?.ToList());
+            return new CreateConfigurationRequest(documentGenerationConfiguration.Name, documentGenerationConfiguration.HasLicense, documentGenerationConfiguration.LevelNames?.ToList(), documentGenerationConfiguration.MetadataFilenameExtension);
         }
 
         internal static UpdateConfigurationRequest ToUpdateConfigurationRequest(
             this DocumentGenerationConfiguration documentGenerationConfiguration)
         {
-            return new UpdateConfigurationRequest(documentGenerationConfiguration.Name, documentGenerationConfiguration.HasLicense, documentGenerationConfiguration.LevelNames?.ToList());
+            return new UpdateConfigurationRequest(documentGenerationConfiguration.Name, documentGenerationConfiguration.HasLicense, documentGenerationConfiguration.LevelNames?.ToList(), documentGenerationConfiguration.MetadataFilenameExtension);
         }
 
         internal static DocumentGenerationTemplateStorageDirectoryDetails GetEntryDetailsFromServer(
@@ -328,6 +330,36 @@ namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
         {
             var httpOperationResponse = httpOperationResponseTask.GetAwaiter().GetResult();
             return httpOperationResponse.ValidateBody(operation);
+        }
+
+        internal static Task<Stream> ValidateContentStream(
+            this HttpOperationResponse httpOperationResponse,
+            [System.Runtime.CompilerServices.CallerMemberName] string operation = "Unknown method")
+        {
+            if (httpOperationResponse?.Response == null)
+            {
+                throw new DocumentGenerationException($"{operation}: Failed.");
+            }
+
+            if (httpOperationResponse.Response.StatusCode == HttpStatusCode.OK)
+            {
+                if (httpOperationResponse.Response.Content == null)
+                {
+                    return Task.FromResult(Stream.Null);
+                }
+
+                return httpOperationResponse.Response.Content.ReadAsStreamAsync();
+            }
+
+            if (httpOperationResponse.Response.Content == null)
+            {
+                throw new DocumentGenerationException(
+                    $"{operation}: {httpOperationResponse.Response.ReasonPhrase}");
+            }
+
+            var content = httpOperationResponse.Response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            throw new DocumentGenerationException(
+                $"{operation}: {httpOperationResponse.Response.ReasonPhrase}: {content}");
         }
 
         internal static DocumentGenerationException DocumentGenerationThrow(

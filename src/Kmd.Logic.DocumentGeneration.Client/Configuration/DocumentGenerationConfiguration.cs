@@ -33,6 +33,8 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
 
         public IList<string> LevelNames { get; set; }
 
+        public string MetadataFilenameExtension { get; set; }
+
         public bool HasLicense { get; set; }
 
         internal DocumentGenerationConfiguration(InternalClient internalClient, Guid subscriptionId, Guid configurationId)
@@ -48,9 +50,10 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
             Guid subscriptionId,
             string name,
             string[] levelNames,
-            bool hasLicense)
+            bool hasLicense,
+            string metadataFilenameExtension)
         {
-            return new DocumentGenerationConfiguration(internalClient, subscriptionId, name, levelNames, hasLicense);
+            return new DocumentGenerationConfiguration(internalClient, subscriptionId, name, levelNames, hasLicense, metadataFilenameExtension);
         }
 
         private DocumentGenerationConfiguration(
@@ -58,13 +61,15 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
             Guid subscriptionId,
             string name,
             string[] levelNames,
-            bool hasLicense)
+            bool hasLicense,
+            string metadataFilenameExtension)
         {
             this.InternalClient = internalClient;
             this.SubscriptionId = subscriptionId;
             this.Name = name;
             this.LevelNames = levelNames;
             this.HasLicense = hasLicense;
+            this.MetadataFilenameExtension = metadataFilenameExtension;
         }
 
         public void Save()
@@ -96,7 +101,8 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
                     new UpdateConfigurationRequest(
                         this.Name,
                         this.HasLicense,
-                        this.LevelNames))
+                        this.LevelNames,
+                        this.MetadataFilenameExtension))
                 .ValidateBody();
             this.TemplateStorageDirectory.Save(serverDocumentGenerationConfigurationSkeleton.TemplateStorageDirectory);
         }
@@ -194,6 +200,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
             this.SubscriptionId = documentGenerationConfigurationSummary.SubscriptionId;
             this.Name = documentGenerationConfigurationSummary.Name;
             this.LevelNames = new List<string>(documentGenerationConfigurationSummary.LevelNames);
+            this.MetadataFilenameExtension = documentGenerationConfigurationSummary.MetadataFilenameExtension;
             this.HasLicense = documentGenerationConfigurationSummary.HasLicense;
         }
     }
