@@ -95,6 +95,8 @@ namespace Kmd.Logic.DocumentGeneration.Client.GenerationSample
                             continue;
                         }
 
+                        await GetMetaDataForTemplate(documentGenerationClient, configurationId, template, hierarchyPath).ConfigureAwait(false);
+
                         foreach (var format in allFormats)
                         {
                             var documentDetails = new GeneratedDocumentDetails
@@ -325,6 +327,36 @@ namespace Kmd.Logic.DocumentGeneration.Client.GenerationSample
             }
 
             DiagnosticLog($"Generated document of links written to {filename}");
+        }
+
+        private static async Task GetMetaDataForTemplate(
+            this DocumentGenerationClient documentGenerationClient,
+            Guid configurationId,
+            DocumentGenerationTemplate template,
+            string hierarchyPath)
+        {
+            try
+            {
+                var stream =
+                    await documentGenerationClient.GetMetadata(
+                        configurationId,
+                        template.TemplateId,
+                        template.Languages?.FirstOrDefault() ?? string.Empty,
+                        hierarchyPath).ConfigureAwait(false);
+                if (stream != Stream.Null)
+                {
+                    var metadataFilename =
+                        GetTempFilename("Metadata_for_" + template.TemplateId, "json");
+                    await using var fs = new FileStream(metadataFilename, FileMode.Create, FileAccess.Write, FileShare.None);
+                    await stream.CopyToAsync(fs).ConfigureAwait(false);
+                    DiagnosticLog(
+                        $"Metadata for {template.TemplateId} written to {metadataFilename}");
+                }
+            }
+            catch (DocumentGenerationException d)
+            {
+                DiagnosticLog($"No template metadata available: {d.Message}");
+            }
         }
 
         private static void DiagnosticLog(string message)

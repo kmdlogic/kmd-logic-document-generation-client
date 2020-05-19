@@ -594,5 +594,36 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// </param>
         Task<HttpOperationResponse<IList<Template>>> GetTemplatesWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, string hierarchyPath = default(string), string subject = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Gets metadata for a nominated template.
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// Identifier of Logic subscription.
+        /// </param>
+        /// <param name='configurationId'>
+        /// Identifier of configuration to use.
+        /// </param>
+        /// <param name='templateId'>
+        /// Identifier of the associated template.
+        /// </param>
+        /// <param name='language'>
+        /// Language code in ISO 639-2 format (e.g. en).
+        /// </param>
+        /// <param name='hierarchyPath'>
+        /// The hierarchy of possible template sources not including the master
+        /// location.
+        /// For example, if you have a customer "A0001" with a department
+        /// "B0001" then the hierarchy path would be "A0001\B0001".
+        /// If the department has no template source configured then the
+        /// customers templates will be used.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> GetMetadataWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, string templateId = default(string), string language = default(string), string hierarchyPath = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
     }
 }

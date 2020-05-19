@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Kmd.Logic.DocumentGeneration.Client.Configuration.TemplateStorageConfigurations;
-using Kmd.Logic.DocumentGeneration.Client.Models;
 using Kmd.Logic.DocumentGeneration.Client.ModelTranslator;
 using Kmd.Logic.DocumentGeneration.Client.ServiceMessages;
 using Kmd.Logic.DocumentGeneration.Client.Types;
@@ -235,6 +236,18 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
                     .ValidateBody()
                     ?.Select(t => t.ToDocumentGenerationTemplate())
                     .ToArray();
+        }
+
+        public async Task<Stream> GetMetadata(string templateId, string twoLetterIsoLanguageName)
+        {
+            var response =
+                await this.InternalClient.GetMetadataWithHttpMessagesAsync(
+                    this.SubscriptionId,
+                    this.ConfigurationId,
+                    templateId,
+                    twoLetterIsoLanguageName,
+                    this.HierarchyPath.ToString());
+            return await response.ValidateContentStream().ConfigureAwait(false);
         }
 
         public DocumentGenerationProgress RequestDocumentGeneration(string templateId, string twoLetterIsoLanguageName, DocumentFormat documentFormat, JObject mergeData, Uri callbackUrl, bool debug)

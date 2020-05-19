@@ -100,6 +100,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                 // Update the existing configuration
                 documentGenerationConfiguration.Name = "ConfigurationSample Name";
                 documentGenerationConfiguration.LevelNames = new[] { "one", "two" };
+                documentGenerationConfiguration.MetadataFilenameExtension = "json";
 
                 // Create a root directory for this configuration
                 var rootTemplateStorageDirectory =
@@ -170,12 +171,33 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                         throw new Exception("Finishing prematurely");
                     }
 
+                    var language = template.Languages.FirstOrDefault() ?? string.Empty;
+
+                    // Get the template metadata if it exists
+                    try
+                    {
+                        var metadataStream =
+                            await templateDirectory.GetMetadata(BasicWordTemplateId, language)
+                                .ConfigureAwait(false);
+                        var metadataFilename = GetTempFilename("Metadata_for_" + BasicWordTemplateId, "json");
+                        await using (var fs = new FileStream(metadataFilename, FileMode.Create, FileAccess.Write, FileShare.None))
+                        {
+                            await metadataStream.CopyToAsync(fs).ConfigureAwait(false);
+                        }
+
+                        DiagnosticLog($"Template metadata written to {metadataFilename}");
+                    }
+                    catch (DocumentGenerationException d)
+                    {
+                        DiagnosticLog($"Unable to get template metadata: {d.Message}");
+                    }
+
                     // Request a document be generated using a template found in the templateDirectory or in ancestor directories
                     DiagnosticLog($"Requesting a document be generated using template {BasicWordTemplateId} found in {hierarchyPath} or in ancestor directories");
                     var documentGenerationRequestId =
                         templateDirectory.RequestDocumentGeneration(
                             template.TemplateId,
-                            template.Languages.FirstOrDefault() ?? string.Empty,
+                            language,
                             DocumentFormat.Docx,
                             mergeData,
                             null,

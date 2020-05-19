@@ -26,12 +26,13 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// Initializes a new instance of the
         /// DocumentGenerationConfigurationSummary class.
         /// </summary>
-        public DocumentGenerationConfigurationSummary(System.Guid? id = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), string name = default(string), bool? hasLicense = default(bool?), IList<string> levelNames = default(IList<string>), DocumentGenerationConfigurationEntrySummary templateStorageDirectory = default(DocumentGenerationConfigurationEntrySummary))
+        public DocumentGenerationConfigurationSummary(System.Guid? id = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), string name = default(string), bool? hasLicense = default(bool?), string metadataFilenameExtension = default(string), IList<string> levelNames = default(IList<string>), DocumentGenerationConfigurationEntrySummary templateStorageDirectory = default(DocumentGenerationConfigurationEntrySummary))
         {
             Id = id;
             SubscriptionId = subscriptionId;
             Name = name;
             HasLicense = hasLicense;
+            MetadataFilenameExtension = metadataFilenameExtension;
             LevelNames = levelNames;
             TemplateStorageDirectory = templateStorageDirectory;
             CustomInit();
@@ -61,6 +62,11 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// </summary>
         [JsonProperty(PropertyName = "hasLicense")]
         public bool? HasLicense { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "metadataFilenameExtension")]
+        public string MetadataFilenameExtension { get; set; }
 
         /// <summary>
         /// </summary>

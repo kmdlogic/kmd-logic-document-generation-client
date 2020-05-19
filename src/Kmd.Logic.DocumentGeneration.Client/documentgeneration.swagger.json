@@ -1462,6 +1462,64 @@
           }
         ]
       }
+    },
+    "/subscriptions/{subscriptionId}/document-generation/templates/{configurationId}/metadata": {
+      "get": {
+        "tags": [
+          "DocumentGeneration"
+        ],
+        "summary": "Gets metadata for a nominated template.",
+        "operationId": "GetMetadata",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Identifier of Logic subscription.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of configuration to use.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "templateId",
+            "in": "query",
+            "description": "Identifier of the associated template.",
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "Language code in ISO 639-2 format (e.g. en).",
+            "type": "string"
+          },
+          {
+            "name": "hierarchyPath",
+            "in": "query",
+            "description": "The hierarchy of possible template sources not including the master location. \r\nFor example, if you have a customer \"A0001\" with a department \"B0001\" then the hierarchy path would be \"A0001\\B0001\". \r\nIf the department has no template source configured then the customers templates will be used.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
     }
   },
   "definitions": {
@@ -1590,6 +1648,9 @@
         },
         "hasLicense": {
           "type": "boolean"
+        },
+        "metadataFilenameExtension": {
+          "type": "string"
         },
         "levelNames": {
           "type": "array",
@@ -1771,6 +1832,9 @@
           "items": {
             "type": "string"
           }
+        },
+        "metadataFilenameExtension": {
+          "type": "string"
         }
       }
     },
@@ -1788,6 +1852,9 @@
           "items": {
             "type": "string"
           }
+        },
+        "metadataFilenameExtension": {
+          "type": "string"
         }
       }
     },

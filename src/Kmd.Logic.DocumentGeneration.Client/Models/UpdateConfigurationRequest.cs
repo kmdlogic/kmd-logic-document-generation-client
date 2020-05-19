@@ -24,11 +24,12 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// <summary>
         /// Initializes a new instance of the UpdateConfigurationRequest class.
         /// </summary>
-        public UpdateConfigurationRequest(string name = default(string), bool? hasLicense = default(bool?), IList<string> levelNames = default(IList<string>))
+        public UpdateConfigurationRequest(string name = default(string), bool? hasLicense = default(bool?), IList<string> levelNames = default(IList<string>), string metadataFilenameExtension = default(string))
         {
             Name = name;
             HasLicense = hasLicense;
             LevelNames = levelNames;
+            MetadataFilenameExtension = metadataFilenameExtension;
             CustomInit();
         }
 
@@ -51,6 +52,11 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// </summary>
         [JsonProperty(PropertyName = "levelNames")]
         public IList<string> LevelNames { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "metadataFilenameExtension")]
+        public string MetadataFilenameExtension { get; set; }
 
     }
 }
