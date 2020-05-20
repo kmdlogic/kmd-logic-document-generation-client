@@ -22,6 +22,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
                                       "Found null SubscriptionId in DocumentGenerationConfigurationSummary");
             this.Name = documentGenerationConfigurationSummary.Name;
             this.LevelNames = new List<string>(documentGenerationConfigurationSummary.LevelNames);
+            this.MetadataFilenameExtension = documentGenerationConfigurationSummary.MetadataFilenameExtension;
             this.HasLicense = documentGenerationConfigurationSummary.HasLicense ?? false;
             this.TemplateStorageDirectory =
                 documentGenerationConfigurationSummary.TemplateStorageDirectory == null
@@ -40,6 +41,8 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
         internal bool HasLicense { get; set; }
 
         internal IReadOnlyList<string> LevelNames { get; set; }
+
+        internal string MetadataFilenameExtension { get; set; }
 
         internal DocumentGenerationTemplateStorageDirectorySkeleton TemplateStorageDirectory { get; set;  }
 

@@ -43,7 +43,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// <param name="configurationId">Identifier of document generation configuration to be used.</param>
         /// <param name="documentGenerationRequestDetails">Document generation parameters.</param>
         /// <returns>DocumentGenerationProgress object.</returns>
-        public async Task<DocumentGenerationProgress> RequestDocumentGeneration(
+        public Task<DocumentGenerationProgress> RequestDocumentGeneration(
             Guid configurationId,
             DocumentGenerationRequestDetails documentGenerationRequestDetails)
         {
@@ -51,10 +51,9 @@ namespace Kmd.Logic.DocumentGeneration.Client
             try
             {
                 var documentGenerationRequest =
-                    await this.Client.RequestDocumentGenerationWithHttpMessagesAsync(
+                    this.Client.RequestDocumentGenerationWithHttpMessagesAsync(
                             resolvedSubscriptionId,
-                            documentGenerationRequestDetails.ToWebRequest(configurationId))
-                        .ConfigureAwait(false);
+                            documentGenerationRequestDetails.ToWebRequest(configurationId));
                 return documentGenerationRequest.ValidateBody().ToDocumentGenerationProgress();
             }
             catch (HttpOperationException httpOperationException)
@@ -68,13 +67,13 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// </summary>
         /// <param name="documentGenerationRequestId">Identifier of request about which to return progress information.</param>
         /// <returns>Document generation request.</returns>
-        public async Task<DocumentGenerationProgress> GetDocumentGenerationProgress(Guid documentGenerationRequestId)
+        public Task<DocumentGenerationProgress> GetDocumentGenerationProgress(Guid documentGenerationRequestId)
         {
             var resolvedSubscriptionId = this.ResolveSubscriptionId();
             try
             {
                 var documentGenerationRequest =
-                    await this.Client.GetDocumentGenerationWithHttpMessagesAsync(resolvedSubscriptionId, documentGenerationRequestId).ConfigureAwait(false);
+                    this.Client.GetDocumentGenerationWithHttpMessagesAsync(resolvedSubscriptionId, documentGenerationRequestId);
                 return documentGenerationRequest.ValidateBody().ToDocumentGenerationProgress();
             }
             catch (HttpOperationException httpOperationException)
@@ -88,14 +87,14 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// </summary>
         /// <param name="documentGenerationRequestId">Identifier of request which document should be retuned.</param>
         /// <returns>DocumentUri of the generated document.</returns>
-        public async Task<DocumentGenerationUri> GetDocumentGenerationUri(Guid documentGenerationRequestId)
+        public Task<DocumentGenerationUri> GetDocumentGenerationUri(Guid documentGenerationRequestId)
         {
             var resolvedSubscriptionId = this.ResolveSubscriptionId();
             try
             {
                 var documentUri =
-                    await this.Client
-                        .GetDocumentWithHttpMessagesAsync(resolvedSubscriptionId, documentGenerationRequestId).ConfigureAwait(false);
+                    this.Client
+                        .GetDocumentWithHttpMessagesAsync(resolvedSubscriptionId, documentGenerationRequestId);
                 return documentUri.ValidateBody().ToDocumentGenerationUri();
             }
             catch (HttpOperationException httpOperationException)
@@ -142,8 +141,9 @@ namespace Kmd.Logic.DocumentGeneration.Client
                             configurationId,
                             hierarchyPath,
                             subject)
+                        .ValidateBody()
                         .ConfigureAwait(false);
-                return templates.ValidateBody().Select(t => t.ToDocumentGenerationTemplate()).ToArray();
+                return templates.Select(t => t.ToDocumentGenerationTemplate()).ToArray();
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -161,8 +161,10 @@ namespace Kmd.Logic.DocumentGeneration.Client
             try
             {
                 var configurations = await this.Client
-                    .GetAllConfigurationsWithHttpMessagesAsync(resolvedSubscriptionId).ConfigureAwait(false);
-                return configurations.ValidateBody().Select(c => c.ToDocumentGenerationConfigurationListItem());
+                    .GetAllConfigurationsWithHttpMessagesAsync(resolvedSubscriptionId)
+                    .ValidateBody()
+                    .ConfigureAwait(false);
+                return configurations.Select(c => c.ToDocumentGenerationConfigurationListItem());
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -175,12 +177,14 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// </summary>
         /// <param name="configurationId">Identifier of the configuration to return.</param>
         /// <returns>The requested document generation configuration object.</returns>
-        public DocumentGenerationConfiguration GetDocumentGenerationConfiguration(Guid configurationId)
+        public Task<DocumentGenerationConfiguration> GetDocumentGenerationConfiguration(Guid configurationId)
         {
             var resolvedSubscriptionId = this.ResolveSubscriptionId();
             try
             {
-                return new DocumentGenerationConfiguration(this.Client, resolvedSubscriptionId, configurationId);
+                var documentGenerationConfiguration =
+                    new DocumentGenerationConfiguration(this.Client, resolvedSubscriptionId, configurationId);
+                return documentGenerationConfiguration.Load();
             }
             catch (HttpOperationException httpOperationException)
             {
@@ -194,7 +198,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// <param name="configurationId">Identifier of the Document Generation Configuration.</param>
         /// <param name="documentConversionToPdfARequestDetails">Document conversion parameters.</param>
         /// <returns>DocumentGenerationProgress.</returns>
-        public async Task<DocumentGenerationProgress> RequestDocumentConversionToPdfA(
+        public Task<DocumentGenerationProgress> RequestDocumentConversionToPdfA(
             Guid configurationId,
             DocumentConversionToPdfARequestDetails documentConversionToPdfARequestDetails)
         {
@@ -202,9 +206,41 @@ namespace Kmd.Logic.DocumentGeneration.Client
             try
             {
                 var documentGenerationRequest =
-                    await this.Client.RequestDocumentConversionWithHttpMessagesAsync(resolvedSubscriptionId, documentConversionToPdfARequestDetails.ToWebRequest(configurationId))
-                        .ConfigureAwait(false);
+                    this.Client.RequestDocumentConversionWithHttpMessagesAsync(resolvedSubscriptionId, documentConversionToPdfARequestDetails.ToWebRequest(configurationId));
                 return documentGenerationRequest.ValidateBody().ToDocumentGenerationProgress();
+            }
+            catch (HttpOperationException httpOperationException)
+            {
+                throw httpOperationException.DocumentGenerationThrow();
+            }
+        }
+
+        /// <summary>
+        /// Gets metadata for a nominated template.
+        /// </summary>
+        /// <param name="configurationId">Identifier of configuration to use.</param>
+        /// <param name="templateId">Identifier of the associated template.</param>
+        /// <param name="language">Language code in ISO 639-2 format (e.g. en).</param>
+        /// <param name="hierarchyPath">
+        /// The hierarchy of possible template sources not including the master location.
+        /// For example, if you have a customer "A0001" with a department "B0001" then the hierarchy path would be "A0001\B0001".
+        /// If the department has no template source configured then the customers templates will be used.
+        /// </param>
+        /// <returns>The template metadata as an output stream.</returns>
+        public async Task<Stream> GetMetadata(Guid configurationId, string templateId, string language, string hierarchyPath)
+        {
+            var resolvedSubscriptionId = this.ResolveSubscriptionId();
+            try
+            {
+                var response =
+                    await this.Client.GetMetadataWithHttpMessagesAsync(
+                            resolvedSubscriptionId,
+                            configurationId,
+                            templateId,
+                            language,
+                            hierarchyPath)
+                        .ConfigureAwait(false);
+                return await response.ValidateContentStream().ConfigureAwait(false);
             }
             catch (HttpOperationException httpOperationException)
             {

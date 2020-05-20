@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Kmd.Logic.DocumentGeneration.Client.Configuration;
 using Kmd.Logic.DocumentGeneration.Client.Configuration.TemplateStorageConfigurations;
@@ -12,6 +14,14 @@ namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
 {
     internal static class ModelMarshaller
     {
+        internal static async Task<DocumentGenerationTemplateStorageDirectoryDetails> ToEntryDetails(
+            this Task<AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails> responseTask)
+        {
+            var response =
+                await responseTask.ConfigureAwait(false);
+            return response.ToEntryDetails();
+        }
+
         internal static DocumentGenerationTemplateStorageDirectoryDetails ToEntryDetails(
             this AzureBlobStorageConfigurationDocumentGenerationConfigurationEntryDetails response)
         {
@@ -23,6 +33,14 @@ namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
                 Name = response.Name,
                 TemplateStorageConfiguration = new AzureBlobTemplateStorage(response.TemplateStorageConfiguration),
             };
+        }
+
+        internal static async Task<DocumentGenerationProgress> ToDocumentGenerationProgress(
+            this Task<DocumentGenerationRequest> documentGenerationRequestTask)
+        {
+            var response =
+                await documentGenerationRequestTask.ConfigureAwait(false);
+            return response?.ToDocumentGenerationProgress();
         }
 
         internal static DocumentGenerationProgress ToDocumentGenerationProgress(
@@ -41,6 +59,14 @@ namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
                 Debug = documentGenerationRequest.Debug,
                 FailReason = documentGenerationRequest.FailReason,
             };
+        }
+
+        internal static async Task<DocumentGenerationUri> ToDocumentGenerationUri(
+            this Task<DocumentUri> documentGenerationUri)
+        {
+            var response =
+                await documentGenerationUri.ConfigureAwait(false);
+            return response?.ToDocumentGenerationUri();
         }
 
         internal static DocumentGenerationUri ToDocumentGenerationUri(this DocumentUri documentGenerationUri)
@@ -78,7 +104,16 @@ namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
                 templateStorageConfiguration.BlobPrefix);
         }
 
-        internal static DocumentGenerationTemplateStorageDirectoryDetails ToEntryDetails(this SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails response)
+        internal static async Task<DocumentGenerationTemplateStorageDirectoryDetails> ToEntryDetails(
+            this Task<SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails> responseTask)
+        {
+            var response =
+                await responseTask.ConfigureAwait(false);
+            return response.ToEntryDetails();
+        }
+
+        internal static DocumentGenerationTemplateStorageDirectoryDetails ToEntryDetails(
+            this SharePointOnlineTemplateStorageConfigurationDocumentGenerationConfigurationEntryDetails response)
         {
             return new DocumentGenerationTemplateStorageDirectoryDetails
             {
@@ -167,16 +202,16 @@ namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
         internal static CreateConfigurationRequest ToCreateConfigurationRequest(
             this DocumentGenerationConfiguration documentGenerationConfiguration)
         {
-            return new CreateConfigurationRequest(documentGenerationConfiguration.Name, documentGenerationConfiguration.HasLicense, documentGenerationConfiguration.LevelNames?.ToList());
+            return new CreateConfigurationRequest(documentGenerationConfiguration.Name, documentGenerationConfiguration.HasLicense, documentGenerationConfiguration.LevelNames?.ToList(), documentGenerationConfiguration.MetadataFilenameExtension);
         }
 
         internal static UpdateConfigurationRequest ToUpdateConfigurationRequest(
             this DocumentGenerationConfiguration documentGenerationConfiguration)
         {
-            return new UpdateConfigurationRequest(documentGenerationConfiguration.Name, documentGenerationConfiguration.HasLicense, documentGenerationConfiguration.LevelNames?.ToList());
+            return new UpdateConfigurationRequest(documentGenerationConfiguration.Name, documentGenerationConfiguration.HasLicense, documentGenerationConfiguration.LevelNames?.ToList(), documentGenerationConfiguration.MetadataFilenameExtension);
         }
 
-        internal static DocumentGenerationTemplateStorageDirectoryDetails GetEntryDetailsFromServer(
+        internal static Task<DocumentGenerationTemplateStorageDirectoryDetails> GetEntryDetailsFromServer(
             this DocumentGenerationTemplateStorageDirectorySkeleton entrySkeleton)
         {
             var templateStorageType = entrySkeleton.TemplateStorageType;
@@ -206,24 +241,30 @@ namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
             return documentGenerationEntryDetails;
         }
 
-        internal static void DeleteEntryOnServer(
+        internal static Task DeleteEntryOnServer(
             this DocumentGenerationTemplateStorageDirectorySkeleton entrySkeleton)
         {
             switch (entrySkeleton.TemplateStorageType)
             {
                 case TemplateStorageType.AzureBlobStorage:
-                    entrySkeleton.InternalClient.DeleteAzureBlobEntryAtId(entrySkeleton.SubscriptionId, entrySkeleton.ConfigurationId, entrySkeleton.Id);
-                    break;
+                    return entrySkeleton.InternalClient.DeleteAzureBlobEntryAtIdWithHttpMessagesAsync(
+                        entrySkeleton.SubscriptionId,
+                        entrySkeleton.ConfigurationId,
+                        entrySkeleton.Id);
                 case TemplateStorageType.SharePointOnline:
-                    entrySkeleton.InternalClient.DeleteSharePointOnlineEntryAtId(entrySkeleton.SubscriptionId, entrySkeleton.ConfigurationId, entrySkeleton.Id);
-                    break;
+                    return entrySkeleton.InternalClient.DeleteSharePointOnlineEntryAtIdWithHttpMessagesAsync(
+                        entrySkeleton.SubscriptionId,
+                        entrySkeleton.ConfigurationId,
+                        entrySkeleton.Id);
                 default:
-                    entrySkeleton.InternalClient.DeleteAzureBlobEntryAtId(entrySkeleton.SubscriptionId, entrySkeleton.ConfigurationId, entrySkeleton.Id);
-                    break;
+                    return entrySkeleton.InternalClient.DeleteAzureBlobEntryAtIdWithHttpMessagesAsync(
+                        entrySkeleton.SubscriptionId,
+                        entrySkeleton.ConfigurationId,
+                        entrySkeleton.Id);
             }
         }
 
-        internal static DocumentGenerationTemplateStorageDirectoryDetails UpdateEntryOnServer(
+        internal static Task<DocumentGenerationTemplateStorageDirectoryDetails> UpdateEntryOnServer(
             this DocumentGenerationTemplateStorageDirectory entry,
             DocumentGenerationTemplateStorageDirectorySkeleton serverSkeleton)
         {
@@ -261,7 +302,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
             }
         }
 
-        internal static DocumentGenerationTemplateStorageDirectoryDetails CreateEntryOnServer(this DocumentGenerationTemplateStorageDirectory entry)
+        internal static Task<DocumentGenerationTemplateStorageDirectoryDetails> CreateEntryOnServer(this DocumentGenerationTemplateStorageDirectory entry)
         {
             var parentHierarchyPathString = entry.ParentHierarchyPath.ToString();
             switch (entry.TemplateStorageConfiguration.TemplateStorageType)
@@ -297,7 +338,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
             }
         }
 
-        internal static T ValidateBody<T>(
+        internal static async Task<T> ValidateBody<T>(
             this IHttpOperationResponse<T> httpOperationResponse,
             [System.Runtime.CompilerServices.CallerMemberName] string operation = "Unknown method")
         {
@@ -317,17 +358,73 @@ namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
                     $"{operation}: {httpOperationResponse.Response.ReasonPhrase}");
             }
 
-            var content = httpOperationResponse.Response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            var content = await httpOperationResponse.Response.Content.ReadAsStringAsync().ConfigureAwait(false);
             throw new DocumentGenerationException(
                 $"{operation}: {httpOperationResponse.Response.ReasonPhrase}: {content}");
         }
 
-        internal static T ValidateBody<T>(
+        internal static async Task<T> ValidateBody<T>(
             this Task<HttpOperationResponse<T>> httpOperationResponseTask,
             [System.Runtime.CompilerServices.CallerMemberName] string operation = "Unknown method")
         {
-            var httpOperationResponse = httpOperationResponseTask.GetAwaiter().GetResult();
-            return httpOperationResponse.ValidateBody(operation);
+            var httpOperationResponse = await httpOperationResponseTask.ConfigureAwait(false);
+            return await httpOperationResponse.ValidateBody(operation).ConfigureAwait(false);
+        }
+
+        internal static async Task<Stream> ValidateContentStream(
+            this HttpOperationResponse httpOperationResponse,
+            [System.Runtime.CompilerServices.CallerMemberName] string operation = "Unknown method")
+        {
+            if (httpOperationResponse?.Response == null)
+            {
+                throw new DocumentGenerationException($"{operation}: Failed.");
+            }
+
+            if (httpOperationResponse.Response.StatusCode == HttpStatusCode.OK)
+            {
+                if (httpOperationResponse.Response.Content == null)
+                {
+                    return Stream.Null;
+                }
+
+                return await httpOperationResponse.Response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            }
+
+            if (httpOperationResponse.Response.Content == null)
+            {
+                throw new DocumentGenerationException(
+                    $"{operation}: {httpOperationResponse.Response.ReasonPhrase}");
+            }
+
+            var content = await httpOperationResponse.Response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            throw new DocumentGenerationException(
+                $"{operation}: {httpOperationResponse.Response.ReasonPhrase}: {content}");
+        }
+
+        internal static async Task ValidateResponse(
+            this Task<HttpOperationResponse> httpOperationResponseTask,
+            [System.Runtime.CompilerServices.CallerMemberName] string operation = "Unknown method")
+        {
+            var response = await httpOperationResponseTask.ConfigureAwait(false);
+            if (response?.Response == null)
+            {
+                throw new DocumentGenerationException($"{operation}: Failed.");
+            }
+
+            if (response.Response.StatusCode == HttpStatusCode.OK)
+            {
+                return;
+            }
+
+            if (response.Response.Content == null)
+            {
+                throw new DocumentGenerationException(
+                    $"{operation}: {response.Response.ReasonPhrase}");
+            }
+
+            var content = await response.Response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            throw new DocumentGenerationException(
+                $"{operation}: {response.Response.ReasonPhrase}: {content}");
         }
 
         internal static DocumentGenerationException DocumentGenerationThrow(

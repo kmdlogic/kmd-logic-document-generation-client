@@ -95,11 +95,12 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                 // Get an existing document generation configuration of template storage directories
                 DiagnosticLog("Getting a document generation template storage configuration.");
                 var documentGenerationConfiguration =
-                    documentGenerationClient.GetDocumentGenerationConfiguration(configurationId);
+                    await documentGenerationClient.GetDocumentGenerationConfiguration(configurationId).ConfigureAwait(false);
 
                 // Update the existing configuration
                 documentGenerationConfiguration.Name = "ConfigurationSample Name";
                 documentGenerationConfiguration.LevelNames = new[] { "one", "two" };
+                documentGenerationConfiguration.MetadataFilenameExtension = "json";
 
                 // Create a root directory for this configuration
                 var rootTemplateStorageDirectory =
@@ -112,13 +113,15 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                 // so they'll all resolve to the same place server side.
                 foreach (var childKey in new[] { "schoolone", "schooltwo" })
                 {
-                    var childEntry = rootTemplateStorageDirectory.AddChild(documentGenerationConfiguration.CreateDocumentGenerationTemplateStorageDirectory(
-                        childKey,
-                        $"school {childKey}",
-                        sampleTemplateStorageConfiguration));
+                    var childEntry =
+                        rootTemplateStorageDirectory.AddChild(
+                            documentGenerationConfiguration.CreateDocumentGenerationTemplateStorageDirectory(
+                                childKey,
+                                $"school {childKey}",
+                                sampleTemplateStorageConfiguration));
                     foreach (var grandChildKey in new[] { "A", "B", "C" })
                     {
-                        var grandChild = childEntry.AddChild(
+                        childEntry.AddChild(
                             grandChildKey,
                             $"dept {grandChildKey}",
                             sampleTemplateStorageConfiguration);
@@ -128,7 +131,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                 // Save the created configuration to the Logic server
                 {
                     DiagnosticLog("Saving the rebuilt document generation template storage configuration.");
-                    documentGenerationConfiguration.Save();
+                    await documentGenerationConfiguration.Save().ConfigureAwait(false);
                     DiagnosticLog("Document generation template storage configuration uploaded.");
                 }
 
@@ -137,7 +140,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                 {
                     DiagnosticLog("Downloading the saved document generation template storage configuration.");
                     documentGenerationConfiguration =
-                        documentGenerationClient.GetDocumentGenerationConfiguration(documentGenerationConfiguration.Id);
+                        await documentGenerationClient.GetDocumentGenerationConfiguration(documentGenerationConfiguration.Id).ConfigureAwait(false);
                     DiagnosticLog($"Document generation template storage configuration \"{documentGenerationConfiguration.Name}\" downloaded.");
                 }
 
@@ -148,7 +151,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                     var modifyThisTemplateDirectory =
                         documentGenerationConfiguration.FindDirectoryByPath(new HierarchyPath(new[] { string.Empty, "schooltwo", "B" }));
                     modifyThisTemplateDirectory.Key = "BModified";
-                    documentGenerationConfiguration.Save();
+                    await documentGenerationConfiguration.Save().ConfigureAwait(false);
                     DiagnosticLog($"Document generation template storage configuration \"{documentGenerationConfiguration.Name}\" modified and uploaded.");
                 }
 
@@ -160,7 +163,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                 {
                     // Get all the templates relative to that template directory and ancestor directories
                     var templates =
-                        templateDirectory.GetTemplates(subject)
+                        (await templateDirectory.GetTemplates(subject).ConfigureAwait(false))
                             .ToDictionary(t => t.TemplateId, t => t);
 
                     // If the template we're interested in hasn't been uploaded to the storage area, don't continue.
@@ -170,16 +173,39 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                         throw new Exception("Finishing prematurely");
                     }
 
+                    var language = template.Languages.FirstOrDefault() ?? string.Empty;
+
+                    // Get the template metadata if it exists
+                    try
+                    {
+                        var metadataStream =
+                            await templateDirectory.GetMetadata(BasicWordTemplateId, language)
+                                .ConfigureAwait(false);
+                        var metadataFilename = GetTempFilename("Metadata_for_" + BasicWordTemplateId, "json");
+                        await using (var fs = new FileStream(metadataFilename, FileMode.Create, FileAccess.Write, FileShare.None))
+                        {
+                            await metadataStream.CopyToAsync(fs).ConfigureAwait(false);
+                        }
+
+                        DiagnosticLog($"Template metadata written to {metadataFilename}");
+                    }
+                    catch (DocumentGenerationException d)
+                    {
+                        DiagnosticLog($"Unable to get template metadata: {d.Message}");
+                    }
+
                     // Request a document be generated using a template found in the templateDirectory or in ancestor directories
                     DiagnosticLog($"Requesting a document be generated using template {BasicWordTemplateId} found in {hierarchyPath} or in ancestor directories");
-                    var documentGenerationRequestId =
-                        templateDirectory.RequestDocumentGeneration(
+                    var documentGenerationProgress =
+                        await templateDirectory.RequestDocumentGeneration(
                             template.TemplateId,
-                            template.Languages.FirstOrDefault() ?? string.Empty,
+                            language,
                             DocumentFormat.Docx,
                             mergeData,
                             null,
-                            false)?.Id;
+                            false)
+                            .ConfigureAwait(false);
+                    var documentGenerationRequestId = documentGenerationProgress?.Id;
 
                     Uri downloadLink;
 
@@ -191,7 +217,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
 
                     try
                     {
-                        downloadLink = PollForProgress(documentGenerationConfiguration, documentGenerationRequestId.Value);
+                        downloadLink = await PollForProgress(documentGenerationConfiguration, documentGenerationRequestId.Value).ConfigureAwait(false);
                     }
                     catch (Exception e)
                     {
@@ -210,17 +236,17 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
 
                     // Request the new document be converted to Pdf/A
                     DiagnosticLog($"Requesting the generated document be converted to Pdf/A");
-                    var converstionRequestId =
-                        documentGenerationConfiguration.RequestDocumentConversionToPdfA(
-                            new DocumentConversionToPdfARequestDetails(
-                                downloadLink,
-                                DocumentFormat.Docx,
-                                null,
-                                false))?.Id;
+                    var conversionProgress =
+                        await documentGenerationConfiguration.RequestDocumentConversionToPdfA(
+                                new DocumentConversionToPdfARequestDetails(
+                                    downloadLink,
+                                    DocumentFormat.Docx))
+                            .ConfigureAwait(false);
+                    var conversionProgressId = conversionProgress?.Id;
 
                     Uri convertedDocumentDownloadLink;
 
-                    if (converstionRequestId == null)
+                    if (conversionProgressId == null)
                     {
                         DiagnosticLog($"Unable to request document conversion");
                         throw new Exception("Finishing prematurely");
@@ -229,7 +255,9 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                     {
                         try
                         {
-                            convertedDocumentDownloadLink = PollForProgress(documentGenerationConfiguration, converstionRequestId.Value);
+                            convertedDocumentDownloadLink =
+                                await PollForProgress(documentGenerationConfiguration, conversionProgressId.Value)
+                                    .ConfigureAwait(false);
                         }
                         catch (Exception e)
                         {
@@ -255,7 +283,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
         }
 
         // poll for the status of the document preparation process
-        private static Uri PollForProgress(
+        private static async Task<Uri> PollForProgress(
             DocumentGenerationConfiguration documentGenerationConfiguration,
             Guid documentGenerationRequestId)
         {
@@ -264,7 +292,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
             while (stopWatch.Elapsed.TotalSeconds < secondsToTimesUp)
             {
                 var documentGenerationProgress =
-                    documentGenerationConfiguration.GetDocumentGenerationProgress(documentGenerationRequestId);
+                    await documentGenerationConfiguration.GetDocumentGenerationProgress(documentGenerationRequestId).ConfigureAwait(false);
                 switch (documentGenerationProgress.State)
                 {
                     case DocumentGenerationState.Failed:
@@ -280,7 +308,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                 }
 
                 var documentGenerationUri =
-                    documentGenerationConfiguration.GetDocumentGenerationUri(documentGenerationRequestId);
+                    await documentGenerationConfiguration.GetDocumentGenerationUri(documentGenerationRequestId).ConfigureAwait(false);
 
                 if (documentGenerationUri?.Uri != null)
                 {
