@@ -19,16 +19,22 @@ To create a Document Generation Configuration click on the `ADD CONFIGURATION` b
 
 You will be then presented with the following screen:
 
-![Image of Logic Console Create Document Generation Configuration screen](./assets/image003.jpg)
+![Image of Logic Console Create Document Generation Configuration screen](./assets/image003.jpg?v=2)
 
 The screen is divided in two sections, the `Configuration Settings` and the `Master Storage Settings`, we will explain them below in detail.
 
 ### Configuration Settings
 
-![Image of Logic Console Create Document Generation Configuration - Settings](./assets/image004.jpg)
+![Image of Logic Console Create Document Generation Configuration - Settings](./assets/image004.jpg?v=2)
 
 - Configuration name:  
 _(Required)_ The configuration name, any non-empty string is valid.
+
+- Companion template metadata file extension:  
+_(Default value)_ `json`.  
+_(Optional)_ The extension of the file in your template storage that will be used to pair your templates with their corresponding metadata.  
+E.g. given a template `template.docx`, the companion template metadata file would be `template.json`.  
+
 
 - ASPOSE license switch:  
 _(Required)_ In order to use `Logic Document Generation` your team needs to have a valid ASPOSE license. Toggle this switch on to acknowledge that.
@@ -112,12 +118,12 @@ _(Optional)_ Your Azure Blob Storage blob prefix.
 ### Persisting your changes
 After filling out the details for your configuration and its master storage the `Save` button underneath will get enabled, like so:
 
-![Image of Logic Console Create Document Generation Configuration - Completed](./assets/image007.jpg)
+![Image of Logic Console Create Document Generation Configuration - Completed](./assets/image007.jpg?v=2)
 
 Just click the `Save` button and you'll be all set.
 
 
-![Image of Logic Console Create Document Generation Configuration - Edit mode](./assets/image008.jpg)
+![Image of Logic Console Create Document Generation Configuration - Edit mode](./assets/image008.jpg?v=2)
 
 
 ## Configuration entries
