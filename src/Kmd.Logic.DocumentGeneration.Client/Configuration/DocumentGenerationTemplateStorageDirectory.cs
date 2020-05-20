@@ -60,7 +60,6 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
             this.Id = documentGenerationTemplateStorageDirectorySkeleton.Id;
             this.Children = null;
             this._parentEntry = parentEntry;
-            this.Load(documentGenerationTemplateStorageDirectorySkeleton);
         }
 
         internal static DocumentGenerationTemplateStorageDirectory Create(
@@ -112,23 +111,19 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
 
         public HierarchyPath ParentHierarchyPath => this._parentEntry?.HierarchyPath ?? new HierarchyPath(Array.Empty<string>());
 
-        internal void Save(DocumentGenerationTemplateStorageDirectorySkeleton serverDocumentGenerationTemplateStorageDirectorySkeleton)
+        internal async Task Save(DocumentGenerationTemplateStorageDirectorySkeleton serverDocumentGenerationTemplateStorageDirectorySkeleton)
         {
             if (serverDocumentGenerationTemplateStorageDirectorySkeleton == null)
             {
-                var details = this.CreateEntryOnServer();
+                var details = await this.CreateEntryOnServer().ConfigureAwait(false);
                 this.Id = details.Id;
             }
             else
             {
-                var details = this.UpdateEntryOnServer(serverDocumentGenerationTemplateStorageDirectorySkeleton);
+                var details = await this.UpdateEntryOnServer(serverDocumentGenerationTemplateStorageDirectorySkeleton).ConfigureAwait(false);
                 this.Id = details.Id;
             }
 
-            var serverChildrenLookupByKey =
-                serverDocumentGenerationTemplateStorageDirectorySkeleton?.Children
-                    .ToDictionary(s => s.Key, s => s)
-                ?? new Dictionary<string, DocumentGenerationTemplateStorageDirectorySkeleton>();
             var serverChildrenLookupById =
                 serverDocumentGenerationTemplateStorageDirectorySkeleton?.Children
                     .ToDictionary(s => s.Id, s => s)
@@ -145,7 +140,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
                 var serverKey = serverChildPair.Value.Key;
                 if (!hereChildrenIds.Contains(serverId))
                 {
-                    serverChildPair.Value.DeleteOnServer();
+                    await serverChildPair.Value.DeleteOnServer().ConfigureAwait(false);
                     deletedOnServer[serverId] = serverChildPair.Value;
                     continue;
                 }
@@ -154,7 +149,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
                 {
                     if (hereChildClashingKey.Id != serverId)
                     {
-                        serverChildPair.Value.DeleteOnServer();
+                        await serverChildPair.Value.DeleteOnServer().ConfigureAwait(false);
                         deletedOnServer[serverId] = serverChildPair.Value;
                     }
                 }
@@ -167,13 +162,14 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
 
             foreach (var hereChildPair in hereChildrenLookupByKey)
             {
-                hereChildPair.Value.Save(serverChildrenLookupById.TryGetValue(hereChildPair.Value.Id, out var entrySkeleton)
+                await hereChildPair.Value.Save(serverChildrenLookupById.TryGetValue(hereChildPair.Value.Id, out var entrySkeleton)
                     ? entrySkeleton
-                    : null);
+                    : null)
+                    .ConfigureAwait(false);
             }
         }
 
-        internal void Load(
+        internal async Task Load(
             DocumentGenerationTemplateStorageDirectorySkeleton documentGenerationTemplateStorageDirectorySkeleton)
         {
             if (documentGenerationTemplateStorageDirectorySkeleton.IsDeprecated())
@@ -183,7 +179,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
             }
 
             var documentGenerationEntryDetails =
-                documentGenerationTemplateStorageDirectorySkeleton.GetEntryDetailsFromServer();
+                await documentGenerationTemplateStorageDirectorySkeleton.GetEntryDetailsFromServer().ConfigureAwait(false);
             this.UpdateProperties(documentGenerationEntryDetails);
 
             var refreshedChildren = new List<DocumentGenerationTemplateStorageDirectory>();
@@ -193,11 +189,12 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
                 var child = this._children.FirstOrDefault(c => c.Key == childEntrySkeleton.Key);
                 if (child != null)
                 {
-                    child.Load(childEntrySkeleton);
+                    await child.Load(childEntrySkeleton).ConfigureAwait(false);
                 }
                 else
                 {
                     child = new DocumentGenerationTemplateStorageDirectory(this._documentGenerationConfiguration, this, childEntrySkeleton);
+                    await child.Load(childEntrySkeleton).ConfigureAwait(false);
                 }
 
                 refreshedChildren.Add(child);
@@ -229,13 +226,14 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
                     .FirstOrDefault(c => c != null);
         }
 
-        public IEnumerable<DocumentGenerationTemplate> GetTemplates(string subject)
+        public async Task<IEnumerable<DocumentGenerationTemplate>> GetTemplates(string subject)
         {
-            return
+            var templatesList = await
                 this.InternalClient.GetTemplatesWithHttpMessagesAsync(this.SubscriptionId, this.ConfigurationId, this.HierarchyPath.ToString(), subject)
                     .ValidateBody()
-                    ?.Select(t => t.ToDocumentGenerationTemplate())
-                    .ToArray();
+                    .ConfigureAwait(false);
+            return templatesList?.Select(t => t.ToDocumentGenerationTemplate())
+                .ToArray();
         }
 
         public async Task<Stream> GetMetadata(string templateId, string twoLetterIsoLanguageName)
@@ -250,9 +248,9 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
             return await response.ValidateContentStream().ConfigureAwait(false);
         }
 
-        public DocumentGenerationProgress RequestDocumentGeneration(string templateId, string twoLetterIsoLanguageName, DocumentFormat documentFormat, JObject mergeData, Uri callbackUrl, bool debug)
+        public Task<DocumentGenerationProgress> RequestDocumentGeneration(string templateId, string twoLetterIsoLanguageName, DocumentFormat documentFormat, JObject mergeData, Uri callbackUrl, bool debug)
         {
-            return
+            var internalDocumentGenerationRequest =
                 this.InternalClient.RequestDocumentGenerationWithHttpMessagesAsync(
                         this.SubscriptionId,
                         new DocumentGenerationRequestDetails(
@@ -264,8 +262,9 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
                                 callbackUrl,
                                 debug)
                             .ToWebRequest(this.ConfigurationId))
-                    .ValidateBody()
-                    ?.ToDocumentGenerationProgress();
+                    .ValidateBody();
+            return internalDocumentGenerationRequest
+                .ToDocumentGenerationProgress();
         }
 
         public Guid SubscriptionId => this._documentGenerationConfiguration.SubscriptionId;

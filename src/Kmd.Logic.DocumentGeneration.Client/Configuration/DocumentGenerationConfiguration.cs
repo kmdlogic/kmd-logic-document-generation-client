@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Kmd.Logic.DocumentGeneration.Client.Configuration.TemplateStorageConfigurations;
 using Kmd.Logic.DocumentGeneration.Client.Models;
 using Kmd.Logic.DocumentGeneration.Client.ModelTranslator;
@@ -42,7 +43,6 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
             this.InternalClient = internalClient;
             this.SubscriptionId = subscriptionId;
             this.Id = configurationId;
-            this.Load();
         }
 
         internal static DocumentGenerationConfiguration Create(
@@ -72,7 +72,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
             this.MetadataFilenameExtension = metadataFilenameExtension;
         }
 
-        public void Save()
+        public async Task Save()
         {
             if (this.TemplateStorageDirectory == null)
             {
@@ -83,9 +83,10 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
             if (this.Id != Guid.Empty)
             {
                 serverDocumentGenerationConfigurationSummary =
-                    this.InternalClient
+                    await this.InternalClient
                         .GetConfigurationSummaryByIdWithHttpMessagesAsync(this.SubscriptionId, this.Id)
-                        .ValidateBody();
+                        .ValidateBody()
+                        .ConfigureAwait(false);
             }
 
             if (serverDocumentGenerationConfigurationSummary == null)
@@ -95,7 +96,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
 
             var serverDocumentGenerationConfigurationSkeleton = new DocumentGenerationConfigurationSkeleton(this.InternalClient, serverDocumentGenerationConfigurationSummary, true);
             this.Id = serverDocumentGenerationConfigurationSkeleton.Id;
-            this.InternalClient.UpdateDocumentGenerationConfigurationWithHttpMessagesAsync(
+            await this.InternalClient.UpdateDocumentGenerationConfigurationWithHttpMessagesAsync(
                     this.SubscriptionId,
                     this.Id,
                     new UpdateConfigurationRequest(
@@ -103,16 +104,18 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
                         this.HasLicense,
                         this.LevelNames,
                         this.MetadataFilenameExtension))
-                .ValidateBody();
-            this.TemplateStorageDirectory.Save(serverDocumentGenerationConfigurationSkeleton.TemplateStorageDirectory);
+                .ValidateBody()
+                .ConfigureAwait(false);
+            await this.TemplateStorageDirectory.Save(serverDocumentGenerationConfigurationSkeleton.TemplateStorageDirectory).ConfigureAwait(false);
         }
 
-        public void Load()
+        public async Task<DocumentGenerationConfiguration> Load()
         {
             var serverDocumentGenerationConfigurationSummary =
-                this.InternalClient
+                await this.InternalClient
                     .GetConfigurationSummaryByIdWithHttpMessagesAsync(this.SubscriptionId, this.Id)
-                    .ValidateBody();
+                    .ValidateBody()
+                    .ConfigureAwait(false);
 
             var documentGenerationConfigurationSkeleton = new DocumentGenerationConfigurationSkeleton(this.InternalClient, serverDocumentGenerationConfigurationSummary, false);
             this.UpdateProperties(documentGenerationConfigurationSkeleton);
@@ -122,22 +125,29 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
                 var entryId = documentGenerationConfigurationEntrySkeleton.Id;
                 if (this.TemplateStorageDirectory != null && this.TemplateStorageDirectory.Id == entryId)
                 {
-                    this.TemplateStorageDirectory.Load(documentGenerationConfigurationEntrySkeleton);
+                    await this.TemplateStorageDirectory.Load(documentGenerationConfigurationEntrySkeleton).ConfigureAwait(false);
                 }
                 else
                 {
-                    this.TemplateStorageDirectory = new DocumentGenerationTemplateStorageDirectory(this, null, documentGenerationConfigurationEntrySkeleton);
+                    var templateStorageDirectory = new DocumentGenerationTemplateStorageDirectory(this, null, documentGenerationConfigurationEntrySkeleton);
+                    await templateStorageDirectory.Load(documentGenerationConfigurationEntrySkeleton).ConfigureAwait(false);
+                    this.TemplateStorageDirectory = templateStorageDirectory;
                 }
             }
             else
             {
                 this.TemplateStorageDirectory = null;
             }
+
+            return this;
         }
 
-        public void Delete()
+        public async Task Delete()
         {
-            this.InternalClient.DeleteDocumentGenerationConfiguration(this.SubscriptionId, this.Id);
+            await this.InternalClient
+                .DeleteDocumentGenerationConfigurationWithHttpMessagesAsync(this.SubscriptionId, this.Id)
+                .ValidateResponse()
+                .ConfigureAwait(false);
         }
 
         public DocumentGenerationTemplateStorageDirectory SetRootTemplateStorageDirectory(string name, ITemplateStorageConfiguration templateStorageConfiguration)
@@ -160,7 +170,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
             return this.TemplateStorageDirectory?.FindDirectoryByPath(path);
         }
 
-        public DocumentGenerationProgress GetDocumentGenerationProgress(Guid documentGenerationRequestId)
+        public Task<DocumentGenerationProgress> GetDocumentGenerationProgress(Guid documentGenerationRequestId)
         {
             var documentGenerationRequest =
                 this.InternalClient
@@ -169,16 +179,16 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
             return documentGenerationRequest.ToDocumentGenerationProgress();
         }
 
-        public DocumentGenerationUri GetDocumentGenerationUri(Guid documentGenerationRequestId)
+        public Task<DocumentGenerationUri> GetDocumentGenerationUri(Guid documentGenerationRequestId)
         {
             var documentUri =
                 this.InternalClient
                     .GetDocumentWithHttpMessagesAsync(this.SubscriptionId, documentGenerationRequestId)
                     .ValidateBody();
-            return documentUri?.ToDocumentGenerationUri();
+            return documentUri.ToDocumentGenerationUri();
         }
 
-        public DocumentGenerationProgress RequestDocumentConversionToPdfA(DocumentConversionToPdfARequestDetails documentConversionToPdfARequestDetails)
+        public Task<DocumentGenerationProgress> RequestDocumentConversionToPdfA(DocumentConversionToPdfARequestDetails documentConversionToPdfARequestDetails)
         {
             var documentGenerationRequest =
                 this.InternalClient.RequestDocumentConversionWithHttpMessagesAsync(this.SubscriptionId, documentConversionToPdfARequestDetails.ToWebRequest(this.Id))
@@ -186,7 +196,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
             return documentGenerationRequest.ToDocumentGenerationProgress();
         }
 
-        public DocumentGenerationProgress RequestDocumentConversion(DocumentConversionRequestDetails documentConversionRequestDetails)
+        public Task<DocumentGenerationProgress> RequestDocumentConversion(DocumentConversionRequestDetails documentConversionRequestDetails)
         {
             var documentGenerationRequest =
                 this.InternalClient.RequestDocumentConversionWithHttpMessagesAsync(this.SubscriptionId, documentConversionRequestDetails.ToWebRequest(this.Id))
