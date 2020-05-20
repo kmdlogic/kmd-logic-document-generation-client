@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Kmd.Logic.DocumentGeneration.Client.Models;
 using Kmd.Logic.DocumentGeneration.Client.ModelTranslator;
 using Kmd.Logic.DocumentGeneration.Client.Types;
@@ -52,9 +53,9 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
 
         internal InternalClient InternalClient => this.DocumentGenerationConfigurationSkeleton.InternalClient;
 
-        internal void DeleteOnServer()
+        internal Task DeleteOnServer()
         {
-            this.DeleteEntryOnServer();
+            return this.DeleteEntryOnServer();
         }
     }
 }
