@@ -19,5 +19,10 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// Gets or sets the Logic Subscription.
         /// </summary>
         public Guid? SubscriptionId { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the serializer should ignore null values or empty arrays.
+        /// </summary>
+        public bool IncludeNullValues { get; set; } = false;
     }
 }

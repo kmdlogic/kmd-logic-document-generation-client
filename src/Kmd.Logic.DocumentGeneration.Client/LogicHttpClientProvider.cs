@@ -5,6 +5,7 @@ using System.Net.Http;
 using Kmd.Logic.DocumentGeneration.Client.Types;
 using Kmd.Logic.Identity.Authorization;
 using Microsoft.Rest;
+using Newtonsoft.Json;
 
 namespace Kmd.Logic.DocumentGeneration.Client
 {
@@ -57,6 +58,13 @@ namespace Kmd.Logic.DocumentGeneration.Client
                 {
                     BaseUri = this._options.DocumentGenerationServiceUri,
                 };
+
+                if (this._options.IncludeNullValues)
+                {
+                    var serializationSettings = this._internalClient.GetSerializationSettings();
+                    serializationSettings.DefaultValueHandling = DefaultValueHandling.Include;
+                    serializationSettings.NullValueHandling = NullValueHandling.Include;
+                }
 
                 return this._internalClient;
             }
