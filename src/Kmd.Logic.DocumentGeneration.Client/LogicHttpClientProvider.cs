@@ -55,7 +55,7 @@ namespace Kmd.Logic.DocumentGeneration.Client
 
                 this._internalClient = new InternalClient(new TokenCredentials(tokenProvider))
                 {
-                    BaseUri = this._options.DocumentGenerationServiceUri,
+                    BaseUri = this._options.DocumentGenerationServiceUri ?? new Uri("https://gateway.kmdlogic.io/document-generation/v2"),
                 };
 
                 return this._internalClient;

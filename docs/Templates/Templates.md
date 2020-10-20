@@ -180,6 +180,30 @@ Use the `date.format` to format date/time values in your templates.
 
 For the Aspose documentation about outputting expression results and related formatting please follow [this guide](https://docs.aspose.com/display/wordsnet/Template+Syntax#TemplateSyntax-OutputtingExpressionResults).
 
+### String case helper
+
+Use the `stringCase` helper to format case of the passed string value.
+
+As for now there is only one method implemented: `stringCase.SentenceCase`. _Sentence case_ is the conventional way of using capital letters in a sentence or capitalizing only the first word.
+
+#### Examples - basic scenario
+
+Use `stringCase.SentenceCase`
+
+```
+<<[stringCase.SentenceCase("someStringValue")]>>
+
+<<[stringCase.SentenceCase(SomeField)]>>
+```
+
+#### Examples - nested helpers
+
+Use `stringCase.SentenceCase` to format case of the date helper result
+
+```
+<<[stringCase.SentenceCase(date.Format(Forløb_sluttermin, ”MMMM yyyy”, “da-DK”))]>>
+```
+
 
 ## Templates and document generation
 
