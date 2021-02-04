@@ -248,7 +248,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
             return await response.ValidateContentStream().ConfigureAwait(false);
         }
 
-        public Task<DocumentGenerationProgress> RequestDocumentGeneration(string templateId, string twoLetterIsoLanguageName, DocumentFormat documentFormat, JObject mergeData, Uri callbackUrl, bool debug)
+        public Task<DocumentGenerationProgress> RequestDocumentGeneration(string templateId, string twoLetterIsoLanguageName, DocumentFormat documentFormat, JObject mergeData, Uri callbackUrl, bool debug, Guid? signConfigurationId)
         {
             var internalDocumentGenerationRequest =
                 this.InternalClient.RequestDocumentGenerationWithHttpMessagesAsync(
@@ -260,7 +260,8 @@ namespace Kmd.Logic.DocumentGeneration.Client.Configuration
                                 documentFormat,
                                 mergeData,
                                 callbackUrl,
-                                debug)
+                                debug,
+                                signConfigurationId)
                             .ToWebRequest(this.ConfigurationId))
                     .ValidateBody();
             return internalDocumentGenerationRequest

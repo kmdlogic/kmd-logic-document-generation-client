@@ -13,7 +13,8 @@ namespace Kmd.Logic.DocumentGeneration.Client.ServiceMessages
             DocumentFormat documentFormat,
             JObject mergeData,
             Uri callbackUrl,
-            bool debug)
+            bool debug,
+            Guid? signConfigurationId)
         {
             this.HierarchyPath = hierarchyPath;
             this.TemplateId = templateId;
@@ -22,6 +23,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.ServiceMessages
             this.MergeData = mergeData;
             this.CallbackUrl = callbackUrl;
             this.Debug = debug;
+            this.SignConfigurationId = signConfigurationId;
         }
 
         /// <summary>
@@ -60,5 +62,10 @@ namespace Kmd.Logic.DocumentGeneration.Client.ServiceMessages
         /// Gets a value indicating whether document generation should be run in diagnostic mode.
         /// </summary>
         public bool Debug { get; }
+
+        /// <summary>
+        /// Gets the identifier of sign configuration to be used.
+        /// </summary>
+        public Guid? SignConfigurationId { get; }
     }
 }

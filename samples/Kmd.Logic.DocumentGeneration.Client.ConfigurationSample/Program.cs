@@ -203,7 +203,8 @@ namespace Kmd.Logic.DocumentGeneration.Client.ConfigurationSample
                             DocumentFormat.Docx,
                             mergeData,
                             null,
-                            false)
+                            false,
+                            new Guid("11111111-1111-1111-1111-111111111111"))
                             .ConfigureAwait(false);
                     var documentGenerationRequestId = documentGenerationProgress?.Id;
 
