@@ -196,7 +196,8 @@ namespace Kmd.Logic.DocumentGeneration.Client.ModelTranslator
                 documentGenerationRequestDetails.DocumentFormat.ToString(),
                 documentGenerationRequestDetails.MergeData,
                 documentGenerationRequestDetails.CallbackUrl?.ToString(),
-                documentGenerationRequestDetails.Debug);
+                documentGenerationRequestDetails.Debug,
+                documentGenerationRequestDetails.SignConfigurationId);
         }
 
         internal static CreateConfigurationRequest ToCreateConfigurationRequest(

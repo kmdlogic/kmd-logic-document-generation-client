@@ -40,7 +40,9 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// document generation completes.</param>
         /// <param name="debug">Flag indicating if document generation should
         /// be run in diagnostic mode.</param>
-        public GenerateDocumentRequest(System.Guid? configurationId = default(System.Guid?), string hierarchyPath = default(string), string templateId = default(string), string language = default(string), string documentFormat = default(string), object mergeData = default(object), string callbackUrl = default(string), bool? debug = default(bool?))
+        /// <param name="signConfigurationId">Identifier of sign configuration
+        /// to be used.</param>
+        public GenerateDocumentRequest(System.Guid? configurationId = default(System.Guid?), string hierarchyPath = default(string), string templateId = default(string), string language = default(string), string documentFormat = default(string), object mergeData = default(object), string callbackUrl = default(string), bool? debug = default(bool?), System.Guid? signConfigurationId = default(System.Guid?))
         {
             ConfigurationId = configurationId;
             HierarchyPath = hierarchyPath;
@@ -50,6 +52,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
             MergeData = mergeData;
             CallbackUrl = callbackUrl;
             Debug = debug;
+            SignConfigurationId = signConfigurationId;
             CustomInit();
         }
 
@@ -113,6 +116,12 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// </summary>
         [JsonProperty(PropertyName = "debug")]
         public bool? Debug { get; set; }
+
+        /// <summary>
+        /// Gets or sets identifier of sign configuration to be used.
+        /// </summary>
+        [JsonProperty(PropertyName = "signConfigurationId")]
+        public System.Guid? SignConfigurationId { get; set; }
 
     }
 }

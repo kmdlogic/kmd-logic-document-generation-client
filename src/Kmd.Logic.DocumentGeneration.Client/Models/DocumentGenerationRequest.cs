@@ -26,7 +26,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// 'Doc', 'Docx', 'Pdf'</param>
         /// <param name="state">Possible values include: 'Requested',
         /// 'Completed', 'Failed'</param>
-        public DocumentGenerationRequest(System.Guid? id = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), System.Guid? configurationId = default(System.Guid?), string templateId = default(string), string language = default(string), string documentFormat = default(string), string hierarchyPath = default(string), string state = default(string), string callbackUrl = default(string), bool? debug = default(bool?), string failReason = default(string))
+        public DocumentGenerationRequest(System.Guid? id = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), System.Guid? configurationId = default(System.Guid?), string templateId = default(string), string language = default(string), string documentFormat = default(string), string hierarchyPath = default(string), string state = default(string), string callbackUrl = default(string), bool? debug = default(bool?), System.Guid? signConfigurationId = default(System.Guid?), string failReason = default(string))
         {
             Id = id;
             SubscriptionId = subscriptionId;
@@ -38,6 +38,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
             State = state;
             CallbackUrl = callbackUrl;
             Debug = debug;
+            SignConfigurationId = signConfigurationId;
             FailReason = failReason;
             CustomInit();
         }
@@ -99,6 +100,11 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// </summary>
         [JsonProperty(PropertyName = "debug")]
         public bool? Debug { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "signConfigurationId")]
+        public System.Guid? SignConfigurationId { get; set; }
 
         /// <summary>
         /// </summary>

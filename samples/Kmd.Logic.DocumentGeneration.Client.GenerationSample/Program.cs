@@ -158,7 +158,8 @@ namespace Kmd.Logic.DocumentGeneration.Client.GenerationSample
                                 documentDetails.DocumentFormat,
                                 documentDetails.MergeData,
                                 null,
-                                false))
+                                false,
+                                new Guid("11111111-1111-1111-1111-111111111111")))
                         .ConfigureAwait(false);
 
                 const int secondsToTimesUp = 30;
