@@ -1901,6 +1901,11 @@
         "debug": {
           "description": "Flag indicating if document generation should be run in diagnostic mode.",
           "type": "boolean"
+        },
+        "signConfigurationId": {
+          "format": "uuid",
+          "description": "Identifier of sign configuration to be used.",
+          "type": "string"
         }
       }
     },
@@ -1953,6 +1958,10 @@
         },
         "debug": {
           "type": "boolean"
+        },
+        "signConfigurationId": {
+          "format": "uuid",
+          "type": "string"
         },
         "failReason": {
           "type": "string",
