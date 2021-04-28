@@ -28,15 +28,14 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// used.</param>
         /// <param name="sourceDocumentUrl">URL that identifies the document to
         /// be converted.</param>
-        /// <param name="sourceDocumentFormat">Format of the source document.
-        /// Possible values include: 'Txt', 'Rtf', 'Doc', 'Docx', 'Pdf'</param>
-        /// <param name="convertedDocumentFormat">Format of the converted
-        /// document. Possible values include: 'Txt', 'Rtf', 'Doc', 'Docx',
-        /// 'Pdf'</param>
-        /// <param name="convertedDocumentPdfFormat">Optional PdfFormat of the
-        /// converted document. Possible values include: 'PdfA1A', 'PdfA1B',
-        /// 'PdfA2A', 'PdfA3A', 'PdfA2B', 'PdfA2U', 'PdfA3B', 'PdfA3U', 'V13',
-        /// 'V14', 'V15', 'V16', 'V17', 'PdfUa1', 'PdfX1A', 'PdfX3'</param>
+        /// <param name="sourceDocumentFormat">Possible values include: 'Txt',
+        /// 'Rtf', 'Doc', 'Docx', 'Pdf'</param>
+        /// <param name="convertedDocumentFormat">Possible values include:
+        /// 'Txt', 'Rtf', 'Doc', 'Docx', 'Pdf'</param>
+        /// <param name="convertedDocumentPdfFormat">Possible values include:
+        /// 'PdfA1A', 'PdfA1B', 'PdfA2A', 'PdfA3A', 'PdfA2B', 'PdfA2U',
+        /// 'PdfA3B', 'PdfA3U', 'V13', 'V14', 'V15', 'V16', 'V17', 'PdfUa1',
+        /// 'PdfX1A', 'PdfX3'</param>
         /// <param name="callbackUrl">URL that is going to be called when
         /// document generation completes.</param>
         /// <param name="debug">Flag indicating if document generation should
@@ -71,24 +70,23 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         public string SourceDocumentUrl { get; set; }
 
         /// <summary>
-        /// Gets or sets format of the source document. Possible values
-        /// include: 'Txt', 'Rtf', 'Doc', 'Docx', 'Pdf'
+        /// Gets or sets possible values include: 'Txt', 'Rtf', 'Doc', 'Docx',
+        /// 'Pdf'
         /// </summary>
         [JsonProperty(PropertyName = "sourceDocumentFormat")]
         public string SourceDocumentFormat { get; set; }
 
         /// <summary>
-        /// Gets or sets format of the converted document. Possible values
-        /// include: 'Txt', 'Rtf', 'Doc', 'Docx', 'Pdf'
+        /// Gets or sets possible values include: 'Txt', 'Rtf', 'Doc', 'Docx',
+        /// 'Pdf'
         /// </summary>
         [JsonProperty(PropertyName = "convertedDocumentFormat")]
         public string ConvertedDocumentFormat { get; set; }
 
         /// <summary>
-        /// Gets or sets optional PdfFormat of the converted document. Possible
-        /// values include: 'PdfA1A', 'PdfA1B', 'PdfA2A', 'PdfA3A', 'PdfA2B',
-        /// 'PdfA2U', 'PdfA3B', 'PdfA3U', 'V13', 'V14', 'V15', 'V16', 'V17',
-        /// 'PdfUa1', 'PdfX1A', 'PdfX3'
+        /// Gets or sets possible values include: 'PdfA1A', 'PdfA1B', 'PdfA2A',
+        /// 'PdfA3A', 'PdfA2B', 'PdfA2U', 'PdfA3B', 'PdfA3U', 'V13', 'V14',
+        /// 'V15', 'V16', 'V17', 'PdfUa1', 'PdfX1A', 'PdfX3'
         /// </summary>
         [JsonProperty(PropertyName = "convertedDocumentPdfFormat")]
         public string ConvertedDocumentPdfFormat { get; set; }

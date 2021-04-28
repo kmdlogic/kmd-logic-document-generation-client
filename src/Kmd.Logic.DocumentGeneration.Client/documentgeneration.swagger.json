@@ -1520,6 +1520,256 @@
           }
         ]
       }
+    },
+    "/subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/documents/azureblob": {
+      "get": {
+        "tags": [
+          "OutputStorageAzureBlob"
+        ],
+        "summary": "Get Azure Blob output storage connection details for a given document generation configuration managed by the subscription by the id of the configuration.",
+        "operationId": "GetAzureBlobConnection",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OutputStorageAzureBlobConnectionResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "OutputStorageAzureBlob"
+        ],
+        "summary": "Update an existing document generation Azure Blob output storage connection.",
+        "operationId": "UpdateAzureBlobConnection",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to update.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The details of the storage connection being updated.",
+            "schema": {
+              "$ref": "#/definitions/AzureBlobOutputStorageModelOutputStorageCreateUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OutputStorageAzureBlobConnectionResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "OutputStorageAzureBlob"
+        ],
+        "summary": "Creates a Azure Blob output storage connection for a given document generation configuration managed by the subscription.",
+        "operationId": "CreateAzureBlobConnection",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The details of the Azure Blob storage connection",
+            "schema": {
+              "$ref": "#/definitions/AzureBlobOutputStorageModelOutputStorageCreateUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OutputStorageAzureBlobConnectionResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "OutputStorageAzureBlob"
+        ],
+        "summary": "Deletes a document generation output storage connection managed by the subscription.",
+        "operationId": "DeleteAzureBlobConnection",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/document-generation/configurations/{configurationId}/documents/azureblob/validate": {
+      "get": {
+        "tags": [
+          "OutputStorageAzureBlob"
+        ],
+        "summary": "Validate Azure Blob output storage connection for a given document generation configuration managed by the subscription by the id of the configuration.",
+        "operationId": "ValidateAzureBlobConnection",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "configurationId",
+            "in": "path",
+            "description": "Identifier of the configuration to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AzureOutputStorageValidateResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
     }
   },
   "definitions": {
@@ -1632,6 +1882,17 @@
         }
       }
     },
+    "IOutputStorageConfiguration": {
+      "type": "object",
+      "properties": {
+        "outputStorageType": {
+          "type": "string",
+          "enum": [
+            "AzureBlobStorage"
+          ]
+        }
+      }
+    },
     "DocumentGenerationConfigurationSummary": {
       "type": "object",
       "properties": {
@@ -1660,6 +1921,9 @@
         },
         "templateStorageDirectory": {
           "$ref": "#/definitions/DocumentGenerationConfigurationEntrySummary"
+        },
+        "outputStorageConfiguration": {
+          "$ref": "#/definitions/IOutputStorageConfiguration"
         }
       }
     },
@@ -1879,7 +2143,6 @@
           "type": "string"
         },
         "documentFormat": {
-          "description": "Format of the generated document.",
           "type": "string",
           "enum": [
             "Txt",
@@ -1945,7 +2208,6 @@
         },
         "state": {
           "type": "string",
-          "readOnly": true,
           "enum": [
             "Requested",
             "Completed",
@@ -1964,8 +2226,7 @@
           "type": "string"
         },
         "failReason": {
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -1983,7 +2244,6 @@
           "type": "string"
         },
         "sourceDocumentFormat": {
-          "description": "Format of the source document.",
           "type": "string",
           "enum": [
             "Txt",
@@ -1994,7 +2254,6 @@
           ]
         },
         "convertedDocumentFormat": {
-          "description": "Format of the converted document.",
           "type": "string",
           "enum": [
             "Txt",
@@ -2005,7 +2264,6 @@
           ]
         },
         "convertedDocumentPdfFormat": {
-          "description": "Optional PdfFormat of the converted document.",
           "type": "string",
           "enum": [
             "PdfA1A",
@@ -2061,6 +2319,52 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "AzureBlobOutputStorageModel": {
+      "type": "object",
+      "properties": {
+        "storageConnectionString": {
+          "type": "string"
+        },
+        "containerName": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureBlobOutputStorageModelOutputStorageCreateUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AzureBlobOutputStorageModel"
+        }
+      }
+    },
+    "OutputStorageAzureBlobConnectionResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "configurationId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "storageConnectionString": {
+          "type": "string"
+        },
+        "containerName": {
+          "type": "string"
+        }
+      }
+    },
+    "AzureOutputStorageValidateResponse": {
+      "type": "object",
+      "properties": {
+        "isConnectionValid": {
+          "type": "boolean"
         }
       }
     }

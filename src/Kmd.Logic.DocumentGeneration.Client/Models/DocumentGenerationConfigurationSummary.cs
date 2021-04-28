@@ -26,7 +26,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// Initializes a new instance of the
         /// DocumentGenerationConfigurationSummary class.
         /// </summary>
-        public DocumentGenerationConfigurationSummary(System.Guid? id = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), string name = default(string), bool? hasLicense = default(bool?), string metadataFilenameExtension = default(string), IList<string> levelNames = default(IList<string>), DocumentGenerationConfigurationEntrySummary templateStorageDirectory = default(DocumentGenerationConfigurationEntrySummary))
+        public DocumentGenerationConfigurationSummary(System.Guid? id = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), string name = default(string), bool? hasLicense = default(bool?), string metadataFilenameExtension = default(string), IList<string> levelNames = default(IList<string>), DocumentGenerationConfigurationEntrySummary templateStorageDirectory = default(DocumentGenerationConfigurationEntrySummary), IOutputStorageConfiguration outputStorageConfiguration = default(IOutputStorageConfiguration))
         {
             Id = id;
             SubscriptionId = subscriptionId;
@@ -35,6 +35,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
             MetadataFilenameExtension = metadataFilenameExtension;
             LevelNames = levelNames;
             TemplateStorageDirectory = templateStorageDirectory;
+            OutputStorageConfiguration = outputStorageConfiguration;
             CustomInit();
         }
 
@@ -77,6 +78,11 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// </summary>
         [JsonProperty(PropertyName = "templateStorageDirectory")]
         public DocumentGenerationConfigurationEntrySummary TemplateStorageDirectory { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "outputStorageConfiguration")]
+        public IOutputStorageConfiguration OutputStorageConfiguration { get; set; }
 
     }
 }

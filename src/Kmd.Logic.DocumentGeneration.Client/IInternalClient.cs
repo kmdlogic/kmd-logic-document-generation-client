@@ -625,5 +625,103 @@ namespace Kmd.Logic.DocumentGeneration.Client
         /// </param>
         Task<HttpOperationResponse> GetMetadataWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, string templateId = default(string), string language = default(string), string hierarchyPath = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
+        /// <summary>
+        /// Get Azure Blob output storage connection details for a given
+        /// document generation configuration managed by the subscription by
+        /// the id of the configuration.
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// The subscription that owns the configurations.
+        /// </param>
+        /// <param name='configurationId'>
+        /// Identifier of the configuration to fetch.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<OutputStorageAzureBlobConnectionResponse>> GetAzureBlobConnectionWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Update an existing document generation Azure Blob output storage
+        /// connection.
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// The subscription that owns the configurations.
+        /// </param>
+        /// <param name='configurationId'>
+        /// Identifier of the configuration to update.
+        /// </param>
+        /// <param name='request'>
+        /// The details of the storage connection being updated.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<OutputStorageAzureBlobConnectionResponse>> UpdateAzureBlobConnectionWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, AzureBlobOutputStorageModelOutputStorageCreateUpdateRequest request = default(AzureBlobOutputStorageModelOutputStorageCreateUpdateRequest), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Creates a Azure Blob output storage connection for a given document
+        /// generation configuration managed by the subscription.
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// The subscription that owns the configurations.
+        /// </param>
+        /// <param name='configurationId'>
+        /// Identifier of the configuration to fetch.
+        /// </param>
+        /// <param name='request'>
+        /// The details of the Azure Blob storage connection
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<OutputStorageAzureBlobConnectionResponse>> CreateAzureBlobConnectionWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, AzureBlobOutputStorageModelOutputStorageCreateUpdateRequest request = default(AzureBlobOutputStorageModelOutputStorageCreateUpdateRequest), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Deletes a document generation output storage connection managed by
+        /// the subscription.
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// The subscription that owns the configurations.
+        /// </param>
+        /// <param name='configurationId'>
+        /// Identifier of the configuration to fetch.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse> DeleteAzureBlobConnectionWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Validate Azure Blob output storage connection for a given document
+        /// generation configuration managed by the subscription by the id of
+        /// the configuration.
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// The subscription that owns the configurations.
+        /// </param>
+        /// <param name='configurationId'>
+        /// Identifier of the configuration to fetch.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<AzureOutputStorageValidateResponse>> ValidateAzureBlobConnectionWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid configurationId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
     }
 }
