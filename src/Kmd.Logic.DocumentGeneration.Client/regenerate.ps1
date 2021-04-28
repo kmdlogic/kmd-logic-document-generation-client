@@ -1,4 +1,4 @@
-autorest --input-file=documentgeneration.swagger.json --output-folder=. --namespace=Kmd.Logic.DocumentGeneration.Client --csharp --override-client-name=InternalClient --add-credentials
+autorest --input-file=documentgeneration.swagger.json --output-folder=. --namespace=Kmd.Logic.DocumentGeneration.Client --csharp --legacy --override-client-name=InternalClient --add-credentials
 
 (Get-Content "InternalClient.cs") |
 	Foreach-Object {$_ -replace 'public partial class InternalClient', 'internal partial class InternalClient'} | 

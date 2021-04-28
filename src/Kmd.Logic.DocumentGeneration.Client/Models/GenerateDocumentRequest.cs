@@ -33,8 +33,8 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// <param name="templateId">Identifier of template to be used.</param>
         /// <param name="language">Language code in ISO 639-2 format (eg.
         /// en).</param>
-        /// <param name="documentFormat">Format of the generated document.
-        /// Possible values include: 'Txt', 'Rtf', 'Doc', 'Docx', 'Pdf'</param>
+        /// <param name="documentFormat">Possible values include: 'Txt', 'Rtf',
+        /// 'Doc', 'Docx', 'Pdf'</param>
         /// <param name="mergeData">Data to be merge into document.</param>
         /// <param name="callbackUrl">URL that is going to be called when
         /// document generation completes.</param>
@@ -91,8 +91,8 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         public string Language { get; set; }
 
         /// <summary>
-        /// Gets or sets format of the generated document. Possible values
-        /// include: 'Txt', 'Rtf', 'Doc', 'Docx', 'Pdf'
+        /// Gets or sets possible values include: 'Txt', 'Rtf', 'Doc', 'Docx',
+        /// 'Pdf'
         /// </summary>
         [JsonProperty(PropertyName = "documentFormat")]
         public string DocumentFormat { get; set; }
