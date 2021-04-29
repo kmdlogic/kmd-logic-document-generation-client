@@ -86,10 +86,11 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         public string HierarchyPath { get; set; }
 
         /// <summary>
-        /// Gets possible values include: 'Requested', 'Completed', 'Failed'
+        /// Gets or sets possible values include: 'Requested', 'Completed',
+        /// 'Failed'
         /// </summary>
         [JsonProperty(PropertyName = "state")]
-        public string State { get; private set; }
+        public string State { get; set; }
 
         /// <summary>
         /// </summary>
@@ -109,7 +110,7 @@ namespace Kmd.Logic.DocumentGeneration.Client.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "failReason")]
-        public string FailReason { get; private set; }
+        public string FailReason { get; set; }
 
     }
 }

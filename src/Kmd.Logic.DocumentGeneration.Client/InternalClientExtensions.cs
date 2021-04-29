@@ -1319,5 +1319,228 @@ namespace Kmd.Logic.DocumentGeneration.Client
                 (await operations.GetMetadataWithHttpMessagesAsync(subscriptionId, configurationId, templateId, language, hierarchyPath, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
+            /// <summary>
+            /// Get Azure Blob output storage connection details for a given document
+            /// generation configuration managed by the subscription by the id of the
+            /// configuration.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            public static OutputStorageAzureBlobConnectionResponse GetAzureBlobConnection(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId)
+            {
+                return operations.GetAzureBlobConnectionAsync(subscriptionId, configurationId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get Azure Blob output storage connection details for a given document
+            /// generation configuration managed by the subscription by the id of the
+            /// configuration.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<OutputStorageAzureBlobConnectionResponse> GetAzureBlobConnectionAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetAzureBlobConnectionWithHttpMessagesAsync(subscriptionId, configurationId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Update an existing document generation Azure Blob output storage
+            /// connection.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to update.
+            /// </param>
+            /// <param name='request'>
+            /// The details of the storage connection being updated.
+            /// </param>
+            public static OutputStorageAzureBlobConnectionResponse UpdateAzureBlobConnection(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, AzureBlobOutputStorageModelOutputStorageCreateUpdateRequest request = default(AzureBlobOutputStorageModelOutputStorageCreateUpdateRequest))
+            {
+                return operations.UpdateAzureBlobConnectionAsync(subscriptionId, configurationId, request).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Update an existing document generation Azure Blob output storage
+            /// connection.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to update.
+            /// </param>
+            /// <param name='request'>
+            /// The details of the storage connection being updated.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<OutputStorageAzureBlobConnectionResponse> UpdateAzureBlobConnectionAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, AzureBlobOutputStorageModelOutputStorageCreateUpdateRequest request = default(AzureBlobOutputStorageModelOutputStorageCreateUpdateRequest), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.UpdateAzureBlobConnectionWithHttpMessagesAsync(subscriptionId, configurationId, request, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Creates a Azure Blob output storage connection for a given document
+            /// generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='request'>
+            /// The details of the Azure Blob storage connection
+            /// </param>
+            public static OutputStorageAzureBlobConnectionResponse CreateAzureBlobConnection(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, AzureBlobOutputStorageModelOutputStorageCreateUpdateRequest request = default(AzureBlobOutputStorageModelOutputStorageCreateUpdateRequest))
+            {
+                return operations.CreateAzureBlobConnectionAsync(subscriptionId, configurationId, request).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Creates a Azure Blob output storage connection for a given document
+            /// generation configuration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='request'>
+            /// The details of the Azure Blob storage connection
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<OutputStorageAzureBlobConnectionResponse> CreateAzureBlobConnectionAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, AzureBlobOutputStorageModelOutputStorageCreateUpdateRequest request = default(AzureBlobOutputStorageModelOutputStorageCreateUpdateRequest), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.CreateAzureBlobConnectionWithHttpMessagesAsync(subscriptionId, configurationId, request, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Deletes a document generation output storage connection managed by the
+            /// subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            public static void DeleteAzureBlobConnection(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId)
+            {
+                operations.DeleteAzureBlobConnectionAsync(subscriptionId, configurationId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Deletes a document generation output storage connection managed by the
+            /// subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task DeleteAzureBlobConnectionAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.DeleteAzureBlobConnectionWithHttpMessagesAsync(subscriptionId, configurationId, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Validate Azure Blob output storage connection for a given document
+            /// generation configuration managed by the subscription by the id of the
+            /// configuration.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            public static AzureOutputStorageValidateResponse ValidateAzureBlobConnection(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId)
+            {
+                return operations.ValidateAzureBlobConnectionAsync(subscriptionId, configurationId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Validate Azure Blob output storage connection for a given document
+            /// generation configuration managed by the subscription by the id of the
+            /// configuration.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='configurationId'>
+            /// Identifier of the configuration to fetch.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<AzureOutputStorageValidateResponse> ValidateAzureBlobConnectionAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid configurationId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.ValidateAzureBlobConnectionWithHttpMessagesAsync(subscriptionId, configurationId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
     }
 }
