@@ -19,7 +19,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/kmdlogic/kmd-logic-documentgeneration-client</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyVersionAttribute>true</GenerateAssemblyVersionAttribute>
   </PropertyGroup>
 
   <ItemGroup>
