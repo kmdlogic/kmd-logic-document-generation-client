@@ -1,3 +1,7 @@
+2.0.0
+* Make client assembly strongly named
+* Make client assembly versioned
+
 1.0.5
 * Provided options to manage output storage configurations which helps customers to configure their own storage location for generated documents
 
