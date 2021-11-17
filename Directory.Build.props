@@ -9,7 +9,9 @@
 
   <PropertyGroup>
     <Description>A client library for KMD Logic Document Generation</Description>
-    <VersionPrefix>1.0.5</VersionPrefix>
+	  <VersionPrefix Condition=" '$(VersionPrefix)' == '' ">2.0.0</VersionPrefix>
+	  <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
+	  <Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version>
     <Authors>KMD</Authors>
     <PackageTags>kmd;logic;documentgeneration</PackageTags>
     <PackageIcon>kmd-logic-icon.png</PackageIcon>
@@ -17,7 +19,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/kmdlogic/kmd-logic-documentgeneration-client</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyVersionAttribute>true</GenerateAssemblyVersionAttribute>
   </PropertyGroup>
 
   <ItemGroup>
