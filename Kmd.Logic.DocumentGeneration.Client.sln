@@ -11,17 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kmd.Logic.DocumentGeneratio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{B1DE939A-4D71-4150-B411-8BB10AE73A3B}"
 	ProjectSection(SolutionItems) = preProject
-		appveyor.yml = appveyor.yml
-		build.ps1 = build.ps1
-		build.sh = build.sh
 		CHANGES.md = CHANGES.md
 		Directory.Build.props = Directory.Build.props
+		.github\workflows\github-cd.yml = .github\workflows\github-cd.yml
 		global.json = global.json
 		kmd-logic-icon.png = kmd-logic-icon.png
 		LICENSE = LICENSE
 		README.md = README.md
-		setup.ps1 = setup.ps1
-		setup.sh = setup.sh
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kmd.Logic.DocumentGeneration.Client.ConfigurationSample", "samples\Kmd.Logic.DocumentGeneration.Client.ConfigurationSample\Kmd.Logic.DocumentGeneration.Client.ConfigurationSample.csproj", "{7E347086-B607-41A5-86AF-A656C23B0D5B}"
