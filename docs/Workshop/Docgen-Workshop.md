@@ -56,8 +56,45 @@ Below are the detailed steps which will help you in getting started with Logic D
 
     ![Image of Output storage](./images/output-storage.jpg)
 
-13. After all the inputs click on `Save` to create the configuration.
+13. After providing all the inputs, click on `Save` to create the configuration.
+
+14. Next we will be creating client credentials in the Console using the same subscription. These will later be used while accessing the document generation APIs.
+
+15. Click on the `Logic` heart icon on top left of the page. It will take you to the `Resource overview` page.
+
+    ![Image of Redirect to Home](./images/redirect-home.jpg)
+
+16. In the `Resource Overview` page, click on the ellipsis and select `Client credentials`
+
+17. ## Image
+
+18. You will be redicted to the Client credentials page where you can see the list of client credentials created. As of now you will not see any existing records. Click on `Add new`.
+
+    ![Image of Add new Client credential](./images/add-client-credential.jpg)
+
+19. Provide a `Display name` and click on `Create` in the pop-up window.
+
+    ![Image of Add new Client credential pop-up](./images/add-client-credential-popup.jpg)
+
+20. After the creation you can see the record in the same page. Expand the record to view more details. Some properties like `client_id`, `client_secret` etc will be used further to access the Document generation APIs.
+
+    ![Image of Client credential](./images/client-credential.jpg)
 
 
 
 ## Configuration entries
+Once a configuration is created you can view the template storage defined at `Root` level whose storage setting was provided during configuration creation. This becomes the `Master`. Screenshot below.
+
+![Image of Configuration Entry at root](./images/configuration-entry-root.jpg)
+    
+You can add further child entries to the Root or Master entry. These child entries will correspond to your levels' template storage setting. E.g. If your configuration has two levels such as `city` and `school` where the hierarchy is root->city->school, you can add one or more child entries to Master which will correspond to the city level. Each of those entries will have their own Template storage setting (Shared point or Azure blob). You can further add one or more child entries to city which will correspond to school level template storage setting. Please refer to the screenshot below.
+
+![Image of Output storage](./images/add-configuration-entry.jpg)
+
+While adding the child entries there are two more fields `Name` and `Key` for which values have to be provided. Name specfies the name of the entry. For Root entry which is added default during configuration creation, the name is Master. Key signifies the logical path in the hierarchy. For Root it is `\`. This path value is **important** as it is used in the body of API request while requesting for document generation.
+
+Consider the above example of levels city and school. Say we have one entry for city under Master with Name as `Copenhagen` and key as `\copenhagen` and one entry for school under city Copenhagen with Name as `Copenhagen International School` and key as `cis`. If you want to generate document for a template for Copenhagen entry, request should have path as `\copenhagen`. For school under Copenhagen request path should be `\copenhagen\cis` and if you want to generate document using template at root, path should be `\\`. Below is the screenshot showing the Configuration entries for the example.
+
+![Image of Output storage](./images/configuration-entries.jpg)
+
+
