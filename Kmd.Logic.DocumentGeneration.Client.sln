@@ -24,6 +24,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kmd.Logic.DocumentGeneratio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kmd.Logic.DocumentGeneration.Client.GenerationSample", "samples\Kmd.Logic.DocumentGeneration.Client.GenerationSample\Kmd.Logic.DocumentGeneration.Client.GenerationSample.csproj", "{7D5C63D0-C684-4A21-98DB-6DE74BC6A6F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kmd.Logic.DocumentGeneration.Client.PdfGenerationSample", "samples\Kmd.Logic.DocumentGeneration.Client.PdfGenerationSample\Kmd.Logic.DocumentGeneration.Client.PdfGenerationSample.csproj", "{429E10D6-35E0-4F8E-8134-F7A404F80131}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,10 @@ Global
 		{7D5C63D0-C684-4A21-98DB-6DE74BC6A6F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D5C63D0-C684-4A21-98DB-6DE74BC6A6F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D5C63D0-C684-4A21-98DB-6DE74BC6A6F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{429E10D6-35E0-4F8E-8134-F7A404F80131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{429E10D6-35E0-4F8E-8134-F7A404F80131}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{429E10D6-35E0-4F8E-8134-F7A404F80131}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{429E10D6-35E0-4F8E-8134-F7A404F80131}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 		{B7D824BD-27A8-44AB-99B3-104CBBC1B3E0} = {F6DAFB03-D211-4EEC-A7E6-0CBF99361FC4}
 		{7E347086-B607-41A5-86AF-A656C23B0D5B} = {B3A856D9-AB49-4DAB-8A53-5B4461B2735C}
 		{7D5C63D0-C684-4A21-98DB-6DE74BC6A6F5} = {B3A856D9-AB49-4DAB-8A53-5B4461B2735C}
+		{429E10D6-35E0-4F8E-8134-F7A404F80131} = {B3A856D9-AB49-4DAB-8A53-5B4461B2735C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9CC79F7D-6B66-467E-B4C9-939A7D88E2BA}

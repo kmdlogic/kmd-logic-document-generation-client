@@ -1,0 +1,20 @@
+{
+    "FirstName": "string",
+    "LastName": "string",
+    "Year": "int",
+    "Income": "int",
+    "Rating": "float",
+    "ImageUrl": "string",
+    "Vendors": [
+	{
+	    "Name": "string",
+	    "Product": [
+		{
+		    "Name": "string",
+		    "Description": "string",
+		    "Price": "int"
+		}
+	    ]
+	}
+    ]
+}
