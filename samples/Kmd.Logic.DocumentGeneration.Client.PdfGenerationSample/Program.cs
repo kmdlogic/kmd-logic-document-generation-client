@@ -26,7 +26,6 @@ namespace Kmd.Logic.DocumentGeneration.Client.PdfGenerationSample
                 var config = new ConfigurationBuilder()
                     .SetBasePath(AppContext.BaseDirectory)
                     .AddJsonFile("appsettings.json", optional: false)
-                    .AddUserSecrets(typeof(Program).Assembly)
                     .AddEnvironmentVariables()
                     .AddCommandLine(args)
                     .Build()

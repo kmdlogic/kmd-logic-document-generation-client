@@ -4,7 +4,6 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <UserSecretsId>edb58c8c-982f-4398-b610-e98cbf7d7df3</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +12,6 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="3.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.1" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
     <PackageReference Include="SerilogTimings" Version="2.3.0" />
     <PackageReference Include="Kmd.Logic.Identity.Authorization" Version="3.0.0" />
