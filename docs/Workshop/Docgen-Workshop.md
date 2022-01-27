@@ -20,39 +20,45 @@ Document generation service is hosted on Logic platform among with many other se
 7. There are APIs available in Document geneation to get the URL where the document is generated and uploaded to.
 
 Below are the detailed steps which will help you in getting started with Logic Document Generation.
-## Create Subscription
-
-1. Login to [Logic Console](https://console.kmdlogic.io/) using your KMD credentials. Select `KMD ADFS`. Console is our front end to generate configurations for different services on Logic. These configurations will be used to consume the APIs.
-2. To use services on Logic you need to create a subscription. First time users when logging into Console, will be asked to create the same. Please refer to the screenshot below which a first time logged in user to Console will see.
-3. ## Image
-
 ## Set a Template storage account
 
-4. Before getting into Document generation configuration, let's first upload [this](./template/word-template.docx) simple template to a Share point or an Azure blob storage. This storage will be used further while creating document generation configuration.
-## Create Document generation Configuration
+Before getting into Logic Console and Document generation configuration, let's first upload [this](./template/word-template.docx) simple template to a Share point or an Azure blob storage. This storage will be used further while creating document generation configuration.
 
-4. After creating subscripton you will landup in the Resource overview page where you can see all the configurations created under you subscription for different services. For a new user it will be empty. Click on the `Create new resource`.
-5. ## Image 
-6. You will reach the Logic Marketplace. Here you can find all services hosted on Logic. Search for `Logic Document Generation`. You will see the service. Select the service to know more about it.
+## Create Subscription & Document generation Configuration
+
+1. Login to [Logic Console](https://console.kmdlogic.io/) using your KMD credentials. Select `KMD ADFS`. Console is our front end to create configurations for different services on Logic. These configurations will be used to consume the APIs of respective services. To use the services on Logic you also need to create a subscription.
+
+2. After logging in to Console you can either see `Marketplace` or `Resource Overview` page depending whether you have a subscription in Console or not. 
+
+3. If you already have a subscription you will land in `Resource Overview` page. If you click on `Creat new resource` you will navigate to `Marketplace`.
+
+    ![Image of Resource Overview](./images/resource-overview.jpg)
+
+4. If you are a first time user you will directly land in `Marketplace`. Here you can see all the products/services available in Logic platform. Search for `Logic Document Generation`. You will see the service. Select the service to know more about it.
 
     ![Image of Marketplace](./images/marketplace.jpg)
 
-7. Once you select the service in previous step you can see various details like Overview, API Reference etc. To create a configuration click on `Create`.
+5. From `Marketplace` once you select the service you can see various details like Overview, API Reference etc. To create a configuration click on `Create`.
 
     ![Image of Product](./images/product.jpg)
 
-8. It will take you to the configuration creation page as shown below.
+6. If you are a new user then you will be enforced to create a subscription first. Below is screenshot for reference.
 
-    ![Image of Product](./images/configuration-create.jpg)
+    ![Image of Create Subscription](./images/create-subscription.jpg)
 
-9. Each configuration has 3 sections such as `Configuration settings`, `Template storage settings` and `Output storage settings`. Each of the section is explained below.
+7. After creating subscripton you will landup in the configuration create page.
 
-10. ### Configuration settings
+    ![Image of Create Configuration](./images/configuration-create.jpg)
+
+
+8. Each configuration has 3 sections such as `Configuration settings`, `Template storage settings` and `Output storage settings`. Each of the section is explained below.
+
+9. ### Configuration settings
     Configuration values like Name, template metadata file extension and levels are defined here. Template metadata files are used to provide additional information about a template. [Refer](../Templates/TemplateMetadata.md) for more information.
 
     Levels are used to define the hierarchy in a configuration. We can have template files at each level which will override the parent template files during document generation. Hierarchies are particularly useful in scenarios where same configuration is used by multiple departments to generate documents using templates at their respective level. For each level separate Template storage configurations are defined which is explained in the next section `Template storage settings`. By default it has 2 levels `Cusotmer` and `Department` which can be removed and you can add your level. You can also choose not to have any level. For workshop puprose let's keep the the default values.
 
-11. ### Template storage settings
+10. ### Template storage settings
     Document generation service uses templates to generate documents. As part of configuration creation, the storage where templates are available are configured. Currently Logic supports two types storage, `Share point` and `Azure blob`. Please refer to the screenshot below.
 
     ![Image of Template storage](./images/template-storage.jpg)
@@ -61,26 +67,26 @@ Below are the detailed steps which will help you in getting started with Logic D
 
     The template storage that is configured during creation of document generation configuration becomes the root level template storage. Once the configuration is created, new entries can be added under this root level which can further signify the template storage for levels defined during configuration creation. These entries are known as [Configuration entries](#configuration-entries)
 
-12. ### Output storage settings
+11. ### Output storage settings
     The generated documents are stored in this storage and there are APIs available to get the the url to the storage. This storage can be owned by Logic or the user. Default it is Logic storage and the document will be available for 24 hrs. You can provide your storage configuration where the document will be uploaded by the document generation service. Currently only Azure blob storage is supported as Output storage. For the purpose of workshop you can use the default setting.
 
     ![Image of Output storage](./images/output-storage.jpg)
 
-13. After providing all the inputs, click on `Save` to create the configuration. After configuration creation you can see the `Configuration ID` or `Resource ID` which will be used while accessing the APIs. You can also see any client credentials created for that subscription.
+12. After providing all the inputs, click on `Save` to create the configuration. After configuration creation you can see the `Configuration ID` or `Resource ID` which will be used while accessing the APIs. You can also see any client credentials created for that subscription.
 
     ![Image of After Configuration Create](./images/after-configuration-create.jpg)
 
 ## Create Client credentials
 
-14. Next we will be creating client credentials in the Console using the same subscription. These will later be used while accessing the document generation APIs.
+13. Next we will be creating client credentials in the Console using the same subscription. These will later be used while accessing the document generation APIs.
 
-15. Click on the `Logic` heart icon on top left of the page. It will take you to the `Resource overview` page.
+14. Click on the `Logic` heart icon on top left of the page. It will take you to the `Resource overview` page.
 
     ![Image of Redirect to Home](./images/redirect-home.jpg)
 
-16. In the `Resource Overview` page, click on the ellipsis and select `Client credentials`
+15. In the `Resource Overview` page, click on the ellipsis and select `Client credentials`
 
-17. ## Image
+    ![Image of Client credential ellipsis](./images/client-credential-ellipsis.jpg)
 
 18. You will be redicted to the Client credentials page where you can see the list of client credentials created. As of now you will not see any existing records. Click on `Add new`.
 
@@ -90,7 +96,7 @@ Below are the detailed steps which will help you in getting started with Logic D
 
     ![Image of Add new Client credential pop-up](./images/add-client-credential-popup.jpg)
 
-20. After the creation you can see the record in the same page. Expand the record to view more details. Some properties like `client_id`, `client_secret` etc will be used further to access the Document generation APIs.
+20. After the creation you can see the record in the same page. Expand the record to view more details. Properties `client_id`, `client_secret` and `scope` will be used further to access the Document generation APIs. Copy these values to a notepad for further use.
 
     ![Image of Client credential](./images/client-credential.jpg)
 ## Document generation API request structure
@@ -120,10 +126,104 @@ Below are the detailed steps which will help you in getting started with Logic D
 
 `mergeData` - Data provided here will be used in the generated document. It should have the placholders e.g. `FirstName`, `LastName` which are used in the template and respective values.
 
-`callbackUrl` - When document generation process is complete or failed you will receive a notification through this Url. For workshop we will use a url provider [Webhook](https://webhook.site/c9f0453d-491c-49eb-a39a-d73d429d9cbb). Navigate to the site and use `Copy` to get the callback url. Screenshot is below.
+`callbackUrl` - When document generation process is complete or failed you will receive a notification through this Url. For workshop we will mock this by using a simple url provider [Webhook](https://webhook.site/c9f0453d-491c-49eb-a39a-d73d429d9cbb). Navigate to the site and use `Copy` to get the callback url. Screenshot is below.
         ![Image of Configuration Entry at root](./images/webhook.jpg)
 
+Form the request body in the format mentioned above and keep it for further use.
+## Document generation using cURL command
 
+We will use `cURL` commands to hit the APIs. 
+
+i)  <ins>Get bearer token</ins> - In first step we will hit our `Logic Identity` [API](https://identity-api.kmdlogic.io/clientCredentials/token?issuer=b2clogin.com) to get bearer token.
+
+ii) <ins>Request Document generation</ins> - Then in second step we will use this bearer token and hit document generation API to request to generate document. In response we will get the `RequestId`.
+
+iii) <ins>Get Url where document is uploaded</ins> - And finally after requesting for document generation, we shall be notified through our call back Url (Here the webhook). Once we are notified, we will hit another document generation API using the request id to get the url where the document is uploaded.
+
+### Request bearer token
+
+Below is the command. Here you have to use the client_id and client_secret noted earlier.
+
+<ins>Powershell</ins>
+
+```
+curl -X 'POST' ` 
+   'https://identity-api.kmdlogic.io/clientCredentials/token?issuer=b2clogin.com' ` 
+   -H 'accept: application/json' ` 
+   -H 'Content-Type: application/x-www-form-urlencoded' ` 
+   -d 'grant_type=client_credentials&client_id={Your_client_id}&client_secret={Your_client_secret}&scope={Your_scope}'
+
+```
+<ins>Bash</ins>
+
+```
+curl -X 'POST' \ 
+   'https://identity-api.kmdlogic.io/clientCredentials/token?issuer=b2clogin.com' \
+   -H 'accept: application/json' \ 
+   -H 'Content-Type: application/x-www-form-urlencoded' \ 
+   -d 'grant_type=client_credentials&client_id={Your_client_id}&client_secret={Your_client_secret}&scope={Your_scope}'
+
+```
+
+You will get the `Bearer` token in response. Copy the value of `access_token` to a notepad. It will be valid for 60 minutes.
+### Request for a document generation
+
+Next is to hit document generation API to request for a document generation using the request body which have been formed in earlier step. For the workshop we are going to use the Logic `Preprod` environment.
+
+<ins>Powershell</ins>
+
+```
+
+curl -X POST `
+"https://kmd-logic-preprod-weu-apim.azure-api.net/document-generation/v2/subscriptions/{Logic_Subscription_Id}/document-generation/requests" `
+-H "accept: application/json" `
+-H "Authorization: bearer {Access_token}" `
+-H "Content-Type: application/json-patch+json" `
+-d '{\"configurationId\":\"{Logic_Document_Generation_ConfigurationId}\",\"hierarchyPath\":\"\\\\\",\"templateId\":\"word-template.docx\",\"language\":\"en\",\"documentFormat\":\"Pdf\",\"mergeData\":{\"FirstName\":\"{Request_Value}\",\"LastName\":\"{Request_Value}\"},\"callbackUrl\":\"{Webhook_Url_Value}",\"debug\":true}'
+
+```
+<ins>Bash</ins>
+
+```
+
+curl -X POST \
+"https://kmd-logic-preprod-weu-apim.azure-api.net/document-generation/v2/subscriptions/{Logic_Subscription_Id}/document-generation/requests" \
+-H "accept: application/json" \
+-H "Authorization: bearer {Access_token}" \
+-H "Content-Type: application/json-patch+json" \
+-d '{\"configurationId\":\"{Logic_Document_Generation_ConfigurationId}\",\"hierarchyPath\":\"\\\\\",\"templateId\":\"word-template.docx\",\"language\":\"en\",\"documentFormat\":\"Pdf\",\"mergeData\":{\"FirstName\":\"{Request_Value}\",\"LastName\":\"{Request_Value}\"},\"callbackUrl\":\"{Webhook_Url_Value}",\"debug\":true}'
+
+```
+
+The response of the above request will give you the request details. Make a note of the `id` from the response. That is the `RequestId`.
+### Get the path to the document
+
+After getting the response from document generation request API, in a few moments you should be able to see a notification in your webhook url in browser. In the notification you can see the request id which you can correlate or match with the request id from the API response. Also you can find the status of the request. It should be `Completed`. Please refer to the below screenshot.
+
+![Image of Configuration Entry at root](./images/webhook-response.jpg)
+
+Now you can hit another document generation API which will give you the path where document has been uploaded.
+
+<ins>Powershell</ins>
+
+```
+curl -X GET `
+"https://kmd-logic-preprod-weu-apim.azure-api.net/document-generation/v2/subscriptions/{Logic_Subscription_Id}/document-generation/requests/{Request_Id}/download" `
+-H "accept: application/json" `
+-H "Authorization: bearer {Access_token}"
+
+```
+<ins>Bash</ins>
+
+```
+curl -X GET \
+"https://kmd-logic-preprod-weu-apim.azure-api.net/document-generation/v2/subscriptions/{Logic_Subscription_Id}/document-generation/requests/{Request_Id}/download" \
+-H "accept: application/json" \
+-H "Authorization: bearer {Access_token}"
+
+```
+
+From the response get the value of `uri` and open it in browser. Your document should be downloaded.
 ## Configuration entries
 Once a configuration is created you can view the template storage defined at `Root` level whose storage setting was provided during configuration creation. This becomes the `Master`. Screenshot below.
 
