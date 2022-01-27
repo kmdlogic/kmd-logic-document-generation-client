@@ -1,0 +1,45 @@
+{
+  "FirstName": "John",
+  "LastName": "Doe",
+  "Year": "1981",
+  "Income": "31337",
+  "Rating": "7.34",
+  "ImageUrl": "http://aux.iconspalace.com/uploads/147186729639424683.png",
+  "Vendors": [
+    {
+      "Name": "Toyota",
+      "Product": [
+        {
+          "Name": "Corolla GLI",
+          "Description": "GLI ipsum",
+          "Price": "18"
+        },
+        {
+          "Name": "Corolla XLI",
+          "Description": "XLI lorem ipsum",
+          "Price": "16"
+        },
+        {
+          "Name": "Yaris",
+          "Description": "EV",
+          "Price": "14" 
+        }
+      ]
+    },
+    {
+      "Name": "Honda",
+      "Product": [
+        {
+          "Name": "City",
+          "Description": "Lorem ipsum.",
+          "Price": "15"
+        },
+        {
+          "Name": "Civic",
+          "Description": "Ipsum lorem.",
+          "Price": "18"
+        }
+      ]
+    }
+  ]
+}
