@@ -7,14 +7,14 @@ Document generation service helps in generating documents for well-defined busin
 1. You are a KMD User
 2. Verify `cURL` command line tool is available in your system by executing `curl --help` in command prompt.
 3. If you don't have `cURL` then please download the package from [here](https://curl.se/dlwiz/?type=bin) for your respective OS ([Refer](https://help.ubidots.com/en/articles/2165289-learn-how-to-install-run-curl-on-windows-macosx-linux) for help in how to install)
-4. You should have either a Share point or Azure storage account to store templates.
+4. You should have either a Share point or Azure storage account to store templates. In this workshop, we will be focussing on Azure storage.
 
-Document generation service is hosted on Logic platform among with many other services. To use Document generation service on Logic platform you need to do the followings
+Document generation service is hosted on Logic platform along with many other services. To use Document generation service on Logic platform you need to do the following
 
 1. Create a subscription in Logic platform by logging in to [Logic Console](https://console.kmdlogic.io/)
 2. Create a Document generation configuration.
 3. Create client credentials for an authorized access to Document generation service.
-4. Use the above created `Subscription Id`, `Configuration Id` and `Client Credentials` while accessing the Document generation APIs to request for a document.
+4. Use the above created `Subscription Id`, `Configuration Id` and `Client Credentials` while accessing the Document Generation APIs to request for a document.
 5. Document generation APIs can be accessed using `cURL` commands or through a [dotnet client](https://www.nuget.org/packages/Kmd.Logic.DocumentGeneration.Client). Also refer to our [Github](https://github.com/kmdlogic/kmd-logic-document-generation-client) for more information.
 6. Once document is generated you will receive a notification from Logic about the status of your request.
 7. There are APIs available in Document geneation to get the URL where the document is generated and uploaded to.
@@ -22,11 +22,11 @@ Document generation service is hosted on Logic platform among with many other se
 Below are the detailed steps which will help you in getting started with Logic Document Generation.
 ## Set a Template storage account
 
-Before getting into Logic Console and Document generation configuration, let's first upload [this](./template/word-template.docx) simple template to a Share point or an Azure blob storage. This storage will be used further while creating document generation configuration.
+Before getting into Logic Console and Document Generation configuration, let's first upload [this](./template/word-template.docx) simple template to a Share point or an Azure blob storage. This storage will be used further while creating document generation configuration.
 
 ## Create Subscription & Document generation Configuration
 
-1. Login to [Logic Console](https://console.kmdlogic.io/) using your KMD credentials. Select `KMD ADFS`. Console is our front end to create configurations for different services on Logic. These configurations will be used to consume the APIs of respective services. To use the services on Logic you also need to create a subscription.
+1. Login to [Logic Console](https://console-preprod.kmdlogic.io/) using your KMD credentials. Select `KMD ADFS`. Console is our front end to create configurations for different services on Logic. These configurations will be used to consume the APIs of respective services. To use the services on Logic you also need to create a subscription.
 
 2. After logging in to Console you can either see `Marketplace` or `Resource Overview` page depending whether you have a subscription in Console or not. 
 
@@ -56,7 +56,7 @@ Before getting into Logic Console and Document generation configuration, let's f
 9. ### Configuration settings
     Configuration values like Name, template metadata file extension and levels are defined here. Template metadata files are used to provide additional information about a template. [Refer](../Templates/TemplateMetadata.md) for more information.
 
-    Levels are used to define the hierarchy in a configuration. We can have template files at each level which will override the parent template files during document generation. Hierarchies are particularly useful in scenarios where same configuration is used by multiple departments to generate documents using templates at their respective level. For each level separate Template storage configurations are defined which is explained in the next section `Template storage settings`. By default it has 2 levels `Cusotmer` and `Department` which can be removed and you can add your level. You can also choose not to have any level. For workshop puprose let's keep the the default values.
+    Levels are used to define the hierarchy in a configuration. We can have template files at each level which will override the parent template files during document generation. Hierarchies are particularly useful in scenarios where same configuration is used by multiple departments to generate documents using templates at their respective level. For each level separate template storage configurations are defined which is explained in the next section `Template storage settings`. By default it has 2 levels `Cusotmer` and `Department` which can be removed and you can add your level. You can also choose not to have any level. For workshop puprose let's keep the the default values.
 
 10. ### Template storage settings
     Document generation service uses templates to generate documents. As part of configuration creation, the storage where templates are available are configured. Currently Logic supports two types storage, `Share point` and `Azure blob`. Please refer to the screenshot below.
