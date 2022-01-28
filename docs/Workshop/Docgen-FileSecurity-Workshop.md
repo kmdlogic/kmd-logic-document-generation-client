@@ -42,7 +42,7 @@ Below are the overview of steps which we are going to follow for this workshop.
 
 ## Document generation using cURL command
 
-Please refer to the previous workshop documentation [Document generation using cURL command](./Docgen-Workshop#document-generation-using-cURL-command)
+Please refer to the previous workshop documentation [Document generation using cURL command](./Docgen-Workshop#document-generation-using-curl-command)
 
 ### Document generation API request structure
 
