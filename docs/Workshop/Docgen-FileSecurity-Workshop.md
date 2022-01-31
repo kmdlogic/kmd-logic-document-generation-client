@@ -40,10 +40,6 @@ Below are the overview of steps which we are going to follow for this workshop.
 
     ![Image of Marketplace File Security](./images/create-sign-configuration.jpg)
 
-## Using cURL command
-
-Please refer to the previous workshop documentation [Document generation using cURL command](./Docgen-Workshop.md#document-generation-using-curl-command)
-
 ### Document generation API request structure
 
 We will pass an additional parameter `SignConfigurationId` in the document generation API request.
@@ -60,6 +56,42 @@ We will pass an additional parameter `SignConfigurationId` in the document gener
 "signConfigurationId":"{Provide the Sign configuration Id}"
 }
 ```
+
+## Generate document using cURL command
+
+Please refer to the previous workshop documentation [Document generation using cURL command](./Docgen-Workshop.md#document-generation-using-curl-command) on how and which APIs we need to hit.
+### Request for a document generation
+
+We will request for document generation with body including the sign configuration id. As sign configuration supports only `Pdf` we will request for a pdf format document.
+
+<ins>Powershell</ins>
+
+```
+
+curl -X POST `
+"https://kmd-logic-preprod-weu-apim.azure-api.net/document-generation/v2/subscriptions/{Logic_Subscription_Id}/document-generation/requests" `
+-H "accept: application/json" `
+-H "Authorization: bearer {Access_token}" `
+-H "Content-Type: application/json-patch+json" `
+-d '{\"configurationId\":\"{Document_Generation_ConfigurationId}\",\"hierarchyPath\":\"\\\\\",\"templateId\":\"word-template.docx\",\"language\":\"en\",\"documentFormat\":\"Pdf\",\"mergeData\":{\"FirstName\":\"{Request_Value}\",\"LastName\":\"{Request_Value}\"},\"callbackUrl\":\"{Webhook_Url_Value}",\"debug\":true,\"signConfigurationId\":\"{Sign_ConfigurationId}\"}'
+
+```
+<ins>Bash</ins>
+
+```
+
+curl -X POST \
+"https://kmd-logic-preprod-weu-apim.azure-api.net/document-generation/v2/subscriptions/{Logic_Subscription_Id}/document-generation/requests" \
+-H "accept: application/json" \
+-H "Authorization: bearer {Access_token}" \
+-H "Content-Type: application/json-patch+json" \
+-d '{\"configurationId\":\"{Document_Generation_ConfigurationId}\",\"hierarchyPath\":\"\\\\\",\"templateId\":\"word-template.docx\",\"language\":\"en\",\"documentFormat\":\"Pdf\",\"mergeData\":{\"FirstName\":\"{Request_Value}\",\"LastName\":\"{Request_Value}\"},\"callbackUrl\":\"{Webhook_Url_Value}",\"debug\":true,\"signConfigurationId\":\"{Sign_ConfigurationId}\"}'
+
+```
+
+After getting the callback received in the webhook site in browser, you can use the [Get API](./Docgen-Workshop.md#get-path-to-the-document) to get the url and download the document. Please note that it should download a pdf format document.
+
+When you open the document in a pdf reader you can see the `Print` option will be disabled as configured in the sign configuration.
     
 
 

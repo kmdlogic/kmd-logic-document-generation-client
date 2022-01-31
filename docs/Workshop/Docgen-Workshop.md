@@ -183,7 +183,7 @@ curl -X POST `
 -H "accept: application/json" `
 -H "Authorization: bearer {Access_token}" `
 -H "Content-Type: application/json-patch+json" `
--d '{\"configurationId\":\"{Logic_Document_Generation_ConfigurationId}\",\"hierarchyPath\":\"\\\\\",\"templateId\":\"word-template.docx\",\"language\":\"en\",\"documentFormat\":\"Pdf\",\"mergeData\":{\"FirstName\":\"{Request_Value}\",\"LastName\":\"{Request_Value}\"},\"callbackUrl\":\"{Webhook_Url_Value}",\"debug\":true}'
+-d '{\"configurationId\":\"{Document_Generation_ConfigurationId}\",\"hierarchyPath\":\"\\\\\",\"templateId\":\"word-template.docx\",\"language\":\"en\",\"documentFormat\":\"Pdf\",\"mergeData\":{\"FirstName\":\"{Request_Value}\",\"LastName\":\"{Request_Value}\"},\"callbackUrl\":\"{Webhook_Url_Value}",\"debug\":true}'
 
 ```
 <ins>Bash</ins>
@@ -200,7 +200,7 @@ curl -X POST \
 ```
 
 The response of the above request will give you the request details. Make a note of the `id` from the response. That is the `RequestId`.
-### Get the path to the document
+### Get path to the document
 
 After getting the response from document generation request API, in a few moments you should be able to see a notification in your webhook url in browser. In the notification you can see the request id which you can correlate or match with the request id from the API response. Also you can find the status of the request. It should be `Completed`. Please refer to the below screenshot.
 
