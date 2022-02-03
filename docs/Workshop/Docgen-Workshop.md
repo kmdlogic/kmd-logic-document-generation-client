@@ -7,11 +7,13 @@ Document generation service helps in generating documents for well-defined busin
 1. You are a KMD User
 2. Verify `cURL` command line tool is available in your system by executing `curl --help` in command prompt.
 3. If you don't have `cURL` then please download the package from [here](https://curl.se/dlwiz/?type=bin) for your respective OS ([Refer](https://help.ubidots.com/en/articles/2165289-learn-how-to-install-run-curl-on-windows-macosx-linux) for help in how to install)
-4. You should have either a Share point or Azure storage account to store templates. In this workshop, we will be focussing on Azure storage.
+4. You should have either a Share point or Azure storage account to store templates. In this workshop, we will be using Azure storage. We will provide you a temporary Azure blob container to be used as template storage during the workshop.
 
 ## Flow
 
 ![Image of overall flow](./images/doc-gen-design-High-Level-Flow.png)
+
+## Step-by-step guide
 
 Document generation service is hosted on Logic platform along with many other services. To use Document generation service on Logic platform you need to do the following
 
