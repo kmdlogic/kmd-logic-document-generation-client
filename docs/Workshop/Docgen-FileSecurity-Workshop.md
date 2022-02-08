@@ -64,10 +64,19 @@ Please refer to the previous workshop documentation [Document generation using c
 
 We will request for document generation with body including the sign configuration id. As sign configuration supports only `Pdf` we will request for a pdf format document.
 
+<ins>Powershell<ins>
 
 ```
 
 curl -X POST "https://kmd-logic-preprod-weu-apim.azure-api.net/document-generation/v2/subscriptions/{Logic_Subscription_Id}/document-generation/requests" -H "accept: application/json" -H "Authorization: bearer {Access_token}" -H "Content-Type: application/json-patch+json" -d '{\"configurationId\":\"{Document_Generation_ConfigurationId}\",\"hierarchyPath\":\"\\\\\",\"templateId\":\"word-template.docx\",\"language\":\"en\",\"documentFormat\":\"Pdf\",\"mergeData\":{\"FirstName\":\"{Request_Value}\",\"LastName\":\"{Request_Value}\"},\"callbackUrl\":\"{Webhook_Url_Value}\",\"debug\":true,\"signConfigurationId\":\"{Sign_ConfigurationId}\"}'
+
+```
+
+<ins>Bash or Cmd<ins>
+
+```
+
+curl -X POST "https://kmd-logic-preprod-weu-apim.azure-api.net/document-generation/v2/subscriptions/{Logic_Subscription_Id}/document-generation/requests" -H "accept: application/json" -H "Authorization: bearer {Access_token}" -H "Content-Type: application/json-patch+json" -d "{\"configurationId\":\"{Document_Generation_ConfigurationId}\",\"hierarchyPath\":\"\\\\\",\"templateId\":\"word-template.docx\",\"language\":\"en\",\"documentFormat\":\"Pdf\",\"mergeData\":{\"FirstName\":\"{Request_Value}\",\"LastName\":\"{Request_Value}\"},\"callbackUrl\":\"{Webhook_Url_Value}\",\"debug\":true,\"signConfigurationId\":\"{Sign_ConfigurationId}\"}"
 
 ```
 
