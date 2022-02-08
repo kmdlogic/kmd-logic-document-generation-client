@@ -153,21 +153,13 @@ Below is the command. Here you have to use the client_id and client_secret noted
 <ins>Powershell</ins>
 
 ```
-curl -X 'POST' ` 
-   'https://identity-api.kmdlogic.io/clientCredentials/token?issuer=b2clogin.com' ` 
-   -H 'accept: application/json' ` 
-   -H 'Content-Type: application/x-www-form-urlencoded' ` 
-   -d 'grant_type=client_credentials&client_id={Your_client_id}&client_secret={Your_client_secret}&scope={Your_scope}'
+curl -X 'POST' 'https://identity-api.kmdlogic.io/clientCredentials/token?issuer=b2clogin.com' -H 'accept: application/json' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials&client_id={Your_client_id}&client_secret={Your_client_secret}&scope={Your_scope}'
 
 ```
 <ins>Bash</ins>
 
 ```
-curl -X 'POST' \ 
-   'https://identity-api.kmdlogic.io/clientCredentials/token?issuer=b2clogin.com' \
-   -H 'accept: application/json' \ 
-   -H 'Content-Type: application/x-www-form-urlencoded' \ 
-   -d 'grant_type=client_credentials&client_id={Your_client_id}&client_secret={Your_client_secret}&scope={Your_scope}'
+curl -X 'POST' 'https://identity-api.kmdlogic.io/clientCredentials/token?issuer=b2clogin.com' -H 'accept: application/json' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials&client_id={Your_client_id}&client_secret={Your_client_secret}&scope={Your_scope}'
 
 ```
 
@@ -180,24 +172,14 @@ Next is to hit document generation API to request for a document generation usin
 
 ```
 
-curl -X POST `
-"https://kmd-logic-preprod-weu-apim.azure-api.net/document-generation/v2/subscriptions/{Logic_Subscription_Id}/document-generation/requests" `
--H "accept: application/json" `
--H "Authorization: bearer {Access_token}" `
--H "Content-Type: application/json-patch+json" `
--d '{\"configurationId\":\"{Document_Generation_ConfigurationId}\",\"hierarchyPath\":\"\\\\\",\"templateId\":\"word-template.docx\",\"language\":\"en\",\"documentFormat\":\"Pdf\",\"mergeData\":{\"FirstName\":\"{Request_Value}\",\"LastName\":\"{Request_Value}\"},\"callbackUrl\":\"{Webhook_Url_Value}",\"debug\":true}'
+curl -X POST "https://kmd-logic-preprod-weu-apim.azure-api.net/document-generation/v2/subscriptions/{Logic_Subscription_Id}/document-generation/requests" -H "accept: application/json" -H "Authorization: bearer {Access_token}" -H "Content-Type: application/json-patch+json" -d '{\"configurationId\":\"{Document_Generation_ConfigurationId}\",\"hierarchyPath\":\"\\\\\",\"templateId\":\"word-template.docx\",\"language\":\"en\",\"documentFormat\":\"Pdf\",\"mergeData\":{\"FirstName\":\"{Request_Value}\",\"LastName\":\"{Request_Value}\"},\"callbackUrl\":\"{Webhook_Url_Value}",\"debug\":true}'
 
 ```
 <ins>Bash</ins>
 
 ```
 
-curl -X POST \
-"https://kmd-logic-preprod-weu-apim.azure-api.net/document-generation/v2/subscriptions/{Logic_Subscription_Id}/document-generation/requests" \
--H "accept: application/json" \
--H "Authorization: bearer {Access_token}" \
--H "Content-Type: application/json-patch+json" \
--d '{\"configurationId\":\"{Logic_Document_Generation_ConfigurationId}\",\"hierarchyPath\":\"\\\\\",\"templateId\":\"word-template.docx\",\"language\":\"en\",\"documentFormat\":\"Pdf\",\"mergeData\":{\"FirstName\":\"{Request_Value}\",\"LastName\":\"{Request_Value}\"},\"callbackUrl\":\"{Webhook_Url_Value}",\"debug\":true}'
+curl -X POST "https://kmd-logic-preprod-weu-apim.azure-api.net/document-generation/v2/subscriptions/{Logic_Subscription_Id}/document-generation/requests" -H "accept: application/json" -H "Authorization: bearer {Access_token}" -H "Content-Type: application/json-patch+json" -d '{\"configurationId\":\"{Logic_Document_Generation_ConfigurationId}\",\"hierarchyPath\":\"\\\\\",\"templateId\":\"word-template.docx\",\"language\":\"en\",\"documentFormat\":\"Pdf\",\"mergeData\":{\"FirstName\":\"{Request_Value}\",\"LastName\":\"{Request_Value}\"},\"callbackUrl\":\"{Webhook_Url_Value}",\"debug\":true}'
 
 ```
 
@@ -213,19 +195,13 @@ Now you can hit another document generation API which will give you the path whe
 <ins>Powershell</ins>
 
 ```
-curl -X GET `
-"https://kmd-logic-preprod-weu-apim.azure-api.net/document-generation/v2/subscriptions/{Logic_Subscription_Id}/document-generation/requests/{Request_Id}/download" `
--H "accept: application/json" `
--H "Authorization: bearer {Access_token}"
+curl -X GET "https://kmd-logic-preprod-weu-apim.azure-api.net/document-generation/v2/subscriptions/{Logic_Subscription_Id}/document-generation/requests/{Request_Id}/download" -H "accept: application/json" -H "Authorization: bearer {Access_token}"
 
 ```
 <ins>Bash</ins>
 
 ```
-curl -X GET \
-"https://kmd-logic-preprod-weu-apim.azure-api.net/document-generation/v2/subscriptions/{Logic_Subscription_Id}/document-generation/requests/{Request_Id}/download" \
--H "accept: application/json" \
--H "Authorization: bearer {Access_token}"
+curl -X GET "https://kmd-logic-preprod-weu-apim.azure-api.net/document-generation/v2/subscriptions/{Logic_Subscription_Id}/document-generation/requests/{Request_Id}/download" -H "accept: application/json" -H "Authorization: bearer {Access_token}"
 
 ```
 
